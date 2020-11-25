@@ -1,6 +1,7 @@
 #include "Registrar.h"
 
 #include "Actions/ActionAddCourse.h"
+//#include <iostream>
 
 Registrar::Registrar()
 {
@@ -22,20 +23,37 @@ StudyPlan* Registrar::getStudyPlay() const
 
 Action* Registrar::CreateRequiredAction() 
 {	
-	ActionData actData = pGUI->GetUserAction("Pick and action...");
+	ActionData actData = pGUI->GetUserAction("Pick an action...");
 	Action* RequiredAction = nullptr;
 
 	switch (actData.actType)
 	{
 	case ADD_CRS:	//add_course action
 		RequiredAction = new ActionAddCourse(this);
+		
+		break;
+	case SAVE:
+		//std::cout << "save" << endl;   //debug_e
+		break;
+	case LOAD:
+		//std::cout << "load" << endl;    //debug_e
+		break;
+	case UNDO:
+		//std::cout << "undo" << endl;     //debug_e
+		break;
+    case DEL_CRS:
+		//std::cout << "lol"; //debug_e       //debug_e
+		break;
+	case REDO:
+		//std::cout << "redo" << endl;       //debug_e
 		break;
 
 	//TODO: Add case for each action
 	
-	/*case EXIT:
+	case EXIT:
+		//std::cout << "fck u";   //debug_e
 		break;
-		*/
+		
 	}
 	return RequiredAction;
 }

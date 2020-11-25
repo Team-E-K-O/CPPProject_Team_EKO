@@ -45,6 +45,7 @@ void GUI::CreateMenu() const
 	MenuItemImages[ITM_UNDO]= "GUI\\Images\\Menu\\Menu_Undo.jpg";
 	MenuItemImages[ITM_OPEN]= "GUI\\Images\\Menu\\Menu_Open.jpg";
 	MenuItemImages[ITM_SAVE] = "GUI\\Images\\Menu\\Menu_Save.jpg";
+	MenuItemImages[ITM_REDO] = "GUI\\Images\\Menu\\Menu_Redo.jpg";
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu items one image at a time
@@ -151,7 +152,7 @@ ActionData GUI::GetUserAction(string msg) const
 			//[1] If user clicks on the Menu bar
 			if (y >= 0 && y < MenuBarHeight)
 			{
-				//Check whick Menu item was clicked
+				//Check which Menu item was clicked
 				//==> This assumes that menu items are lined up horizontally <==
 				int ClickedItemOrder = (x / MenuItemWidth);
 				//Divide x coord of the point clicked by the menu item width (int division)
@@ -161,6 +162,11 @@ ActionData GUI::GetUserAction(string msg) const
 				{
 				case ITM_ADD: return ActionData{ ADD_CRS };	//Add course
 				case ITM_EXIT: return ActionData{ EXIT };		//Exit
+				case ITM_DELETE: return ActionData{ DEL_CRS }; 
+				case ITM_UNDO:return ActionData{ UNDO };
+				case ITM_REDO:return ActionData{ REDO };
+				case ITM_OPEN:return ActionData{ OPEN };
+				case ITM_SAVE:return ActionData{ SAVE };
 
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar
 				}
