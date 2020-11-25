@@ -28,6 +28,7 @@ enum ActionType
 
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
+	OPEN,       //Open File
 
 	EXIT,		//Exit the application
 

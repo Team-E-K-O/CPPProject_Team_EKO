@@ -34,3 +34,8 @@ bool ActionDeleteCourse::Execute()
 
 	return true;
 }
+
+
+ActionDeleteCourse::~ActionDeleteCourse()
+{
+}
