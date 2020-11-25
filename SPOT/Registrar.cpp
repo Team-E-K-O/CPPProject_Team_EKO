@@ -1,5 +1,5 @@
 #include "Registrar.h"
-
+#include "ActionDeleteCourse.h"
 #include "Actions/ActionAddCourse.h"
 
 Registrar::Registrar()
@@ -32,7 +32,9 @@ Action* Registrar::CreateRequiredAction()
 		break;
 
 	//TODO: Add case for each action
-	
+	case DEL_CRS:    //delete course action
+		RequiredAction = new ActionDeleteCourse(this);
+		break;
 	/*case EXIT:
 		break;
 		*/

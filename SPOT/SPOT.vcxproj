@@ -90,6 +90,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\as\Desktop\Team EKO\Team-E-K-O\Cpp_Project_Team_EKO\SPOT\Actions;C:\Users\as\Desktop\Team EKO\Team-E-K-O\Cpp_Project_Team_EKO\SPOT\Courses;C:\Users\as\Desktop\Team EKO\Team-E-K-O\Cpp_Project_Team_EKO\SPOT\StudyPlan;C:\Users\as\Desktop\Team EKO\Team-E-K-O\Cpp_Project_Team_EKO\SPOT\GUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -119,6 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionDeleteCourse.cpp" />
     <ClCompile Include="Actions\ActionAddCourse.cpp" />
     <ClCompile Include="Courses\Course.cpp" />
     <ClCompile Include="GUI\CMUgraphicsLib\CMUgraphics.cpp" />
@@ -164,6 +166,7 @@
     <ClCompile Include="StudyPlan\StudyPlan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionDeleteCourse.h" />
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\ActionAddCourse.h" />
     <ClInclude Include="Courses\Course.h" />
