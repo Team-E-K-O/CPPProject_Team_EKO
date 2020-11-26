@@ -9,6 +9,7 @@ GUI::GUI()
 	pWind->ChangeTitle(WindTitle);
 	ClearDrawingArea();
 	ClearStatusBar();
+	ClearNotesBar();
 	CreateMenu();
 }
 
@@ -20,6 +21,13 @@ void GUI::ClearDrawingArea() const
 	pWind->SetPen(BkGrndColor);
 	pWind->DrawRectangle(0, MenuBarHeight, WindWidth, WindHeight -StatusBarHeight);
 
+}
+
+void GUI::ClearNotesBar() const
+{
+	pWind->SetBrush(NotesBarColor);
+	pWind->SetPen(NotesBarColor);
+	pWind->DrawRectangle(1300, MenuBarHeight, 1000, WindHeight - StatusBarHeight);
 }
 
 void GUI::ClearStatusBar() const
@@ -78,6 +86,7 @@ void GUI::UpdateInterface() const
 	CreateMenu();
 	ClearStatusBar();
 	ClearDrawingArea();
+	ClearNotesBar();
 	pWind->UpdateBuffer();
 	pWind->SetBuffering(false);
 

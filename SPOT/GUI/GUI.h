@@ -35,7 +35,7 @@ class GUI
 		wx = 15, wy = 15,		//Window starting coordinates
 		StatusBarHeight = 60,	//Status Bar Height
 		MenuBarHeight = 80,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
-		MenuItemWidth = 70;		//Width of each item in the menu
+		MenuItemWidth = 80;	    //Width of each item in the menu
 
 
 
@@ -45,7 +45,9 @@ class GUI
 	color ConnColor = GREEN;		//Connector color
 	color MsgColor = BLUE;			//Messages color
 	color BkGrndColor = LIGHTGRAY;	//Background color
-	color StatusBarColor = DARKGRAY;//statusbar color
+	color StatusBarColor = DARKGRAY;//StatusBar color
+	color NotesBarColor = GRAY;     //NotesBar color
+
 	string WindTitle = "Study-Plan Organizational Tool (SPOT)";
 
 	window* pWind;
@@ -54,6 +56,7 @@ public:
 	void CreateMenu() const;
 	void ClearDrawingArea() const;
 	void ClearStatusBar() const;	//Clears the status bar
+	void ClearNotesBar() const;     //Clears the notes bar
 
 	//output functions
 	void PrintMsg(string msg) const;		//prints a message on status bar

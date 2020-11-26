@@ -48,15 +48,8 @@ Action* Registrar::CreateRequiredAction()
 		break;
 
 	//TODO: Add case for each action
-<<<<<<< HEAD
-	case DEL_CRS:    //delete course action
-		break;
-	/*case EXIT:
-=======
-	
 	case EXIT:
 		//std::cout << "fck u";   //debug_e
->>>>>>> origin/Phase_1_Ezzat
 		break;
 		
 	}
