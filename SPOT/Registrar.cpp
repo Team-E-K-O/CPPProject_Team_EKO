@@ -46,7 +46,7 @@ Action* Registrar::CreateRequiredAction()
 	case REDO:
 		//std::cout << "redo" << endl;       //debug_e
 		break;
-	case NOTES_AREA :
+	case NOTES_AREA:
 		std::cout << "Notes area" << endl;   //debug_e
 		break;
 
