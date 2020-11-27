@@ -187,12 +187,13 @@ ActionData GUI::GetUserAction(string msg) const
 			{
 				return ActionData{ DRAW_AREA,x,y };	//user want clicks inside drawing area
 			}
+			//[3] User clicks on the notes area
 			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x >= 1000)
 			{
 				return ActionData{ NOTES_AREA,x,y };	//user want clicks inside notes area
 			}
 
-			//[3] User clicks on the status bar
+			//[4] User clicks on the status bar
 			return ActionData{ STATUS_BAR };
 		}
 	}//end while
