@@ -78,6 +78,18 @@ void GUI::PrintMsg(string msg) const
 	pWind->DrawString(MsgX, WindHeight - MsgY, msg);
 }
 
+//Prints a message on the notes bar
+void GUI::PrintNote(string msg) const
+{
+	int MsgX = 1025;
+	int MsgY = MenuBarHeight + 10;
+
+	// Print the Message
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(MsgX, WindHeight - MsgY, msg);
+}
+
 //////////////////////////////////////////////////////////////////////////
 void GUI::UpdateInterface() const
 {
