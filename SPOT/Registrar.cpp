@@ -1,6 +1,6 @@
 #include "Registrar.h"
 #include "Actions/ActionAddCourse.h"
-//#include <iostream>
+#include <iostream>   //debug_e
 
 Registrar::Registrar()
 {
@@ -45,6 +45,9 @@ Action* Registrar::CreateRequiredAction()
 		break;
 	case REDO:
 		//std::cout << "redo" << endl;       //debug_e
+		break;
+	case NOTES_AREA :
+		std::cout << "Notes area" << endl;   //debug_e
 		break;
 
 	//TODO: Add case for each action

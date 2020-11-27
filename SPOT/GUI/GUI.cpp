@@ -2,6 +2,7 @@
 #include "../Courses/Course.h"
 #include "../StudyPlan/AcademicYear.h"
 #include <sstream>
+#include <iostream>    //debug_e
 
 GUI::GUI()
 { 
@@ -149,7 +150,6 @@ ActionData GUI::GetUserAction(string msg) const
 		int x, y;
 		ctInput = pWind->GetMouseClick(x, y);	//Get the coordinates of the user click
 		ktInput = pWind->GetKeyPress(cKeyData);
-
 		if (ktInput == ESCAPE)	//if ESC is pressed,return CANCEL action
 		{
 			return ActionData{ CANCEL };
@@ -157,6 +157,7 @@ ActionData GUI::GetUserAction(string msg) const
 
 		
 		if (ctInput == LEFT_CLICK)	//mouse left click
+			
 		{
 			//[1] If user clicks on the Menu bar
 			if (y >= 0 && y < MenuBarHeight)
@@ -182,9 +183,13 @@ ActionData GUI::GetUserAction(string msg) const
 			}
 
 			//[2] User clicks on the drawing area
-			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight)
+			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x<1000)
 			{
 				return ActionData{ DRAW_AREA,x,y };	//user want clicks inside drawing area
+			}
+			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x >= 1000)
+			{
+				return ActionData{ NOTES_AREA,x,y };	//user want clicks inside notes area
 			}
 
 			//[3] User clicks on the status bar
