@@ -54,7 +54,7 @@ Action* Registrar::CreateRequiredAction()
 
 	//TODO: Add case for each action
 	case EXIT:
-		//std::cout << "fck u";   //debug_e
+		running = false;
 		break;
 		
 	}
@@ -71,7 +71,8 @@ bool Registrar::ExecuteAction(Action* pAct)
 
 void Registrar::Run()
 {
-	while (true)
+	running = true;
+	while (running)
 	{
 		//update interface here as CMU Lib doesn't refresh itself
 		//when window is minimized then restored
