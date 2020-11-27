@@ -1,7 +1,8 @@
-﻿#include"ActionDeleteCourse.h"
-#include"..\Registrar.h"
-#include"Courses/UnivCourse.h"
-#include<iostream>
+﻿#include "ActionDeleteCourse.h"
+#include "..\Registrar.h"
+#include "../Courses/UnivCourse.h"
+#include "Drawable.h"
+#include <iostream>
 
 ActionDeleteCourse::ActionDeleteCourse(Registrar* p) :Action(p)
 {
@@ -11,27 +12,20 @@ bool ActionDeleteCourse::Execute()
 {
 	GUI* pGUI = pReg->getGUI();
 
-	pGUI->PrintMsg("Click On The Course You Wish To Delete....");
-
-
-	ActionData actData = pGUI->GetUserAction("Coming SOON ♥");
+	ActionData actData = pGUI->GetUserAction("Click On What You Wish To Delete....");
 
 	int x, y;
-	if (actData.actType == DRAW_AREA)	//user clicked inside drawing
+	if (actData.actType == DRAW_AREA)
 	{
 		x = actData.x;
 		y = actData.y;
 
-
 		graphicsInfo gInfo{ x, y };
 
-		//TODO: given course code, get course title, crd hours from registrar
-		//For now, we will add any dummy values
-		string Title = "";
-		int crd = 0;
+		Registrar p;
+		p.Run();
+		pGUI->ClearDrawingArea();
 	}
-
-
 	return true;
 }
 
