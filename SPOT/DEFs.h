@@ -35,7 +35,7 @@ enum ActionType
 	STATUS_BAR,	//A click on the status bar
 	MENU_BAR,	//A click on an empty place in the menu bar
 	DRAW_AREA,	//A click in the drawing area
-	NOTES_AREA,  //A click in the notes area
+	NOTES_AREA, //A click in the notes area
 
 	CANCEL,		//ESC key is pressed
 
