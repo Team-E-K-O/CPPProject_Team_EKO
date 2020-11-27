@@ -60,7 +60,7 @@ public:
 
 	//output functions
 	void PrintMsg(string msg) const;		//prints a message on status bar
-	void PrintNote(string msg) const;		//prints a message on notes bar
+	void PrintNote(string msg,int x,int y) const;		//prints a message on notes bar
 
 	//Drawing functions
 	void DrawCourse(const Course* );

@@ -9,12 +9,12 @@ ActionAddNote::ActionAddNote(Registrar* p) :Action(p)
 
 bool ActionAddNote::Execute()
 {
-	//GUI* pGUI = pReg->getGUI();
+	GUI* pGUI = pReg->getGUI();
 
-	//pGUI->PrintMsg("Add Note:");
-	//Course_Code code = pGUI->GetSrting();
+	pGUI->PrintMsg("Add Note:");
+	string note = pGUI->GetSrting();
 
-	//TODO: add input validation
+	ActionData actData = pGUI->GetUserAction();
 
 
 	int x, y;
@@ -26,26 +26,14 @@ bool ActionAddNote::Execute()
 
 		GUI* pGUI = pReg->getGUI();
 
-		pGUI->PrintNote("Add Note:");
-		Course_Code code = pGUI->GetSrting();
+		pGUI->PrintNote(note,x,y);
+		
 
-		graphicsInfo gInfo{ x, y };
-
-		//TODO: given course code, get course title, crd hours from registrar
-		//For now, we will add any dummy values
-		string Title = "Test101";
-		pC->setGfxInfo(gInfo);
-
-		//TODO: Ask registrar to add course to the year selected by the user
-		//TODO: add the course to the correct year obtained from registrar
-
-		//For the seke of demo, we will add the course to the 1st year, 1st semester
-		StudyPlan* pS = pReg->getStudyPlay();
-		pS->AddCourse(pC, 1, FALL);
+		
 	}
 
 
-	//TODO:
+
 
 
 	return true;

@@ -29,6 +29,7 @@ void GUI::ClearNotesBar() const
 	pWind->SetBrush(NotesBarColor);
 	pWind->SetPen(NotesBarColor);
 	pWind->DrawRectangle(1300, MenuBarHeight, 1000, WindHeight - StatusBarHeight);
+
 }
 
 void GUI::ClearStatusBar() const
@@ -42,7 +43,7 @@ void GUI::CreateMenu() const
 {
 	pWind->SetBrush(StatusBarColor);
 	pWind->SetPen(StatusBarColor);
-	pWind->DrawRectangle(0, 0, WindWidth, MenuBarHeight);
+	
 
 	//You can draw the menu icons any way you want.
 
@@ -79,15 +80,12 @@ void GUI::PrintMsg(string msg) const
 }
 
 //Prints a message on the notes bar
-void GUI::PrintNote(string msg) const
+void GUI::PrintNote(string msg,int x,int y) const
 {
-	int MsgX = 1025;
-	int MsgY = MenuBarHeight + 10;
-
 	// Print the Message
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	pWind->SetPen(MsgColor);
-	pWind->DrawString(MsgX, WindHeight - MsgY, msg);
+	pWind->DrawString(x, y, msg);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -134,7 +132,14 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	graphicsInfo gInfo = pY->getGfxInfo();
 
 	///TODO: compelete this function to:
-	//		1- Draw a rectangle for the academic year 
+	int m = (1000 -5*PLAN_YEAR_WIDTH)/6;
+	for (int i = 0; i < 5; i++)
+	{
+		pWind->SetBrush(RED);
+		pWind->SetPen(RED);
+		pWind->DrawRectangle((i + 1) * m+i* PLAN_YEAR_WIDTH, MenuBarHeight + 10, (i + 1) * m+(i+1)* PLAN_YEAR_WIDTH, WindHeight - StatusBarHeight - 10);
+	
+	}
 	//		2- Draw a sub-rectangle for each semester
 	//Then each course should be drawn inside rect of its year/sem
 	
