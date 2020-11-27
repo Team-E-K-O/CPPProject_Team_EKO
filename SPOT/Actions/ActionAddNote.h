@@ -1,7 +1,7 @@
 #pragma once
 #include "Action.h"
 //Class responsible for adding notes action
-class ActionAddNote
+class ActionAddNote:
 	public Action
 {
 public:
