@@ -35,7 +35,7 @@ class GUI
 		wx = 15, wy = 15,		//Window starting coordinates
 		StatusBarHeight = 60,	//Status Bar Height
 		MenuBarHeight = 80,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
-		MenuItemWidth = 80;	    //Width of each item in the menu
+		DrawingAreaWidth=1080, MenuItemWidth = 80;	    //Width of each item in the menu
 
 
 
@@ -47,6 +47,8 @@ class GUI
 	color BkGrndColor = LIGHTGRAY;	//Background color
 	color StatusBarColor = DARKGRAY;//StatusBar color
 	color NotesBarColor = GRAY;     //NotesBar color
+	color OutlineColor = BLACK;     //Outline color for all rectangles
+	color YearFill = WHITESMOKE;    //Year Recangle Box
 
 	string WindTitle = "Study-Plan Organizational Tool (SPOT)";
 

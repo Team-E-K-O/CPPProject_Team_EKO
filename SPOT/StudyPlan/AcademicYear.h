@@ -4,6 +4,7 @@
 #include "..\Courses\Course.h"
 #include "../GUI/Drawable.h"
 
+
 //Represent one year in the student's study plan
 class AcademicYear:public Drawable
 {
@@ -23,7 +24,7 @@ public:
 	virtual ~AcademicYear();
 
 	bool AddCourse(Course*, SEMESTER );
-	
+	int YearNumber;
 
 	void virtual DrawMe(GUI*) const;
 };

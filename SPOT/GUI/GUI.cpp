@@ -1,6 +1,7 @@
 #include "GUI.h"
 #include "../Courses/Course.h"
 #include "../StudyPlan/AcademicYear.h"
+#include <string>
 #include <sstream>
 #include <iostream>    //debug_e
 
@@ -20,15 +21,15 @@ void GUI::ClearDrawingArea() const
 {
 	pWind->SetBrush(BkGrndColor);
 	pWind->SetPen(BkGrndColor);
-	pWind->DrawRectangle(0, MenuBarHeight, WindWidth, WindHeight -StatusBarHeight);
+	pWind->DrawRectangle(0, MenuBarHeight, DrawingAreaWidth, WindHeight -StatusBarHeight);
 
 }
 
 void GUI::ClearNotesBar() const
 {
 	pWind->SetBrush(NotesBarColor);
-	pWind->SetPen(NotesBarColor);
-	pWind->DrawRectangle(1300, MenuBarHeight, 1000, WindHeight - StatusBarHeight);
+	pWind->SetPen(OutlineColor);
+	pWind->DrawRectangle(1300, MenuBarHeight, DrawingAreaWidth, WindHeight - StatusBarHeight);
 
 }
 
@@ -129,18 +130,27 @@ void GUI::DrawCourse(const Course* pCrs)
 
 void GUI::DrawAcademicYear(const AcademicYear* pY) 
 {
-	graphicsInfo gInfo = pY->getGfxInfo();
-
 	///TODO: compelete this function to:
-	int m = (1000 -5*PLAN_YEAR_WIDTH)/6;
-	for (int i = 0; i < 5; i++)
-	{
-		pWind->SetBrush(RED);
-		pWind->SetPen(RED);
-		pWind->DrawRectangle((i + 1) * m+i* PLAN_YEAR_WIDTH, MenuBarHeight + 10, (i + 1) * m+(i+1)* PLAN_YEAR_WIDTH, WindHeight - StatusBarHeight - 10);
+	   graphicsInfo gInfo = pY->getGfxInfo();
+	   int x1 = gInfo.x * DrawingAreaWidth / 5;
+	   int x2 = (1 + gInfo.x) * DrawingAreaWidth / 5;
+		string yrname = "YEAR " + to_string(gInfo.x + 1);
+		pWind->SetPen(OutlineColor);
+		pWind->SetBrush(YearFill);
+		pWind->DrawRectangle(x1 ,MenuBarHeight ,x2 , WindHeight - StatusBarHeight);
+		pWind->DrawString(x1 + 10, MenuBarHeight + 15, yrname);
+		//2 - Draw a sub - rectangle for each semester
+		
+		for (int n = FALL; n < SEM_CNT; n++)
+		{
+			string SEM_S[] = { "FALL","SPRING","SUMMER" };
+			pWind->SetPen(OutlineColor);
+			pWind->SetBrush(YearFill);
+			pWind->DrawRectangle(x1+n*(x2-x1)/3, MenuBarHeight + 30  , x1 + (n + 1) * (x2 - x1) /3, WindHeight - StatusBarHeight );
+			pWind->DrawString(x1 + n * (x2 - x1) / 3 + 15, MenuBarHeight + 35, SEM_S[n]);
+		}
 	
-	}
-	//		2- Draw a sub-rectangle for each semester
+	//		
 	//Then each course should be drawn inside rect of its year/sem
 	
 }
