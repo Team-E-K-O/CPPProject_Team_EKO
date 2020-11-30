@@ -26,6 +26,6 @@ public:
 	bool AddCourse(Course*, SEMESTER );
 	int YearNumber;
 
-	void virtual DrawMe(GUI*) const;
+	void virtual DrawMe(GUI*) ;
 };
 

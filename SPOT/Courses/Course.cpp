@@ -25,7 +25,7 @@ int Course::getCredits() const
 	return credits;
 }
 
-void Course::DrawMe(GUI* pG) const
+void Course::DrawMe(GUI* pG) 
 {
 	pG->DrawCourse(this);
 }

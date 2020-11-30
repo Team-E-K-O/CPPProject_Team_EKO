@@ -1,6 +1,6 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
-
+#include <iostream>  //debug_e
 AcademicYear::AcademicYear()
 {
 	//TODO: make all necessary initializations
@@ -16,8 +16,17 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 {
 	//TODO:
 	//This function still needs many checks to be compelete
+	pC->setDim(CRS_WIDTH, CRS_HEIGHT);
 	YearCourses[sem].push_back(pC);
-	TotalCredits += pC->getCredits();
+	TotalCredits += pC->getCredits(); 
+	graphicsInfo g= getGfxInfo();
+	g.y = g.y + 18 + YearCourses[sem].size() * (pC->getDimh()+10);
+	g.x  = g.x + sem * getDimw() / 3;
+	std::cout << YearCourses[sem].size() << endl;   //debug_e
+	std::cout << g.x << "   " << g.y << endl;        //debug_e
+	pC->setGfxInfo(g);
+
+
 
 	//TODO: acording to course type incremenet corrsponding toatl hours for that year
 
@@ -26,7 +35,7 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 }
 
 
-void AcademicYear::DrawMe(GUI* pGUI) const
+void AcademicYear::DrawMe(GUI* pGUI) 
 {
 	pGUI->DrawAcademicYear(this);
 	//Draw all semesters inside this year by iterating on each semester list

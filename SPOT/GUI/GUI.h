@@ -35,7 +35,8 @@ class GUI
 		wx = 15, wy = 15,		//Window starting coordinates
 		StatusBarHeight = 60,	//Status Bar Height
 		MenuBarHeight = 80,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
-		DrawingAreaWidth=1080, MenuItemWidth = 80;	    //Width of each item in the menu
+		DrawingAreaWidth = 1080, MenuItemWidth = 80,	    //Width of each item in the menu
+		DrawingAreaHeigth = WindHeight - StatusBarHeight - MenuBarHeight;
 
 
 
@@ -65,8 +66,8 @@ public:
 	void PrintNote(string msg,int x,int y) const;		//prints a message on notes bar
 
 	//Drawing functions
-	void DrawCourse(const Course* );
-	void DrawAcademicYear(const AcademicYear*);
+	void DrawCourse( Course* );
+	void DrawAcademicYear( AcademicYear*);
 	void UpdateInterface() const;
 	
 	//input functions

@@ -105,7 +105,7 @@ void GUI::UpdateInterface() const
 }
 
 ////////////////////////    Drawing functions    ///////////////////
-void GUI::DrawCourse(const Course* pCrs)
+void GUI::DrawCourse( Course* pCrs)
 {
 	if (pCrs->isSelected())
 		pWind->SetPen(HiColor, 2);
@@ -128,13 +128,28 @@ void GUI::DrawCourse(const Course* pCrs)
 	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT/2, crd.str());
 }
 
-void GUI::DrawAcademicYear(const AcademicYear* pY) 
+void GUI::DrawAcademicYear( AcademicYear* pY) 
 {
 	///TODO: compelete this function to:
-	   graphicsInfo gInfo = pY->getGfxInfo();
-	   int x1 = gInfo.x * DrawingAreaWidth / 5;
-	   int x2 = (1 + gInfo.x) * DrawingAreaWidth / 5;
-		string yrname = "YEAR " + to_string(gInfo.x + 1);
+	  
+	    graphicsInfo gInfo = pY->getGfxInfo();    
+		pY->setDim(DrawingAreaWidth / 5, DrawingAreaHeigth);
+		int x1, x2;
+		if (gInfo.y == 1)     //initialising the year dimensions for the first time
+		{
+			x1 = gInfo.x * DrawingAreaWidth / 5;
+			x2 = (1 + gInfo.x) * DrawingAreaWidth / 5;
+			gInfo.x = x1;
+			gInfo.y = MenuBarHeight; 
+			pY->setGfxInfo(gInfo);
+		}
+		else
+		{
+			x1 = gInfo.x;
+			x2 =gInfo.x+ DrawingAreaWidth / 5;
+		}
+		string yrname = "YEAR " + to_string(pY->YearNumber);
+		pWind->SetFont(15, BOLD, BY_NAME, "Arial");
 		pWind->SetPen(OutlineColor);
 		pWind->SetBrush(YearFill);
 		pWind->DrawRectangle(x1 ,MenuBarHeight ,x2 , WindHeight - StatusBarHeight);
@@ -149,7 +164,7 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 			pWind->DrawRectangle(x1+n*(x2-x1)/3, MenuBarHeight + 30  , x1 + (n + 1) * (x2 - x1) /3, WindHeight - StatusBarHeight );
 			pWind->DrawString(x1 + n * (x2 - x1) / 3 + 15, MenuBarHeight + 35, SEM_S[n]);
 		}
-	
+		
 	//		
 	//Then each course should be drawn inside rect of its year/sem
 	
@@ -210,12 +225,12 @@ ActionData GUI::GetUserAction(string msg) const
 			}
 
 			//[2] User clicks on the drawing area
-			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x<1000)
+			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x<DrawingAreaWidth)
 			{
 				return ActionData{ DRAW_AREA,x,y };	//user want clicks inside drawing area
 			}
 			//[3] User clicks on the notes area
-			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x >= 1000)
+			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x >= DrawingAreaWidth)
 			{
 				return ActionData{ NOTES_AREA,x,y };	//user want clicks inside notes area
 			}
@@ -226,6 +241,7 @@ ActionData GUI::GetUserAction(string msg) const
 	}//end while
 
 }
+
 
 string GUI::GetSrting() const
 {

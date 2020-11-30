@@ -3,7 +3,7 @@
 #include "AcademicYear.h"
 #include "../GUI/Drawable.h"
 
-//A full study plan for as student
+//A full study plan for a student
 class StudyPlan:public Drawable
 {
 	int TotalCredits=0;		//total no. of credit hours for courses registred in this year
@@ -17,7 +17,8 @@ class StudyPlan:public Drawable
 public:
 	StudyPlan();
 	bool AddCourse(Course*, int year, SEMESTER);
-	void virtual DrawMe(GUI*) const;
+	void virtual DrawMe(GUI*) ;
+	void DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem);
 	virtual ~StudyPlan();
 };
 

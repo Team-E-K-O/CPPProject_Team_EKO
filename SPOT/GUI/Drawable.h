@@ -22,13 +22,20 @@ protected:
 	//Info required for drawing
 	graphicsInfo GfxInfo;
 	bool Selected;	//is this obj selected (to highlight when drawing)
+	int height;
+	int width;
+
 public:
 	Drawable();
 	void setGfxInfo(graphicsInfo);
 	graphicsInfo getGfxInfo() const;
 	void setSelected(bool );
 	bool isSelected() const;
-	void virtual DrawMe(GUI*) const = 0;
+	bool isClicked(graphicsInfo)const;   //function to determine if this object is clicked or not
+	void setDim(int w, int h);           //function to set the heigth and width for an object
+	int getDimw() const;
+	int getDimh() const;
+	void virtual DrawMe(GUI*) = 0;
 	virtual ~Drawable();
 };
 

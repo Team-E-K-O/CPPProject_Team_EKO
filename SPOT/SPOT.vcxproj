@@ -22,7 +22,8 @@
     <ProjectGuid>{B84C2A90-6BB5-4AB5-8523-87F1D3B8EDAD}</ProjectGuid>
     <RootNamespace>SPOT</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>SPOT</ProjectName>
+    <ProjectName>
+    </ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
