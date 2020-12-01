@@ -1,5 +1,5 @@
 #include "StudyPlan.h"
-
+#include <iostream>
 
 
 StudyPlan::StudyPlan()
@@ -26,6 +26,10 @@ void StudyPlan::DrawMe(GUI* pGUI) const
 	//Plan draws all year inside it.
 	for (int i = 0; i < plan.size(); i++)
 		plan[i]->DrawMe(pGUI);
+}
+
+void StudyPlan::DeleteStudyPlan()
+{
 }
 
 StudyPlan::~StudyPlan()
