@@ -3,7 +3,6 @@
 #include <iostream>   //debug_e
 
 
-
 StudyPlan::StudyPlan()
 {
 	//By default, the study plan starts with 5 years
@@ -61,6 +60,11 @@ void StudyPlan::AddPlanNote(string s)
 	Notes.push_back(s);
 }
 
+
+void StudyPlan::DeleteStudyPlan(graphicsInfo g,int year, SEMESTER sem)
+{
+	plan[year - 1]->DeleteCourse(g, sem);
+}
 
 StudyPlan::~StudyPlan()
 {

@@ -16,6 +16,7 @@ class StudyPlan:public Drawable
 
 
 	string PlanNotes;
+
 public:
 	StudyPlan();
 	bool AddCourse(Course*, int year, SEMESTER);
@@ -23,5 +24,6 @@ public:
 	void DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem);
 	void AddPlanNote(string);
 	virtual ~StudyPlan();
+	void  DeleteStudyPlan(graphicsInfo,int year, SEMESTER sem);
 };
 

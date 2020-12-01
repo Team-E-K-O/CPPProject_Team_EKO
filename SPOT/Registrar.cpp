@@ -1,6 +1,7 @@
 #include "Registrar.h"
 #include "Actions/ActionAddCourse.h"
 #include "Actions/ActionAddNote.h"
+#include "ActionDeleteCourse.h"
 #include <iostream>   //debug_e
 
 Registrar::Registrar()
@@ -33,19 +34,19 @@ Action* Registrar::CreateRequiredAction()
 		
 		break;
 	case SAVE:
-		//std::cout << "save" << endl;   //debug_e
+
 		break;
+
 	case LOAD:
-		//std::cout << "load" << endl;    //debug_e
+
 		break;
+
 	case UNDO:
-		//std::cout << "undo" << endl;     //debug_e
+
 		break;
-    case DEL_CRS:
-		//std::cout << "lol"; //debug_e       //debug_e
-		break;
+
 	case REDO:
-		//std::cout << "redo" << endl;       //debug_e
+
 		break;
 	case NOTES_AREA :
 		//std::cout << "Notes area" << endl;   //debug_e
@@ -56,6 +57,11 @@ Action* Registrar::CreateRequiredAction()
 	case EXIT:
 		running = false;
 		break;
+	case DEL_CRS:    //delete course action
+		RequiredAction = new ActionDeleteCourse(this);
+
+		break;
+
 		
 	}
 	return RequiredAction;

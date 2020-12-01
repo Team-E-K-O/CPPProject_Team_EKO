@@ -48,3 +48,17 @@ void AcademicYear::DrawMe(GUI* pGUI)
 			(*it)->DrawMe(pGUI);	//call DrawMe for each course in this semester
 		}
 }
+
+void AcademicYear::DeleteCourse(graphicsInfo g,SEMESTER sem)
+{
+	auto  sem_ = YearCourses[sem];
+	for (auto  crs = sem_.begin(); crs != sem_.end() ; ++crs)
+	{
+		if ((*crs)->isClicked(g))
+		{
+			sem_.erase(crs);
+			YearCourses[sem] = sem_;
+			break;
+		}
+	}
+}
