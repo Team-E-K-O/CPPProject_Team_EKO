@@ -11,7 +11,7 @@ GUI::GUI()
 	pWind->ChangeTitle(WindTitle);
 	ClearDrawingArea();
 	ClearStatusBar();
-	ClearNotesBar();
+	ClearNotesArea();
 	CreateMenu();
 }
 
@@ -25,11 +25,12 @@ void GUI::ClearDrawingArea() const
 
 }
 
-void GUI::ClearNotesBar() const
+
+void GUI::ClearNotesArea() const
 {
 	pWind->SetBrush(NotesBarColor);
 	pWind->SetPen(OutlineColor);
-	pWind->DrawRectangle(1300, MenuBarHeight, DrawingAreaWidth, WindHeight - StatusBarHeight);
+	pWind->DrawRectangle(DrawingAreaWidth, MenuBarHeight, WindWidth, WindHeight - StatusBarHeight);
 
 }
 
@@ -80,15 +81,6 @@ void GUI::PrintMsg(string msg) const
 	pWind->DrawString(MsgX, WindHeight - MsgY, msg);
 }
 
-//Prints a message on the notes bar
-void GUI::PrintNote(string msg,int x,int y) const
-{
-	// Print the Message
-	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->SetPen(MsgColor);
-	pWind->DrawString(x, y, msg);
-}
-
 //////////////////////////////////////////////////////////////////////////
 void GUI::UpdateInterface() const
 {
@@ -98,13 +90,23 @@ void GUI::UpdateInterface() const
 	CreateMenu();
 	ClearStatusBar();
 	ClearDrawingArea();
-	ClearNotesBar();
+	ClearNotesArea();
 	pWind->UpdateBuffer();
 	pWind->SetBuffering(false);
 
 }
 
 ////////////////////////    Drawing functions    ///////////////////
+void GUI::DrawNotes(vector<string> s) const  
+{
+	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD, BY_NAME, "Gramound");  //tested ---> 17 char max for current settings
+	pWind->SetPen(MsgColor);
+	pWind->SetBrush(NotesBarColor);
+	pWind->SetPen(OutlineColor);
+	for (int i = 0; i < s.size(); i++)
+		pWind->DrawString(DrawingAreaWidth + 10, MenuBarHeight + (1 + i) * 15, s[i]);
+
+}
 void GUI::DrawCourse( Course* pCrs)
 {
 	if (pCrs->isSelected())

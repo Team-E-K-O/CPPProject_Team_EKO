@@ -17,6 +17,7 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 	//TODO:
 	//This function still needs many checks to be compelete
 	pC->setDim(CRS_WIDTH, CRS_HEIGHT);
+
 	YearCourses[sem].push_back(pC);
 	TotalCredits += pC->getCredits(); 
 	graphicsInfo g= getGfxInfo();

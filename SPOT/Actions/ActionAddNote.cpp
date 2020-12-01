@@ -10,32 +10,10 @@ ActionAddNote::ActionAddNote(Registrar* p) :Action(p)
 bool ActionAddNote::Execute()
 {
 	GUI* pGUI = pReg->getGUI();
-
+	StudyPlan* Ps = pReg->getStudyPlay();
 	pGUI->PrintMsg("Add Note:");
 	string note = pGUI->GetSrting();
-
-	ActionData actData = pGUI->GetUserAction();
-
-
-	int x, y;
-	if (actData.actType == NOTES_AREA)	//user clicked inside notes area
-	{
-		//get coord where user clicked
-		x = actData.x;
-		y = actData.y;
-
-		GUI* pGUI = pReg->getGUI();
-
-		pGUI->PrintNote(note,x,y);
-		
-
-		
-	}
-
-
-
-
-
+	Ps->AddPlanNote(note);
 	return true;
 }
 

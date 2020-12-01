@@ -1,4 +1,5 @@
 #include "StudyPlan.h"
+#include "../GUI/GUI.h"
 #include <iostream>   //debug_e
 
 
@@ -7,6 +8,7 @@ StudyPlan::StudyPlan()
 {
 	//By default, the study plan starts with 5 years
 	//More year can be added
+	Notes.push_back("Click here to add a note.");
 	for (int i = 0; i < 5; i++) {
 		plan.push_back(new AcademicYear);
 		graphicsInfo gfx;
@@ -46,15 +48,19 @@ void StudyPlan::DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem)
 }
 void StudyPlan::DrawMe(GUI* pGUI)
 {
+	pGUI->DrawNotes(Notes);
 	//Plan draws all year inside it.
 	for (int i = 0; i < plan.size(); i++)
 	{
-		plan[i]->DrawMe(pGUI);
-		
+		plan[i]->DrawMe(pGUI);	
 	}
-		
-	
 }
+void StudyPlan::AddPlanNote(string s)
+{
+	Notes[0] = "Notes :";
+	Notes.push_back(s);
+}
+
 
 StudyPlan::~StudyPlan()
 {

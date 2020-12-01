@@ -12,6 +12,8 @@ class StudyPlan:public Drawable
 		TotalMinorCredits=0;
 
 	vector<AcademicYear*> plan;	//plan is a list of academic years
+	vector<string>Notes;       //lines of notes
+
 
 	string PlanNotes;
 public:
@@ -19,6 +21,7 @@ public:
 	bool AddCourse(Course*, int year, SEMESTER);
 	void virtual DrawMe(GUI*) ;
 	void DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem);
+	void AddPlanNote(string);
 	virtual ~StudyPlan();
 };
 
