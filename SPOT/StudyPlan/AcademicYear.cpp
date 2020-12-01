@@ -10,7 +10,14 @@ AcademicYear::AcademicYear()
 AcademicYear::~AcademicYear()
 {
 }
-
+int AcademicYear::GetYearNumber() const
+{
+	return YearNumber;
+}
+void AcademicYear::SetYearNumber(int x)
+{
+	YearNumber = x;
+}
 //Adds a course to this year in the spesified semester
 bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 {

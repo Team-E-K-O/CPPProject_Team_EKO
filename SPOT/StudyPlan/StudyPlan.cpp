@@ -14,7 +14,7 @@ StudyPlan::StudyPlan()
 		gfx.x = i;
 		gfx.y = 1;
 		plan[i]->setGfxInfo(gfx);
-		plan[i]->YearNumber = i + 1;
+		plan[i]->SetYearNumber(i+1) ;
 	}
 }
 

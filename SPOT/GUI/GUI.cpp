@@ -150,7 +150,7 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 			x1 = gInfo.x;
 			x2 =gInfo.x+ DrawingAreaWidth / 5;
 		}
-		string yrname = "YEAR " + to_string(pY->YearNumber);
+		string yrname = "YEAR " + to_string(pY->GetYearNumber());
 		pWind->SetFont(15, BOLD, BY_NAME, "Arial");
 		pWind->SetPen(OutlineColor);
 		pWind->SetBrush(YearFill);
