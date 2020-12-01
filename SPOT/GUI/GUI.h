@@ -57,6 +57,7 @@ class GUI
 	window* pWind;
 public:
 	GUI();
+	void RedrawCourse(AcademicYear* , Course* , int ,int );
 	void CreateMenu() const;
 	void ClearDrawingArea() const;
 	void ClearStatusBar() const;	//Clears the status bar
