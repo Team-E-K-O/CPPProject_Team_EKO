@@ -24,6 +24,15 @@ bool ActionDeleteCourse::Execute()
 
 		graphicsInfo gInfo{ x, y };
 
+		int year;
+		SEMESTER sem;
+
+		StudyPlan* pp = pReg->getStudyPlay();
+		pp->DetYearSem(gInfo, year, sem);
+		pp->DeleteStudyPlan(gInfo,year, sem);
+
+
+		cout << year << endl << sem;
 
 
 		return true;

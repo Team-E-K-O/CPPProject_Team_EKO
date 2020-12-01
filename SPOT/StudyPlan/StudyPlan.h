@@ -20,6 +20,6 @@ public:
 	void virtual DrawMe(GUI*) ;
 	void DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem);
 	virtual ~StudyPlan();
-	void virtual DeleteStudyPlan();
+	void  DeleteStudyPlan(graphicsInfo,int year, SEMESTER sem);
 };
 

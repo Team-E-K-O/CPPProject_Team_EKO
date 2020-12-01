@@ -55,8 +55,9 @@ void StudyPlan::DrawMe(GUI* pGUI)
 	
 }
 
-void StudyPlan::DeleteStudyPlan()
+void StudyPlan::DeleteStudyPlan(graphicsInfo g,int year, SEMESTER sem)
 {
+	plan[year - 1]->DeleteCourse(g, sem);
 }
 
 StudyPlan::~StudyPlan()

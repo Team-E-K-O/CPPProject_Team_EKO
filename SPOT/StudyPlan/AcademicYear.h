@@ -27,5 +27,8 @@ public:
 	int YearNumber;
 
 	void virtual DrawMe(GUI*) ;
+
+	void DeleteCourse(graphicsInfo,SEMESTER sem);
+
 };
 

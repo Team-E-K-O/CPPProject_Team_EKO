@@ -1,6 +1,7 @@
 #include "Registrar.h"
 #include "Actions/ActionAddCourse.h"
 #include "Actions/ActionAddNote.h"
+#include "ActionDeleteCourse.h"
 #include <iostream>   //debug_e
 
 Registrar::Registrar()
