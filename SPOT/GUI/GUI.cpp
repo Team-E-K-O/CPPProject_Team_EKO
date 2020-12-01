@@ -1,7 +1,9 @@
 #include "GUI.h"
 #include "../Courses/Course.h"
 #include "../StudyPlan/AcademicYear.h"
+#include <string>
 #include <sstream>
+#include <iostream>    //debug_e
 
 GUI::GUI()
 { 
@@ -9,6 +11,7 @@ GUI::GUI()
 	pWind->ChangeTitle(WindTitle);
 	ClearDrawingArea();
 	ClearStatusBar();
+	ClearNotesBar();
 	CreateMenu();
 }
 
@@ -18,7 +21,15 @@ void GUI::ClearDrawingArea() const
 {
 	pWind->SetBrush(BkGrndColor);
 	pWind->SetPen(BkGrndColor);
-	pWind->DrawRectangle(0, MenuBarHeight, WindWidth, WindHeight -StatusBarHeight);
+	pWind->DrawRectangle(0, MenuBarHeight, DrawingAreaWidth, WindHeight -StatusBarHeight);
+
+}
+
+void GUI::ClearNotesBar() const
+{
+	pWind->SetBrush(NotesBarColor);
+	pWind->SetPen(OutlineColor);
+	pWind->DrawRectangle(1300, MenuBarHeight, DrawingAreaWidth, WindHeight - StatusBarHeight);
 
 }
 
@@ -33,7 +44,7 @@ void GUI::CreateMenu() const
 {
 	pWind->SetBrush(StatusBarColor);
 	pWind->SetPen(StatusBarColor);
-	pWind->DrawRectangle(0, 0, WindWidth, MenuBarHeight);
+	
 
 	//You can draw the menu icons any way you want.
 
@@ -69,6 +80,15 @@ void GUI::PrintMsg(string msg) const
 	pWind->DrawString(MsgX, WindHeight - MsgY, msg);
 }
 
+//Prints a message on the notes bar
+void GUI::PrintNote(string msg,int x,int y) const
+{
+	// Print the Message
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(x, y, msg);
+}
+
 //////////////////////////////////////////////////////////////////////////
 void GUI::UpdateInterface() const
 {
@@ -78,13 +98,14 @@ void GUI::UpdateInterface() const
 	CreateMenu();
 	ClearStatusBar();
 	ClearDrawingArea();
+	ClearNotesBar();
 	pWind->UpdateBuffer();
 	pWind->SetBuffering(false);
 
 }
 
 ////////////////////////    Drawing functions    ///////////////////
-void GUI::DrawCourse(const Course* pCrs)
+void GUI::DrawCourse( Course* pCrs)
 {
 	if (pCrs->isSelected())
 		pWind->SetPen(HiColor, 2);
@@ -107,13 +128,44 @@ void GUI::DrawCourse(const Course* pCrs)
 	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT/2, crd.str());
 }
 
-void GUI::DrawAcademicYear(const AcademicYear* pY) 
+void GUI::DrawAcademicYear( AcademicYear* pY) 
 {
-	graphicsInfo gInfo = pY->getGfxInfo();
-
 	///TODO: compelete this function to:
-	//		1- Draw a rectangle for the academic year 
-	//		2- Draw a sub-rectangle for each semester
+	  
+	    graphicsInfo gInfo = pY->getGfxInfo();    
+		pY->setDim(DrawingAreaWidth / 5, DrawingAreaHeigth);
+		int x1, x2;
+		if (gInfo.y == 1)     //initialising the year dimensions for the first time
+		{
+			x1 = gInfo.x * DrawingAreaWidth / 5;
+			x2 = (1 + gInfo.x) * DrawingAreaWidth / 5;
+			gInfo.x = x1;
+			gInfo.y = MenuBarHeight; 
+			pY->setGfxInfo(gInfo);
+		}
+		else
+		{
+			x1 = gInfo.x;
+			x2 =gInfo.x+ DrawingAreaWidth / 5;
+		}
+		string yrname = "YEAR " + to_string(pY->YearNumber);
+		pWind->SetFont(15, BOLD, BY_NAME, "Arial");
+		pWind->SetPen(OutlineColor);
+		pWind->SetBrush(YearFill);
+		pWind->DrawRectangle(x1 ,MenuBarHeight ,x2 , WindHeight - StatusBarHeight);
+		pWind->DrawString(x1 + 10, MenuBarHeight + 15, yrname);
+		//2 - Draw a sub - rectangle for each semester
+		
+		for (int n = FALL; n < SEM_CNT; n++)
+		{
+			string SEM_S[] = { "FALL","SPRING","SUMMER" };
+			pWind->SetPen(OutlineColor);
+			pWind->SetBrush(YearFill);
+			pWind->DrawRectangle(x1+n*(x2-x1)/3, MenuBarHeight + 30  , x1 + (n + 1) * (x2 - x1) /3, WindHeight - StatusBarHeight );
+			pWind->DrawString(x1 + n * (x2 - x1) / 3 + 15, MenuBarHeight + 35, SEM_S[n]);
+		}
+		
+	//		
 	//Then each course should be drawn inside rect of its year/sem
 	
 }
@@ -140,7 +192,6 @@ ActionData GUI::GetUserAction(string msg) const
 		int x, y;
 		ctInput = pWind->GetMouseClick(x, y);	//Get the coordinates of the user click
 		ktInput = pWind->GetKeyPress(cKeyData);
-
 		if (ktInput == ESCAPE)	//if ESC is pressed,return CANCEL action
 		{
 			return ActionData{ CANCEL };
@@ -148,6 +199,7 @@ ActionData GUI::GetUserAction(string msg) const
 
 		
 		if (ctInput == LEFT_CLICK)	//mouse left click
+			
 		{
 			//[1] If user clicks on the Menu bar
 			if (y >= 0 && y < MenuBarHeight)
@@ -173,17 +225,23 @@ ActionData GUI::GetUserAction(string msg) const
 			}
 
 			//[2] User clicks on the drawing area
-			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight)
+			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x<DrawingAreaWidth)
 			{
 				return ActionData{ DRAW_AREA,x,y };	//user want clicks inside drawing area
 			}
+			//[3] User clicks on the notes area
+			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x >= DrawingAreaWidth)
+			{
+				return ActionData{ NOTES_AREA,x,y };	//user want clicks inside notes area
+			}
 
-			//[3] User clicks on the status bar
+			//[4] User clicks on the status bar
 			return ActionData{ STATUS_BAR };
 		}
 	}//end while
 
 }
+
 
 string GUI::GetSrting() const
 {

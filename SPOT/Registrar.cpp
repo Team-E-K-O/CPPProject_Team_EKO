@@ -1,7 +1,7 @@
 #include "Registrar.h"
-#include "ActionDeleteCourse.h"
 #include "Actions/ActionAddCourse.h"
-//#include <iostream>
+#include "Actions/ActionAddNote.h"
+#include <iostream>   //debug_e
 
 Registrar::Registrar()
 {
@@ -47,8 +47,15 @@ Action* Registrar::CreateRequiredAction()
 	case REDO:
 
 		break;
+	case NOTES_AREA :
+		//std::cout << "Notes area" << endl;   //debug_e
+		RequiredAction = new ActionAddNote(this);
+		break;
 
 	//TODO: Add case for each action
+	case EXIT:
+		running = false;
+		break;
 	case DEL_CRS:    //delete course action
 		RequiredAction = new ActionDeleteCourse(this);
 
@@ -69,7 +76,8 @@ bool Registrar::ExecuteAction(Action* pAct)
 
 void Registrar::Run()
 {
-	while (true)
+	running = true;
+	while (running)
 	{
 		//update interface here as CMU Lib doesn't refresh itself
 		//when window is minimized then restored

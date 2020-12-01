@@ -8,6 +8,7 @@
 //The maestro class for the application
 class Registrar
 {
+	bool running ;
 	GUI *pGUI;	//pointer to GUI 
 	Rules RegRules;	//Registration rules
 	StudyPlan *pSPlan;

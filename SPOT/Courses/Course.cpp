@@ -1,7 +1,5 @@
 #include "Course.h"
 #include "../GUI/GUI.h"
-#include <iostream>
-
 Course::Course(Course_Code r_code, string r_title, int crd):code(r_code),Title(r_title)
 {
 	credits = crd;
@@ -27,7 +25,7 @@ int Course::getCredits() const
 	return credits;
 }
 
-void Course::DrawMe(GUI* pG) const
+void Course::DrawMe(GUI* pG) 
 {
 	pG->DrawCourse(this);
 }

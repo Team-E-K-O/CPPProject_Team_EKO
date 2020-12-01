@@ -1,8 +1,8 @@
 #include "ActionAddCourse.h"
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
-#include <iostream>
 
+#include <iostream>  //debug_e
 ActionAddCourse::ActionAddCourse(Registrar* p):Action(p)
 {
 }
@@ -17,7 +17,7 @@ bool ActionAddCourse::Execute()
 	//TODO: add input validation
 
 
-	ActionData actData = pGUI->GetUserAction("Select a year to add coures to:(To be implemented in phase1) we will just draw coures where user clicks");
+	ActionData actData = pGUI->GetUserAction("Select a and semister year to add coures to:");
 	//TODO: add input validation
 
 	int x, y;
@@ -42,8 +42,12 @@ bool ActionAddCourse::Execute()
 		//TODO: add the course to the correct year obtained from registrar
 
 		//For the seke of demo, we will add the course to the 1st year, 1st semester
+		int year;
+		SEMESTER Sem;
 		StudyPlan* pS = pReg->getStudyPlay();
-		pS->AddCourse(pC, 1, FALL);
+		pS->DetYearSem(gInfo, year, Sem);
+		pS->AddCourse(pC, year, Sem);
+		std::cout << "Sem" << Sem << endl;   //debug_e
 	}
 
 	

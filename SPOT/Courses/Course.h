@@ -21,7 +21,8 @@ public:
 	string getTitle() const;
 	string getCode() const;
 	int getCredits() const;
-	void DrawMe(GUI*) const;
+
+	void DrawMe(GUI*) ;
 	virtual ~Course();
 
 };

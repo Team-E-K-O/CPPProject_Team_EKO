@@ -35,7 +35,8 @@ class GUI
 		wx = 15, wy = 15,		//Window starting coordinates
 		StatusBarHeight = 60,	//Status Bar Height
 		MenuBarHeight = 80,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
-		MenuItemWidth = 70;		//Width of each item in the menu
+		DrawingAreaWidth = 1080, MenuItemWidth = 80,	    //Width of each item in the menu
+		DrawingAreaHeigth = WindHeight - StatusBarHeight - MenuBarHeight;
 
 
 
@@ -45,7 +46,11 @@ class GUI
 	color ConnColor = GREEN;		//Connector color
 	color MsgColor = BLUE;			//Messages color
 	color BkGrndColor = LIGHTGRAY;	//Background color
-	color StatusBarColor = DARKGRAY;//statusbar color
+	color StatusBarColor = DARKGRAY;//StatusBar color
+	color NotesBarColor = GRAY;     //NotesBar color
+	color OutlineColor = BLACK;     //Outline color for all rectangles
+	color YearFill = WHITESMOKE;    //Year Recangle Box
+
 	string WindTitle = "Study-Plan Organizational Tool (SPOT)";
 
 	window* pWind;
@@ -54,13 +59,15 @@ public:
 	void CreateMenu() const;
 	void ClearDrawingArea() const;
 	void ClearStatusBar() const;	//Clears the status bar
+	void ClearNotesBar() const;     //Clears the notes bar
 
 	//output functions
 	void PrintMsg(string msg) const;		//prints a message on status bar
+	void PrintNote(string msg,int x,int y) const;		//prints a message on notes bar
 
 	//Drawing functions
-	void DrawCourse(const Course* );
-	void DrawAcademicYear(const AcademicYear*);
+	void DrawCourse( Course* );
+	void DrawAcademicYear( AcademicYear*);
 	void UpdateInterface() const;
 	
 	//input functions
