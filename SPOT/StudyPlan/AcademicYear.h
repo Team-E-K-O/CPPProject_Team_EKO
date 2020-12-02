@@ -28,7 +28,7 @@ public:
 	bool AddCourse(Course*, SEMESTER );
 	int GetNumCourses(int) const;
 	void virtual DrawMe(GUI*) ;
-	Course* ReturnCoursePointer(graphicsInfo, SEMESTER sem);
+	virtual Course* ReturnCoursePointer(graphicsInfo, SEMESTER sem);
 
 	void DeleteCourse(graphicsInfo,SEMESTER sem);
 

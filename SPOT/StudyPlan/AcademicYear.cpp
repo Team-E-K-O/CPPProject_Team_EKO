@@ -95,7 +95,6 @@ Course* AcademicYear::ReturnCoursePointer(graphicsInfo g, SEMESTER sem)
 		cout << "test"<< endl;
 		if ((*it)->isClicked(g))
 		{
-			(*it)->setSelected(true);
 			return *it;
 			break;
 		}
