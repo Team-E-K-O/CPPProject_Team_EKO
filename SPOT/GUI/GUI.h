@@ -4,6 +4,7 @@ using namespace std;
 
 #include "..\DEFs.h"
 #include "CMUgraphicsLib\CMUgraphics.h"
+#include <vector>
 
 class Course;
 class AcademicYear;
@@ -47,7 +48,7 @@ class GUI
 	color MsgColor = BLUE;			//Messages color
 	color BkGrndColor = LIGHTGRAY;	//Background color
 	color StatusBarColor = DARKGRAY;//StatusBar color
-	color NotesBarColor = GRAY;     //NotesBar color
+	color NotesBarColor =LEMONCHIFFON;     //NotesBar color
 	color OutlineColor = BLACK;     //Outline color for all rectangles
 	color YearFill = WHITESMOKE;    //Year Recangle Box
 
@@ -56,15 +57,14 @@ class GUI
 	window* pWind;
 public:
 	GUI();
+	void RedrawCourse(AcademicYear* , Course* , int ,int );
 	void CreateMenu() const;
 	void ClearDrawingArea() const;
 	void ClearStatusBar() const;	//Clears the status bar
-	void ClearNotesBar() const;     //Clears the notes bar
-
+	void DrawNotes(vector<string>) const;     //Clears the notes bar
+	void ClearNotesArea() const;
 	//output functions
-	void PrintMsg(string msg) const;		//prints a message on status bar
-	void PrintNote(string msg,int x,int y) const;		//prints a message on notes bar
-
+	void PrintMsg(string) const;		//prints a message on status bar
 	//Drawing functions
 	void DrawCourse( Course* );
 	void DrawAcademicYear( AcademicYear*);

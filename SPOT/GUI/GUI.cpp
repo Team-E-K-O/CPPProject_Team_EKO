@@ -11,7 +11,7 @@ GUI::GUI()
 	pWind->ChangeTitle(WindTitle);
 	ClearDrawingArea();
 	ClearStatusBar();
-	ClearNotesBar();
+	ClearNotesArea();
 	CreateMenu();
 }
 
@@ -25,11 +25,12 @@ void GUI::ClearDrawingArea() const
 
 }
 
-void GUI::ClearNotesBar() const
+
+void GUI::ClearNotesArea() const
 {
 	pWind->SetBrush(NotesBarColor);
 	pWind->SetPen(OutlineColor);
-	pWind->DrawRectangle(1300, MenuBarHeight, DrawingAreaWidth, WindHeight - StatusBarHeight);
+	pWind->DrawRectangle(DrawingAreaWidth, MenuBarHeight, WindWidth, WindHeight - StatusBarHeight);
 
 }
 
@@ -63,7 +64,20 @@ void GUI::CreateMenu() const
 	for (int i = 0; i<ITM_CNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i*MenuItemWidth, 0, MenuItemWidth, MenuBarHeight);
 }
-
+void GUI::RedrawCourse(AcademicYear* yr,Course* crs,int sem,int n1)
+{
+	graphicsInfo g = yr->getGfxInfo();
+	crs->setDim(CRS_WIDTH, CRS_HEIGHT);
+	int n = yr->GetNumCourses(sem);
+	int space = ((WindHeight - (MenuBarHeight + 30 + StatusBarHeight)) - n * CRS_HEIGHT) / (n + 1);
+	cout << "number of courses is :" << n << endl;    //debug_e
+	cout <<"Space ="<< space << endl;   //debug_e
+	g.y = MenuBarHeight + 30 + (n1+1)*space +  n1* crs->getDimh();
+	g.x = g.x + sem * yr->getDimw() / 3;
+	//std::cout << YearCourses[sem].size() << endl;   //debug_e
+	std::cout << g.x << "   " << g.y << endl;        //debug_e
+	crs->setGfxInfo(g);
+}
 ////////////////////////    Output functions    ///////////////////
 
 //Prints a message on the status bar
@@ -80,15 +94,6 @@ void GUI::PrintMsg(string msg) const
 	pWind->DrawString(MsgX, WindHeight - MsgY, msg);
 }
 
-//Prints a message on the notes bar
-void GUI::PrintNote(string msg,int x,int y) const
-{
-	// Print the Message
-	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->SetPen(MsgColor);
-	pWind->DrawString(x, y, msg);
-}
-
 //////////////////////////////////////////////////////////////////////////
 void GUI::UpdateInterface() const
 {
@@ -98,13 +103,23 @@ void GUI::UpdateInterface() const
 	CreateMenu();
 	ClearStatusBar();
 	ClearDrawingArea();
-	ClearNotesBar();
+	ClearNotesArea();
 	pWind->UpdateBuffer();
 	pWind->SetBuffering(false);
 
 }
 
 ////////////////////////    Drawing functions    ///////////////////
+void GUI::DrawNotes(vector<string> s) const  
+{
+	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD, BY_NAME, "Gramound");  //tested ---> 17 char max for current settings
+	pWind->SetPen(MsgColor);
+	pWind->SetBrush(NotesBarColor);
+	pWind->SetPen(OutlineColor);
+	for (int i = 0; i < s.size(); i++)
+		pWind->DrawString(DrawingAreaWidth + 10, MenuBarHeight + (1 + i) * 15, s[i]);
+
+}
 void GUI::DrawCourse( Course* pCrs)
 {
 	if (pCrs->isSelected())
@@ -148,7 +163,7 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 			x1 = gInfo.x;
 			x2 =gInfo.x+ DrawingAreaWidth / 5;
 		}
-		string yrname = "YEAR " + to_string(pY->YearNumber);
+		string yrname = "YEAR " + to_string(pY->GetYearNumber());
 		pWind->SetFont(15, BOLD, BY_NAME, "Arial");
 		pWind->SetPen(OutlineColor);
 		pWind->SetBrush(YearFill);
