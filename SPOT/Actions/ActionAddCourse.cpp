@@ -47,7 +47,6 @@ bool ActionAddCourse::Execute()
 		StudyPlan* pS = pReg->getStudyPlay();
 		pS->DetYearSem(gInfo, year, Sem);
 		pS->AddCourse(pC, year, Sem);
-		std::cout << "Sem" << Sem << endl;   //debug_e
 	}
 
 	

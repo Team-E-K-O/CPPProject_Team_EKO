@@ -24,8 +24,6 @@ bool ActionAddNote::Execute()
 		x = actData.x;
 		y = actData.y;
 
-		GUI* pGUI = pReg->getGUI();
-
 		pGUI->PrintNote(note,x,y);
 		
 
