@@ -17,7 +17,7 @@ bool ActionAddCourse::Execute()
 	//TODO: add input validation
 
 
-	ActionData actData = pGUI->GetUserAction("Select a and semister year to add coures to:");
+	ActionData actData = pGUI->GetUserAction("Select a and semister year to add course to:");
 	//TODO: add input validation
 
 	int x, y;

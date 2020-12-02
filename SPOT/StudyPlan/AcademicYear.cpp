@@ -89,14 +89,20 @@ Course* AcademicYear::ReturnCoursePointer(graphicsInfo g, SEMESTER sem)
 {
 	
 		cout << "start" << endl;
+		bool t = false;
 
 	for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)
 	{
 		cout << "test"<< endl;
 		if ((*it)->isClicked(g))
 		{
+			t = true;
 			return *it;
+			
 			break;
+			
 		}
 	}
+	if (!t)
+		return nullptr;
 }

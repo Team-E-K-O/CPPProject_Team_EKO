@@ -34,6 +34,38 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionAddCourse(this);
 		
 		break;
+	case DRAW_AREA :
+	{
+		
+		{
+			pGUI->ClearStatusBar();
+			int x, y;
+			x = actData.x;
+			y = actData.y;
+			graphicsInfo gInfo{ x,y };
+			int year;
+			SEMESTER sem;
+			StudyPlan* pp = getStudyPlay();
+			pp->DetYearSem(gInfo, year, sem);
+			Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
+			if (pc == nullptr)
+			{
+				//break;
+			}
+			else
+			{
+
+				pc->setSelected(true);
+				pc->DrawMe(pGUI);
+				string pc2 = to_string(pc->getCredits());
+				string title = pc->getTitle();
+				string code = pc->getCode();
+				string courseinfo = title + ", " + code + ", " + pc2;
+				ActionData actData = pGUI->GetUserAction(courseinfo);
+				pc->setSelected(0);
+			}
+		}
+	}
 	case SAVE:
 
 		break;
