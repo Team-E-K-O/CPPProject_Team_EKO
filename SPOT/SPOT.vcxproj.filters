@@ -152,6 +152,9 @@
     <ClCompile Include="Actions\ActionDeleteCourse.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionMove.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GUI\GUI.h">
@@ -239,6 +242,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionDeleteCourse.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionMove.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

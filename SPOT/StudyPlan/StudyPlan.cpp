@@ -66,6 +66,12 @@ void StudyPlan::DeleteStudyPlan(graphicsInfo g,int year, SEMESTER sem)
 	plan[year - 1]->DeleteCourse(g, sem);
 }
 
+Course* StudyPlan::ReturnCoursePointer(graphicsInfo g, int year, SEMESTER sem)
+{
+	cout << year << "   "<< sem << endl;
+	return plan[year - 1]->ReturnCoursePointer(g, sem);
+}
+
 StudyPlan::~StudyPlan()
 {
 }

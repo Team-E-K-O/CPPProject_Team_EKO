@@ -30,11 +30,6 @@ bool ActionDeleteCourse::Execute()
 		StudyPlan* pp = pReg->getStudyPlay();
 		pp->DetYearSem(gInfo, year, sem);
 		pp->DeleteStudyPlan(gInfo,year, sem);
-
-
-		cout << year << endl << sem;
-
-
 		return true;
 	}
 

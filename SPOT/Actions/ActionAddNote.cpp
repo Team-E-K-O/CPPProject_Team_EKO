@@ -14,7 +14,6 @@ bool ActionAddNote::Execute()
 	pGUI->PrintMsg("Add Note:");
 	string note = pGUI->GetSrting();
 	Ps->AddPlanNote(note);
-	//test test test
 	return true;
 }
 

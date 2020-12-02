@@ -20,6 +20,7 @@ class StudyPlan:public Drawable
 public:
 	StudyPlan();
 	bool AddCourse(Course*, int year, SEMESTER);
+	Course* ReturnCoursePointer(graphicsInfo g, int year, SEMESTER sem);
 	void virtual DrawMe(GUI*) ;
 	void DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem);
 	void AddPlanNote(string);
