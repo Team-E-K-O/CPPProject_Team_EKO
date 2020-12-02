@@ -2,6 +2,7 @@
 #include "Actions/ActionAddCourse.h"
 #include "Actions/ActionAddNote.h"
 #include "Actions/ActionDeleteCourse.h"
+#include "ActionMove.h"
 #include <iostream>   //debug_e
 
 Registrar::Registrar()
@@ -51,6 +52,9 @@ Action* Registrar::CreateRequiredAction()
 	case NOTES_AREA :
 		//std::cout << "Notes area" << endl;   //debug_e
 		RequiredAction = new ActionAddNote(this);
+		break;
+	case MOVE :
+		RequiredAction = new ActionMove(this);
 		break;
 
 	//TODO: Add case for each action

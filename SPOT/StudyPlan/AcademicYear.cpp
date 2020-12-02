@@ -68,16 +68,35 @@ int AcademicYear::GetNumCourses(int sem) const
 {
 	return NumberOfCourses[sem];
 }
+
+
 void AcademicYear::DeleteCourse(graphicsInfo g,SEMESTER sem)
 {
-	auto  sem_ = YearCourses[sem];
-	for (auto  crs = sem_.begin(); crs != sem_.end() ; ++crs)
+	auto  sem_ = YearCourses[sem];   /////
+	for (auto  crs = sem_.begin(); crs != sem_.end() ; ++crs)     //auto crs Yearcrss[sm]. 
 	{
 		if ((*crs)->isClicked(g))
 		{
 			sem_.erase(crs);
 			YearCourses[sem] = sem_;
 			NumberOfCourses[sem]--;
+			break;
+		}
+	}
+}
+
+Course* AcademicYear::ReturnCoursePointer(graphicsInfo g, SEMESTER sem)
+{
+	
+		cout << "start" << endl;
+
+	for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)
+	{
+		cout << "test"<< endl;
+		if ((*it)->isClicked(g))
+		{
+			(*it)->setSelected(true);
+			return *it;
 			break;
 		}
 	}

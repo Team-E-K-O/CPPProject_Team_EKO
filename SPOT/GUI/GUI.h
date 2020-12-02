@@ -18,10 +18,12 @@ class GUI
 		//If you want to change the menu items order, just change the order here
 		ITM_ADD,		//Add a new course
 		ITM_DELETE,
+		ITM_MOVE,
 		ITM_UNDO,
 		ITM_REDO,
 		ITM_OPEN,
 		ITM_SAVE,
+		
 						//TODO: Add more items names here
 
          
