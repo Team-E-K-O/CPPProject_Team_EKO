@@ -3,6 +3,7 @@
 #include "Actions/ActionAddNote.h"
 #include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionMove.h"
+#include "Actions/ActionEditCourseCode.h"
 #include <iostream>   //debug_e
 
 Registrar::Registrar()
@@ -97,7 +98,8 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionDeleteCourse(this);
 
 		break;
-
+	case EDIT:  // Edit course in the study plan
+		RequiredAction = new ActionEditCourseCode(this);
 		
 	}
 	return RequiredAction;
