@@ -17,14 +17,33 @@ bool ActionImportText::Execute()
 	if (!Myfile.is_open())
 		return false;
 	else
+	{
 
 		while (getline(Myfile,Line))
 		{
 			Lines.push_back(Line);
 		}
 		Myfile.close();
+		string word = "";
+		for (string y : Lines)
+		{
+			vector<string> words;
+			string word = "";
+			for (auto x : y)
+			{
+				if (x == ',')	
+					word = "";
+				else 
+					word = word + x;
+			}
+			words.push_back(word);
+			////code for adding courses per sem.
+			string years = words[0];
+			int yr = years[5] - 48;
 
 
+		}
+   }
 }
 ActionImportText::~ActionImportText()
 {
