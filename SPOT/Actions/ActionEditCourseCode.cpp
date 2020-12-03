@@ -29,33 +29,24 @@ bool ActionEditCourseCode::Execute()
 		Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
 		pc->setSelected(true);
 		pc->DrawMe(pGUI);
-
-		while (true)
-		{
 			pGUI->PrintMsg("Enter The New Course Code: Enter course Code(e.g. CIE202):");
 
 			Course_Code code = pGUI->GetSrting();
-			
-			pc->setSelected(false);
 
 			string Title = "Test101";
 
 			int crd = 0;
 
-			Course* pC = new Course(code, Title, crd);
+			Course* pC2 = new Course(code, Title, crd);
 
-			pC->setGfxInfo(gInfo);
+			pC2->setGfxInfo(gInfo);
+			pp->DeleteStudyPlan(gInfo, year, sem);
 
 			pp->DetYearSem(gInfo, year, sem);
 
-			pp->AddCourse(pc, year, sem);
+			pp->AddCourse(pC2, year, sem);
 
-			pp->DeleteStudyPlan(gInfo, year, sem);
-
-			break;
-		}
-
-
+			
 		return true;
 	}
 
