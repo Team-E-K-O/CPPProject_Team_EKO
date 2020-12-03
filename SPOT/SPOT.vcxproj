@@ -125,6 +125,7 @@
     <ClCompile Include="Actions\ActionAddNote.cpp" />
     <ClCompile Include="Actions\ActionDeleteCourse.cpp" />
     <ClCompile Include="Actions\ActionImportText.cpp" />
+    <ClCompile Include="Actions\ActionEditCourseCode.cpp" />
     <ClCompile Include="Actions\ActionMove.cpp" />
     <ClCompile Include="Courses\Course.cpp" />
     <ClCompile Include="GUI\CMUgraphicsLib\CMUgraphics.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Actions\ActionAddNote.h" />
     <ClInclude Include="Actions\ActionDeleteCourse.h" />
     <ClInclude Include="Actions\ActionImportText.h" />
+    <ClInclude Include="Actions\ActionEditCourseCode.h" />
     <ClInclude Include="Actions\ActionMove.h" />
     <ClInclude Include="Courses\Course.h" />
     <ClInclude Include="GUI\CMUgraphicsLib\CMUgraphics.h" />

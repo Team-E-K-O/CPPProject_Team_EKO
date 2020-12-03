@@ -3,6 +3,8 @@
 #include "Actions/ActionAddNote.h"
 #include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionMove.h"
+#include "Actions/ActionMove.h"
+#include "Actions/ActionEditCourseCode.h"
 #include <iostream>   //debug_e
 
 Registrar::Registrar()
@@ -34,6 +36,38 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionAddCourse(this);
 		
 		break;
+	case DRAW_AREA :
+	{
+		
+		{
+			pGUI->ClearStatusBar();
+			int x, y;
+			x = actData.x;
+			y = actData.y;
+			graphicsInfo gInfo{ x,y };
+			int year;
+			SEMESTER sem;
+			StudyPlan* pp = getStudyPlay();
+			pp->DetYearSem(gInfo, year, sem);
+			Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
+			if (pc == nullptr)
+			{
+				//break;
+			}
+			else
+			{
+
+				pc->setSelected(true);
+				pc->DrawMe(pGUI);
+				string pc2 = to_string(pc->getCredits());
+				string title = pc->getTitle();
+				string code = pc->getCode();
+				string courseinfo = title + ", " + code + ", " + pc2;
+				ActionData actData = pGUI->GetUserAction(courseinfo);
+				pc->setSelected(0);
+			}
+		}
+	}
 	case SAVE:
 
 		break;
@@ -65,7 +99,8 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionDeleteCourse(this);
 
 		break;
-
+	case EDIT:  // Edit course in the study plan
+		RequiredAction = new ActionEditCourseCode(this);
 		
 	}
 	return RequiredAction;

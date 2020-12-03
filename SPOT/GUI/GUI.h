@@ -19,6 +19,7 @@ class GUI
 		ITM_ADD,		//Add a new course
 		ITM_DELETE,
 		ITM_MOVE,
+		ITM_EDIT,
 		ITM_UNDO,
 		ITM_REDO,
 		ITM_OPEN,
