@@ -20,7 +20,7 @@ public:
 	bool ExecuteAction(Action*);
 	void UpdateInterface();
 	StudyPlan* getStudyPlay() const;
-	void GetRules();
+	void GetCourseCatalog();
 	void Run();
 
 	~Registrar();

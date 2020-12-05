@@ -145,7 +145,7 @@ void Registrar::UpdateInterface()
 	pGUI->UpdateInterface();	//update interface items      //test
 	pSPlan->DrawMe(pGUI);		//make study plan draw itself
 }
-void Registrar::GetRules()
+void Registrar::GetCourseCatalog()
 {
 	string file_name = "CourseCatalog.txt";
 	vector<vector<string>> Words;
