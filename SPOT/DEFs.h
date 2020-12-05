@@ -2,6 +2,7 @@
 
 //This header file contains some defenitions to be used all over the application
 #include <string>
+
 using namespace std;
 typedef string Course_Code;
 
@@ -28,7 +29,6 @@ enum ActionType
 
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
-	OPEN,       //Open File
 	MOVE,       //Move Course
 	EDIT,       //Edit a course in the study plan
 

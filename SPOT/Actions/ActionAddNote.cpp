@@ -2,7 +2,6 @@
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
 
-#include <iostream>
 ActionAddNote::ActionAddNote(Registrar* p) :Action(p)
 {
 }

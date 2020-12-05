@@ -22,7 +22,7 @@ class GUI
 		ITM_EDIT,
 		ITM_UNDO,
 		ITM_REDO,
-		ITM_OPEN,
+		ITM_LOAD,
 		ITM_SAVE,
 		
 						//TODO: Add more items names here
@@ -55,7 +55,7 @@ class GUI
 	color OutlineColor = BLACK;     //Outline color for all rectangles
 	color YearFill = WHITESMOKE;    //Year Recangle Box
 
-	string WindTitle = "Study-Plan Organizational Tool (SPOT)";
+	string WindTitle = "Study-Plan Organizational Tool (ZC)";
 
 	window* pWind;
 public:

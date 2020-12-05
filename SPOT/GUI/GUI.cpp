@@ -3,13 +3,13 @@
 #include "../StudyPlan/AcademicYear.h"
 #include <string>
 #include <sstream>
-#include <iostream>    //debug_e
+
 
 GUI::GUI()
 { 
 	pWind = new window(WindWidth, WindHeight,wx,wy);
 	pWind->ChangeTitle(WindTitle);
-	ClearDrawingArea();
+	//ClearDrawingArea();    //test
 	ClearStatusBar();
 	ClearNotesArea();
 	CreateMenu();
@@ -55,7 +55,7 @@ void GUI::CreateMenu() const
 	MenuItemImages[ITM_EXIT] = "GUI\\Images\\Menu\\Menu_Exit.jpg";
 	MenuItemImages[ITM_DELETE]= "GUI\\Images\\Menu\\Menu_Delete.jpg";
 	MenuItemImages[ITM_UNDO]= "GUI\\Images\\Menu\\Menu_Undo.jpg";
-	MenuItemImages[ITM_OPEN]= "GUI\\Images\\Menu\\Menu_Open.jpg";
+	MenuItemImages[ITM_LOAD]= "GUI\\Images\\Menu\\Menu_Open.jpg";
 	MenuItemImages[ITM_SAVE] = "GUI\\Images\\Menu\\Menu_Save.jpg";
 	MenuItemImages[ITM_REDO] = "GUI\\Images\\Menu\\Menu_Redo.jpg";
 	MenuItemImages[ITM_MOVE] = "GUI\\Images\\Menu\\Menu_Move.jpg";
@@ -72,12 +72,8 @@ void GUI::RedrawCourse(AcademicYear* yr,Course* crs,int sem,int n1)
 	crs->setDim(CRS_WIDTH, CRS_HEIGHT);
 	int n = yr->GetNumCourses(sem);
 	int space = ((WindHeight - (MenuBarHeight + 30 + StatusBarHeight)) - n * CRS_HEIGHT) / (n + 1);
-	cout << "number of courses is :" << n << endl;    //debug_e
-	cout <<"Space ="<< space << endl;   //debug_e
 	g.y = MenuBarHeight + 30 + (n1+1)*space +  n1* crs->getDimh();
 	g.x = g.x + sem * yr->getDimw() / 3;
-	//std::cout << YearCourses[sem].size() << endl;   //debug_e
-	std::cout << g.x << "   " << g.y << endl;        //debug_e
 	crs->setGfxInfo(g);
 }
 ////////////////////////    Output functions    ///////////////////
@@ -104,7 +100,7 @@ void GUI::UpdateInterface() const
 	//Redraw everything
 	CreateMenu();
 	ClearStatusBar();
-	ClearDrawingArea();
+	//ClearDrawingArea();      //test
 	ClearNotesArea();
 	pWind->UpdateBuffer();
 	pWind->SetBuffering(false);
@@ -181,6 +177,7 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 			pWind->DrawRectangle(x1+n*(x2-x1)/3, MenuBarHeight + 30  , x1 + (n + 1) * (x2 - x1) /3, WindHeight - StatusBarHeight );
 			pWind->DrawString(x1 + n * (x2 - x1) / 3 + 15, MenuBarHeight + 35, SEM_S[n]);
 		}
+	
 		
 	//		
 	//Then each course should be drawn inside rect of its year/sem
@@ -234,7 +231,7 @@ ActionData GUI::GetUserAction(string msg) const
 				case ITM_DELETE: return ActionData{ DEL_CRS }; 
 				case ITM_UNDO:return ActionData{ UNDO };
 				case ITM_REDO:return ActionData{ REDO };
-				case ITM_OPEN:return ActionData{ OPEN };
+				case ITM_LOAD:return ActionData{ LOAD };
 				case ITM_SAVE:return ActionData{ SAVE };
 				case ITM_MOVE:return ActionData{ MOVE };
 				case ITM_EDIT:return ActionData{ EDIT };

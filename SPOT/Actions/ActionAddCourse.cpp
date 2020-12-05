@@ -2,7 +2,6 @@
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
 
-#include <iostream>  //debug_e
 ActionAddCourse::ActionAddCourse(Registrar* p):Action(p)
 {
 }
@@ -36,8 +35,6 @@ bool ActionAddCourse::Execute()
 		string Title = "Test101";
 		int crd = 0;
 		Course* pC = new Course(code, Title, crd);
-		pC->setGfxInfo(gInfo);
-
 		//TODO: Ask registrar to add course to the year selected by the user
 		//TODO: add the course to the correct year obtained from registrar
 

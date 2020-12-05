@@ -50,4 +50,12 @@ void Drawable::setSelected(bool sel)
 {
 	Selected = sel;
 }
+void Drawable::SetDrawed()
+{
+	Drawed = true;
+}
+bool Drawable::IsDrawed() const
+{
+	return Drawed;
+}
 

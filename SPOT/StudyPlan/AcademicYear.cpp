@@ -1,6 +1,7 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
-#include <iostream>  //debug_e
+#include <vector>
+using namespace std;
 AcademicYear::AcademicYear()
 {
 	//TODO: make all necessary initializations
@@ -69,20 +70,11 @@ int AcademicYear::GetNumCourses(int sem) const
 	return NumberOfCourses[sem];
 }
 
-Course* AcademicYear::SaveCourse(SEMESTER sem)
-{
-	for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)     //auto crs Yearcrss[sm]. 
-	{
-		    return* it;
-			break;
-	}
-
-}
 
 void AcademicYear::DeleteCourse(graphicsInfo g,SEMESTER sem)
 {
 	auto  sem_ = YearCourses[sem];   /////
-	for (auto  crs = sem_.begin(); crs != sem_.end() ; ++crs)     //auto crs Yearcrss[sm]. 
+	for (auto  crs = sem_.begin(); crs != sem_.end() ; ++crs)
 	{
 		if ((*crs)->isClicked(g))
 		{
@@ -94,24 +86,49 @@ void AcademicYear::DeleteCourse(graphicsInfo g,SEMESTER sem)
 	}
 }
 
+void AcademicYear::DeleteAll()
+{
+	for (int sem = FALL; sem < SEM_CNT; sem++)
+	{
+		YearCourses[sem].clear();
+		NumberOfCourses[sem]=0;
+	}
+}
+
 Course* AcademicYear::ReturnCoursePointer(graphicsInfo g, SEMESTER sem)
 {
-	
-		cout << "start" << endl;
 		bool t = false;
 
 	for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)
 	{
-		cout << "test"<< endl;
 		if ((*it)->isClicked(g))
 		{
 			t = true;
 			return *it;
 			
 			break;
-			
 		}
 	}
 	if (!t)
 		return nullptr;
 }
+
+vector<vector<Course>> AcademicYear::ReturnAllCrs() const
+{
+	vector<vector<Course>> yr;
+
+	for (int sem = FALL; sem < SEM_CNT; sem++)
+	{
+		auto term = YearCourses[sem];
+		vector<Course> termcrs;
+		for (auto it : term)
+		{
+			termcrs.push_back(*it);
+		}
+		yr.push_back(termcrs);
+		
+	}
+	return yr;
+}
+
+

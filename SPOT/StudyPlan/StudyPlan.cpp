@@ -1,6 +1,5 @@
 #include "StudyPlan.h"
 #include "../GUI/GUI.h"
-#include <iostream>   //debug_e
 
 
 StudyPlan::StudyPlan()
@@ -23,7 +22,7 @@ StudyPlan::StudyPlan()
 bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
 {
 	//TODO: add all requried checks to add the course 
-	std::cout << year<<endl;    //debug_e
+	//std::cout << year<<endl;    //debug_e
 	plan[year - 1]->AddCourse(pC, sem);
 	
 	return true;
@@ -79,17 +78,31 @@ void StudyPlan::DeleteStudyPlan(graphicsInfo g,int year, SEMESTER sem)
 	plan[year - 1]->DeleteCourse(g, sem);
 }
 
-Course* StudyPlan::SaveStudyPlan(int year, SEMESTER sem)
+void StudyPlan::DeleteALL()
 {
-	return plan[year - 1]->SaveCourse(sem);
+	for (int i = 0; i < plan.size(); i++)
+	{
+		plan[i]->DeleteAll();
+	}
 }
 
 Course* StudyPlan::ReturnCoursePointer(graphicsInfo g, int year, SEMESTER sem)
 {
-	cout << year << "   "<< sem << endl;
 	return plan[year - 1]->ReturnCoursePointer(g, sem);
 }
 
 StudyPlan::~StudyPlan()
 {
+}
+
+vector<vector<vector<Course>>> StudyPlan::ReturnALlCrs() const
+{
+	vector<vector<vector<Course>>> all;
+	for (auto it : plan)
+	{
+		
+	    vector<vector<Course>> x =(it)->ReturnAllCrs();
+		all.push_back(x);
+	}
+	return all;
 }
