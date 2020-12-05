@@ -60,10 +60,14 @@ void StudyPlan::AddPlanNote(string s)
 	Notes.push_back(s);
 }
 
-
 void StudyPlan::DeleteStudyPlan(graphicsInfo g,int year, SEMESTER sem)
 {
 	plan[year - 1]->DeleteCourse(g, sem);
+}
+
+void StudyPlan::SaveStudyPlan(int year, SEMESTER sem)
+{
+	plan[year - 1]->SaveCourse(sem);
 }
 
 Course* StudyPlan::ReturnCoursePointer(graphicsInfo g, int year, SEMESTER sem)

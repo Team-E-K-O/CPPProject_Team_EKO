@@ -26,5 +26,6 @@ public:
 	void AddPlanNote(string);
 	virtual ~StudyPlan();
 	void  DeleteStudyPlan(graphicsInfo,int year, SEMESTER sem);
+	void  SaveStudyPlan(int year, SEMESTER sem);
 };
 

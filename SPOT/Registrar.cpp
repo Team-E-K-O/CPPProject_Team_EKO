@@ -4,6 +4,7 @@
 #include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionMove.h"
 #include "Actions/ActionEditCourseCode.h"
+#include"Actions/ActionSave.h"
 #include <iostream>   //debug_e
 
 Registrar::Registrar()
@@ -51,7 +52,7 @@ Action* Registrar::CreateRequiredAction()
 			Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
 			if (pc == nullptr)
 			{
-				//break;
+				break;
 			}
 			else
 			{
@@ -68,7 +69,7 @@ Action* Registrar::CreateRequiredAction()
 		}
 	}
 	case SAVE:
-
+		RequiredAction = new ActionSave(this);
 		break;
 
 	case LOAD:
@@ -83,7 +84,6 @@ Action* Registrar::CreateRequiredAction()
 
 		break;
 	case NOTES_AREA :
-		//std::cout << "Notes area" << endl;   //debug_e
 		RequiredAction = new ActionAddNote(this);
 		break;
 	case MOVE :
