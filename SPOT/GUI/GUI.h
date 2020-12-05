@@ -22,7 +22,7 @@ class GUI
 		ITM_EDIT,
 		ITM_UNDO,
 		ITM_REDO,
-		ITM_OPEN,
+		ITM_LOAD,
 		ITM_SAVE,
 		
 						//TODO: Add more items names here

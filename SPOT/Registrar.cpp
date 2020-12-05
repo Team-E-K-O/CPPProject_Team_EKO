@@ -5,6 +5,7 @@
 #include "Actions/ActionMove.h"
 #include "Actions/ActionMove.h"
 #include "Actions/ActionEditCourseCode.h"
+#include "Actions/ActionImportSplan.h"
 #include <iostream>   //debug_e
 
 Registrar::Registrar()
@@ -69,11 +70,10 @@ Action* Registrar::CreateRequiredAction()
 		}
 	}
 	case SAVE:
-
 		break;
 
 	case LOAD:
-
+		RequiredAction = new ActionImportSplan(this);
 		break;
 
 	case UNDO:

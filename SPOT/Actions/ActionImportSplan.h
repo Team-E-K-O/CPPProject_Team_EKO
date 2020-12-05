@@ -3,13 +3,13 @@
 #include <vector>
 #include <string>
 using namespace std;
-class ActionImportText    :public Action
+class ActionImportSplan    :public Action
 {
 public:
-	ActionImportText(Registrar*);
+	ActionImportSplan(Registrar*);
 	bool virtual Execute();
 
-	virtual ~ActionImportText();
+	virtual ~ActionImportSplan();
 	
 };
 
