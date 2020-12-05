@@ -6,6 +6,7 @@
 #include "Actions/ActionMove.h"
 #include "Actions/ActionEditCourseCode.h"
 #include"Actions/ActionSave.h"
+#include"Actions/ActionSave.h"
 #include "Actions/ActionImportSplan.h"
 #include <iostream>   //debug_e
 
@@ -72,6 +73,7 @@ Action* Registrar::CreateRequiredAction()
 		}
 	}
 	case SAVE:
+		RequiredAction = new ActionSave(this);
 		break;
 
 	case LOAD:
