@@ -54,7 +54,7 @@ class GUI
 	color OutlineColor = BLACK;     //Outline color for all rectangles
 	color YearFill = WHITESMOKE;    //Year Recangle Box
 
-	string WindTitle = "Study-Plan Organizational Tool (SPOT)";
+	string WindTitle = "Study-Plan Organizational Tool (ZC)";
 
 	window* pWind;
 public:
