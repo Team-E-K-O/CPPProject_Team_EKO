@@ -13,7 +13,7 @@ bool ActionSave::Execute()
 {
 	GUI* pGUI = pReg->getGUI();
 
-	ActionData actData = pGUI->GetUserAction("Write the name of the .txt file: ");
+	pGUI->PrintMsg("Write the name of the .txt file: ");
 
 	string filename = pGUI->GetSrting();
 
