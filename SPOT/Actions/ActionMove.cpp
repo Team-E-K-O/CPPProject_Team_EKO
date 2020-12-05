@@ -1,7 +1,7 @@
 #include "ActionMove.h"
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
-#include <iostream>  //debug_e
+//#include <iostream>  //debug_e
 
 
 ActionMove::ActionMove(Registrar* p) :Action(p)
@@ -19,7 +19,7 @@ bool ActionMove::Execute()
 		x = actData.x;
 		y = actData.y;
 
-		cout << "tst tst" << endl;
+		//cout << "tst tst" << endl;
 
 		graphicsInfo gInfo{ x, y };
 

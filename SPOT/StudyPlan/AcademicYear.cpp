@@ -1,6 +1,6 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
-#include <iostream>  //debug_e
+//#include <iostream>  //debug_e
 #include <vector>
 using namespace std;
 AcademicYear::AcademicYear()

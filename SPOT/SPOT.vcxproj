@@ -209,6 +209,7 @@
     <ClInclude Include="StudyPlan\StudyPlan.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\ReadMe.txt" />
     <Text Include="GUI\CMUgraphicsLib\Manual.txt" />
     <Text Include="GUI\CMUgraphicsLib\Readme.txt" />
   </ItemGroup>

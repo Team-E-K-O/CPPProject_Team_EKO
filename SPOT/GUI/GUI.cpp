@@ -3,7 +3,7 @@
 #include "../StudyPlan/AcademicYear.h"
 #include <string>
 #include <sstream>
-#include <iostream>    //debug_e
+//#include <iostream>    //debug_e
 
 GUI::GUI()
 { 
