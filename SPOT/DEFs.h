@@ -28,8 +28,8 @@ enum ActionType
 
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
-	OPEN,       //Open File
 	MOVE,       //Move Course
+	EDIT,       //Edit a course in the study plan
 
 	EXIT,		//Exit the application
 

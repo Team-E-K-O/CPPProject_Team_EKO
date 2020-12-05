@@ -55,10 +55,11 @@ void GUI::CreateMenu() const
 	MenuItemImages[ITM_EXIT] = "GUI\\Images\\Menu\\Menu_Exit.jpg";
 	MenuItemImages[ITM_DELETE]= "GUI\\Images\\Menu\\Menu_Delete.jpg";
 	MenuItemImages[ITM_UNDO]= "GUI\\Images\\Menu\\Menu_Undo.jpg";
-	MenuItemImages[ITM_OPEN]= "GUI\\Images\\Menu\\Menu_Open.jpg";
+	MenuItemImages[ITM_LOAD]= "GUI\\Images\\Menu\\Menu_Open.jpg";
 	MenuItemImages[ITM_SAVE] = "GUI\\Images\\Menu\\Menu_Save.jpg";
 	MenuItemImages[ITM_REDO] = "GUI\\Images\\Menu\\Menu_Redo.jpg";
 	MenuItemImages[ITM_MOVE] = "GUI\\Images\\Menu\\Menu_Move.jpg";
+	MenuItemImages[ITM_EDIT] = "GUI\\Images\\Menu\\Item_Edit.jpg";
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu items one image at a time
@@ -233,9 +234,10 @@ ActionData GUI::GetUserAction(string msg) const
 				case ITM_DELETE: return ActionData{ DEL_CRS }; 
 				case ITM_UNDO:return ActionData{ UNDO };
 				case ITM_REDO:return ActionData{ REDO };
-				case ITM_OPEN:return ActionData{ OPEN };
+				case ITM_LOAD:return ActionData{ LOAD };
 				case ITM_SAVE:return ActionData{ SAVE };
 				case ITM_MOVE:return ActionData{ MOVE };
+				case ITM_EDIT:return ActionData{ EDIT };
 
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar
 				}
