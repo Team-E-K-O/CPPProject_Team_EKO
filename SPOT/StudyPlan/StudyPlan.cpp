@@ -45,6 +45,20 @@ void StudyPlan::DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem)
 		}
 
 }
+
+
+void StudyPlan::DetYearSemSave(int& year, SEMESTER& Sem)
+{
+	for (int i = 0; i < plan.size(); i++)
+	{
+		year = i + 1;
+		Sem = FALL;
+		Sem = SPRING;
+		Sem = SUMMER;
+	}
+}
+
+
 void StudyPlan::DrawMe(GUI* pGUI)
 {
 	pGUI->DrawNotes(Notes);
@@ -65,9 +79,9 @@ void StudyPlan::DeleteStudyPlan(graphicsInfo g,int year, SEMESTER sem)
 	plan[year - 1]->DeleteCourse(g, sem);
 }
 
-void StudyPlan::SaveStudyPlan(int year, SEMESTER sem)
+Course* StudyPlan::SaveStudyPlan(int year, SEMESTER sem)
 {
-	plan[year - 1]->SaveCourse(sem);
+	return plan[year - 1]->SaveCourse(sem);
 }
 
 Course* StudyPlan::ReturnCoursePointer(graphicsInfo g, int year, SEMESTER sem)

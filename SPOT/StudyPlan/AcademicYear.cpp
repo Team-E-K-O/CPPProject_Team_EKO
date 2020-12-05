@@ -69,15 +69,14 @@ int AcademicYear::GetNumCourses(int sem) const
 	return NumberOfCourses[sem];
 }
 
-void AcademicYear::SaveCourse(SEMESTER sem)
+Course* AcademicYear::SaveCourse(SEMESTER sem)
 {
-	auto  sem_ = YearCourses[sem];   /////
-	for (auto crs = sem_.begin(); crs != sem_.end(); ++crs)     //auto crs Yearcrss[sm]. 
+	for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)     //auto crs Yearcrss[sm]. 
 	{
-			YearCourses[sem] = sem_;
-			cout << sem;                   //debug_e
+		    return* it;
 			break;
 	}
+
 }
 
 void AcademicYear::DeleteCourse(graphicsInfo g,SEMESTER sem)

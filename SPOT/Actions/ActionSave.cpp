@@ -13,40 +13,41 @@ bool ActionSave::Execute()
 {
 	GUI* pGUI = pReg->getGUI();
 
-	ActionData actData = pGUI->GetUserAction("Write the name of the .txt file: ");
+	pGUI->PrintMsg("Write the name of the .txt file: ");
 
 	string filename = pGUI->GetSrting();
 
-	int year;
-	SEMESTER sem;
-
 	StudyPlan* pp = pReg->getStudyPlay();
-	//pp->SaveStudyPlan(year, sem);
 
 	ofstream myfile;
 	myfile.open(filename + ".txt");
 
+	int year;
+	SEMESTER sem; 
+	
+	pp->DetYearSemSave(year, sem);
+	cout << year << endl << sem << endl;
 	myfile <<
 		"Year1:\n"
-		"\tFall: \n"
-		"\tSpring: \n"
-		"\tSummer: \n"
+		"\tFall: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSpring: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSummer: " << pp->SaveStudyPlan(year, sem) << endl <<
 		"Year2:\n"
-		"\tFall: \n"
-		"\tSpring: \n"
-		"\tSummer: \n"
+		"\tFall: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSpring: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSummer: " << pp->SaveStudyPlan(year, sem) << endl <<
 		"Year3:\n"
-		"\tFall: \n"
-		"\tSpring: \n"
-		"\tSummer: \n"
+		"\tFall: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSpring: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSummer: " << pp->SaveStudyPlan(year, sem) << endl <<
 		"Year4:\n"
-		"\tFall: \n"
-		"\tSpring: \n"
-		"\tSummer: \n"
+		"\tFall: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSpring: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSummer: " << pp->SaveStudyPlan(year, sem) << endl <<
 		"Year5:\n"
-		"\tFall: \n"
-		"\tSpring: \n"
-		"\tSummer: \n";
+		"\tFall: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSpring: " << pp->SaveStudyPlan(year, sem) << endl <<
+		"\tSummer: " << pp->SaveStudyPlan(year, sem) << endl;
 
 	myfile.close();
 	return true;
