@@ -1,6 +1,5 @@
 #include "StudyPlan.h"
 #include "../GUI/GUI.h"
-#include <iostream>   //debug_e
 
 
 StudyPlan::StudyPlan()

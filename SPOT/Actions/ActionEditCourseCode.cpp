@@ -1,7 +1,6 @@
 #include "ActionEditCourseCode.h"
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
-#include <iostream>  //debug_e
 
 
 ActionEditCourseCode::ActionEditCourseCode(Registrar* p) :Action(p)
@@ -56,7 +55,7 @@ bool ActionEditCourseCode::Execute()
 				pp->DetYearSem(gInfo, year, sem);
 
 				pp->AddCourse(pC2, year, sem);
-
+				break;
 			}
 			
 		}
