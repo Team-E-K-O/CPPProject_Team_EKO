@@ -7,11 +7,17 @@
 #include "Actions/ActionEditCourseCode.h"
 #include "Actions/ActionImportSplan.h"
 #include <iostream>   //debug_e
+#include <string>
+#include <fstream>
+#include <sstream>
+using namespace std;
 
 Registrar::Registrar()
 {
+	//GetRules();                      //Disabled untill a catalog file is uploaded cuz it wil cause the program to crash
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
+
 }
 
 //returns a pointer to GUI
@@ -116,6 +122,7 @@ bool Registrar::ExecuteAction(Action* pAct)
 
 void Registrar::Run()
 {
+
 	running = true;
 	while (running)
 	{
@@ -138,7 +145,41 @@ void Registrar::UpdateInterface()
 	pGUI->UpdateInterface();	//update interface items      //test
 	pSPlan->DrawMe(pGUI);		//make study plan draw itself
 }
+void Registrar::GetRules()
+{
+	string file_name = "CourseCatalog.txt";
+	vector<vector<string>> Words;
+	string Line;
+	ifstream Myfile(file_name);
+	if (Myfile.is_open())
+	{
+		while (getline(Myfile, Line))
+		{
+			stringstream ssLine(Line);
+			string Word;
+			vector<string> linewrds;
+			while (getline(ssLine, Word, ','))
+				linewrds.push_back(Word);
+			Words.push_back(linewrds);
+		}
+		for (auto w :Words )
+		{	
+		CourseInfo c;
+		c.Title = w[0];
+		c.Code = w[1];
+		for (int i = 2; i < 5; i++)
+			c.PreReqList.push_back(w[i]);
+		for (int i = 5; i < 8; i++)
+			c.CoReqList.push_back(w[i]);
+		char s = w[8][5];
+		c.Credits = s - '0';
+		c.type = w[9];
+		RegRules.CourseCatalog.push_back(c);
+		}
 
+
+	}
+}
 Registrar::~Registrar()
 {
 	delete pGUI;
