@@ -65,7 +65,7 @@ Action* Registrar::CreateRequiredAction()
 				string pc2 = to_string(pc->getCredits());
 				string title = pc->getTitle();
 				string code = pc->getCode();
-				string courseinfo = title + ", " + code + ", " + pc2;
+				string courseinfo ="Title: " +  title + ", " + "Code: " + code + ", " + "Credits: " + pc2;
 				ActionData actData = pGUI->GetUserAction(courseinfo);
 				pc->setSelected(0);
 				break;

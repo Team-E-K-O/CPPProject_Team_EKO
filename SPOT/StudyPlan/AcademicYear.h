@@ -3,6 +3,9 @@
 
 #include "..\Courses\Course.h"
 #include "../GUI/Drawable.h"
+#include <vector>
+using namespace std;
+
 
 
 //Represent one year in the student's study plan
@@ -29,9 +32,8 @@ public:
 	int GetNumCourses(int) const;
 	void virtual DrawMe(GUI*) ;
 	virtual Course* ReturnCoursePointer(graphicsInfo, SEMESTER sem);
-
+	vector<vector<Course>>  ReturnAllCrs()   const;
 	void DeleteCourse(graphicsInfo,SEMESTER sem);
-	Course* SaveCourse(SEMESTER sem);
-
+	virtual void DeleteAll();
 };
 
