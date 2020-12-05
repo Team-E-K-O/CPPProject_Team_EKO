@@ -26,7 +26,8 @@ bool ActionSave::Execute()
 	SEMESTER sem; 
 	
 	pp->DetYearSemSave(year, sem);
-	cout << year << endl << sem << endl;
+	cout << year << endl << sem << endl;      //debug_e
+
 	myfile <<
 		"Year1:\n"
 		"\tFall: " << pp->SaveStudyPlan(year, sem) << endl <<
