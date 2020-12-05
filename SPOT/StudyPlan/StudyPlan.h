@@ -2,7 +2,7 @@
 #include <vector>
 #include "AcademicYear.h"
 #include "../GUI/Drawable.h"
-
+using namespace std;
 //A full study plan for a student
 class StudyPlan:public Drawable
 {
@@ -23,8 +23,11 @@ public:
 	Course* ReturnCoursePointer(graphicsInfo g, int year, SEMESTER sem);
 	void virtual DrawMe(GUI*) ;
 	void DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem);
+	void DetYearSemSave(int& year, SEMESTER& Sem);
 	void AddPlanNote(string);
 	virtual ~StudyPlan();
+	void DeleteALL();
+	vector<vector<vector<Course>>>  ReturnALlCrs() const;
 	void  DeleteStudyPlan(graphicsInfo,int year, SEMESTER sem);
 };
 

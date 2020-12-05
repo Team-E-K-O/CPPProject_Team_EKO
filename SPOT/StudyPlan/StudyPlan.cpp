@@ -23,7 +23,7 @@ StudyPlan::StudyPlan()
 bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
 {
 	//TODO: add all requried checks to add the course 
-	std::cout << year<<endl;    //debug_e
+	//std::cout << year<<endl;    //debug_e
 	plan[year - 1]->AddCourse(pC, sem);
 	
 	return true;
@@ -45,6 +45,20 @@ void StudyPlan::DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem)
 		}
 
 }
+
+
+void StudyPlan::DetYearSemSave(int& year, SEMESTER& Sem)
+{
+	for (int i = 0; i < plan.size(); i++)
+	{
+		year = i + 1;
+		Sem = FALL;
+		Sem = SPRING;
+		Sem = SUMMER;
+	}
+}
+
+
 void StudyPlan::DrawMe(GUI* pGUI)
 {
 	pGUI->DrawNotes(Notes);
@@ -60,18 +74,36 @@ void StudyPlan::AddPlanNote(string s)
 	Notes.push_back(s);
 }
 
-
 void StudyPlan::DeleteStudyPlan(graphicsInfo g,int year, SEMESTER sem)
 {
 	plan[year - 1]->DeleteCourse(g, sem);
 }
 
+void StudyPlan::DeleteALL()
+{
+	for (int i = 0; i < plan.size(); i++)
+	{
+		plan[i]->DeleteAll();
+	}
+}
+
 Course* StudyPlan::ReturnCoursePointer(graphicsInfo g, int year, SEMESTER sem)
 {
-	cout << year << "   "<< sem << endl;
 	return plan[year - 1]->ReturnCoursePointer(g, sem);
 }
 
 StudyPlan::~StudyPlan()
 {
+}
+
+vector<vector<vector<Course>>> StudyPlan::ReturnALlCrs() const
+{
+	vector<vector<vector<Course>>> all;
+	for (auto it : plan)
+	{
+		
+	    vector<vector<Course>> x =(it)->ReturnAllCrs();
+		all.push_back(x);
+	}
+	return all;
 }

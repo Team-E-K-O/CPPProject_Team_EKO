@@ -14,12 +14,13 @@ bool ActionImportSplan::Execute()
 	string file_name = pGUI->GetSrting();
 	vector<vector<string>> Words;
 	string Line;
-	ifstream Myfile(file_name);
+	ifstream Myfile("Saves\\" + file_name + ".txt");
 	if (!Myfile.is_open())
 		return false;
 	else
 	{
-
+		StudyPlan* pS = pReg->getStudyPlay();
+		pS->DeleteALL();
 		while (getline(Myfile, Line))
 		{
 			stringstream ssLine(Line);
@@ -47,7 +48,7 @@ bool ActionImportSplan::Execute()
 				string Title = "Test101";
 				int crd = 0;
 				Course* pC = new Course(code, Title, crd);
-				StudyPlan* pS = pReg->getStudyPlay();
+				
 				pS->AddCourse(pC, year, sem);
 			}
 		}

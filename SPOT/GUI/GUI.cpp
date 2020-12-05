@@ -72,12 +72,12 @@ void GUI::RedrawCourse(AcademicYear* yr,Course* crs,int sem,int n1)
 	crs->setDim(CRS_WIDTH, CRS_HEIGHT);
 	int n = yr->GetNumCourses(sem);
 	int space = ((WindHeight - (MenuBarHeight + 30 + StatusBarHeight)) - n * CRS_HEIGHT) / (n + 1);
-	cout << "number of courses is :" << n << endl;    //debug_e
-	cout <<"Space ="<< space << endl;   //debug_e
+	//cout << "number of courses is :" << n << endl;    //debug_e
+	//cout <<"Space ="<< space << endl;   //debug_e
 	g.y = MenuBarHeight + 30 + (n1+1)*space +  n1* crs->getDimh();
 	g.x = g.x + sem * yr->getDimw() / 3;
 	//std::cout << YearCourses[sem].size() << endl;   //debug_e
-	std::cout << g.x << "   " << g.y << endl;        //debug_e
+	//std::cout << g.x << "   " << g.y << endl;        //debug_e
 	crs->setGfxInfo(g);
 }
 ////////////////////////    Output functions    ///////////////////
