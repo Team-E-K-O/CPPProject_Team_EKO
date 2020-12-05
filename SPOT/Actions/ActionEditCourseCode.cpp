@@ -57,6 +57,7 @@ bool ActionEditCourseCode::Execute()
 
 				pp->AddCourse(pC2, year, sem);
 
+				break;
 			}
 			
 		}
