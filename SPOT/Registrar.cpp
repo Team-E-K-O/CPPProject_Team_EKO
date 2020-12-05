@@ -135,7 +135,7 @@ void Registrar::Run()
 
 void Registrar::UpdateInterface()
 {
-	pGUI->UpdateInterface();	//update interface items
+	pGUI->UpdateInterface();	//update interface items      //test
 	pSPlan->DrawMe(pGUI);		//make study plan draw itself
 }
 

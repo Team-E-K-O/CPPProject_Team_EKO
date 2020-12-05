@@ -9,7 +9,7 @@ GUI::GUI()
 { 
 	pWind = new window(WindWidth, WindHeight,wx,wy);
 	pWind->ChangeTitle(WindTitle);
-	ClearDrawingArea();
+	//ClearDrawingArea();    //test
 	ClearStatusBar();
 	ClearNotesArea();
 	CreateMenu();
@@ -104,7 +104,7 @@ void GUI::UpdateInterface() const
 	//Redraw everything
 	CreateMenu();
 	ClearStatusBar();
-	ClearDrawingArea();
+	//ClearDrawingArea();      //test
 	ClearNotesArea();
 	pWind->UpdateBuffer();
 	pWind->SetBuffering(false);
@@ -181,6 +181,7 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 			pWind->DrawRectangle(x1+n*(x2-x1)/3, MenuBarHeight + 30  , x1 + (n + 1) * (x2 - x1) /3, WindHeight - StatusBarHeight );
 			pWind->DrawString(x1 + n * (x2 - x1) / 3 + 15, MenuBarHeight + 35, SEM_S[n]);
 		}
+	
 		
 	//		
 	//Then each course should be drawn inside rect of its year/sem

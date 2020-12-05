@@ -22,6 +22,7 @@ protected:
 	//Info required for drawing
 	graphicsInfo GfxInfo;
 	bool Selected;	//is this obj selected (to highlight when drawing)
+	bool Drawed=false;
 	int height;
 	int width;
 
@@ -36,6 +37,8 @@ public:
 	int getDimw() const;
 	int getDimh() const;
 	void virtual DrawMe(GUI*) = 0;
+	void SetDrawed();
+	bool IsDrawed() const;
 	virtual ~Drawable();
 };
 
