@@ -5,6 +5,7 @@
 #include "Actions/ActionMove.h"
 #include "Actions/ActionMove.h"
 #include "Actions/ActionEditCourseCode.h"
+#include"Actions/ActionSave.h"
 #include "Actions/ActionImportSplan.h"
 #include <iostream>   //debug_e
 
@@ -53,7 +54,7 @@ Action* Registrar::CreateRequiredAction()
 			Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
 			if (pc == nullptr)
 			{
-				//break;
+				break;
 			}
 			else
 			{
@@ -66,6 +67,7 @@ Action* Registrar::CreateRequiredAction()
 				string courseinfo = title + ", " + code + ", " + pc2;
 				ActionData actData = pGUI->GetUserAction(courseinfo);
 				pc->setSelected(0);
+				break;
 			}
 		}
 	}
@@ -84,7 +86,6 @@ Action* Registrar::CreateRequiredAction()
 
 		break;
 	case NOTES_AREA :
-		//std::cout << "Notes area" << endl;   //debug_e
 		RequiredAction = new ActionAddNote(this);
 		break;
 	case MOVE :

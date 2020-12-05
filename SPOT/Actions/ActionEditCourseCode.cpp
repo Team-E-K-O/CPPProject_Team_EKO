@@ -27,25 +27,39 @@ bool ActionEditCourseCode::Execute()
 		StudyPlan* pp = pReg->getStudyPlay();
 		pp->DetYearSem(gInfo, year, sem);
 		Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
-		pc->setSelected(true);
-		pc->DrawMe(pGUI);
-			pGUI->PrintMsg("Enter The New Course Code: Enter course Code(e.g. CIE202):");
+		
+		while (true)
+		{
+			if (pc == nullptr)
+			{
+				break;
+			}
+			else
+			{
 
-			Course_Code code = pGUI->GetSrting();
+				pc->setSelected(true);
+				pc->DrawMe(pGUI);
 
-			string Title = "Test101";
+				pGUI->PrintMsg("Enter The New Course Code: Enter course Code(e.g. CIE202):");
 
-			int crd = 0;
+				Course_Code code = pGUI->GetSrting();
 
-			Course* pC2 = new Course(code, Title, crd);
+				string Title = "Test101";
 
-			pC2->setGfxInfo(gInfo);
-			pp->DeleteStudyPlan(gInfo, year, sem);
+				int crd = 0;
 
-			pp->DetYearSem(gInfo, year, sem);
+				Course* pC2 = new Course(code, Title, crd);
 
-			pp->AddCourse(pC2, year, sem);
+				pC2->setGfxInfo(gInfo);
+				pp->DeleteStudyPlan(gInfo, year, sem);
 
+				pp->DetYearSem(gInfo, year, sem);
+
+				pp->AddCourse(pC2, year, sem);
+
+			}
+			
+		}
 			
 		return true;
 	}

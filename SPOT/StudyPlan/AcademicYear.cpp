@@ -69,6 +69,15 @@ int AcademicYear::GetNumCourses(int sem) const
 	return NumberOfCourses[sem];
 }
 
+Course* AcademicYear::SaveCourse(SEMESTER sem)
+{
+	for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)     //auto crs Yearcrss[sm]. 
+	{
+		    return* it;
+			break;
+	}
+
+}
 
 void AcademicYear::DeleteCourse(graphicsInfo g,SEMESTER sem)
 {

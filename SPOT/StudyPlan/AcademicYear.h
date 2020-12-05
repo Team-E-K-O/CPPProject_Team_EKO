@@ -31,6 +31,7 @@ public:
 	virtual Course* ReturnCoursePointer(graphicsInfo, SEMESTER sem);
 
 	void DeleteCourse(graphicsInfo,SEMESTER sem);
+	Course* SaveCourse(SEMESTER sem);
 
 };
 

@@ -23,8 +23,10 @@ public:
 	Course* ReturnCoursePointer(graphicsInfo g, int year, SEMESTER sem);
 	void virtual DrawMe(GUI*) ;
 	void DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem);
+	void DetYearSemSave(int& year, SEMESTER& Sem);
 	void AddPlanNote(string);
 	virtual ~StudyPlan();
 	void  DeleteStudyPlan(graphicsInfo,int year, SEMESTER sem);
+	Course*  SaveStudyPlan(int year, SEMESTER sem);
 };
 
