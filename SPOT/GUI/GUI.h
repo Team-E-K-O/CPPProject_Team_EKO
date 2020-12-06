@@ -45,18 +45,19 @@ class GUI
 
 
 	color DrawColor = BLACK;		//Drawing color
-	color FillColor = YELLOW;		//Filling color (for courses)
+	color FillColor = LIGHTCYAN;		//Filling color (for courses)
 	color HiColor = RED;			//Highlighting color
 	color ConnColor = GREEN;		//Connector color
-	color MsgColor = BLUE;			//Messages color
-	color BkGrndColor = LIGHTGRAY;	//Background color
-	color StatusBarColor = DARKGRAY;//StatusBar color
+	color MsgColor = BLACK;			//Messages color
+	color BkGrndColor = SKYBLUE;	//Background color
+	color StatusBarColor = ANTIQUEWHITE;//StatusBar color
 	color NotesBarColor =LEMONCHIFFON;     //NotesBar color
 	color OutlineColor = BLACK;     //Outline color for all rectangles
-	color YearFill = WHITESMOKE;    //Year Recangle Box
+	color YearFill = FLORALWHITE;    //Year Recangle Box
+	color SemFill = SNOW;
+		
 
-	string WindTitle = "Study-Plan Organizational Tool (ZC)";
-
+	string WindTitle = "Team E_K_O";
 	window* pWind;
 public:
 	GUI();

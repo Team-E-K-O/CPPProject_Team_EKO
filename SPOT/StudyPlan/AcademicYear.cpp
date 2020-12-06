@@ -1,6 +1,5 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
-//#include <iostream>  //debug_e
 #include <vector>
 using namespace std;
 AcademicYear::AcademicYear()
@@ -71,15 +70,6 @@ int AcademicYear::GetNumCourses(int sem) const
 	return NumberOfCourses[sem];
 }
 
-//Course* AcademicYear::SaveCourse(SEMESTER sem)
-//{
-//	for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)
-//	{
-//		    return* it;
-//			break;
-//	}
-//
-//}
 
 void AcademicYear::DeleteCourse(graphicsInfo g,SEMESTER sem)
 {
@@ -117,7 +107,6 @@ Course* AcademicYear::ReturnCoursePointer(graphicsInfo g, SEMESTER sem)
 			return *it;
 			
 			break;
-			
 		}
 	}
 	if (!t)
