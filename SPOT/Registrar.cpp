@@ -157,7 +157,7 @@ void Registrar::GetCourseCatalog()
 	string file_name = "CourseCatalog.txt";
 	vector<vector<string>> Words;
 	string Line;
-	ifstream Myfile(file_name);
+	ifstream Myfile("Course Catalog\\" + file_name);
 	if (Myfile.is_open())
 	{
 		while (getline(Myfile, Line))
