@@ -40,21 +40,25 @@ bool ActionEditCourseCode::Execute()
 				pc->DrawMe(pGUI);
 
 				pGUI->PrintMsg("Enter The New Course Code: Enter course Code(e.g. CIE202):");
-
+				pc->setSelected(false);
 				Course_Code code = pGUI->GetSrting();
 
-				string Title = "Test101";
+				
 
-				int crd = 0;
+				Course* pC2 = pReg->AddCourse(code);
+				if (pC2) {
 
-				Course* pC2 = new Course(code, Title, crd);
 
-				pC2->setGfxInfo(gInfo);
-				pp->DeleteStudyPlan(gInfo);
+					pC2->setGfxInfo(gInfo);
+					pp->DeleteStudyPlan(gInfo);
 
-				pp->DetYearSem(gInfo, year, sem);
+					pp->DetYearSem(gInfo, year, sem);
 
-				pp->AddCourse(pC2, year, sem);
+					pp->AddCourse(pC2, year, sem);
+				}
+				else
+					ActionData actData = pGUI->GetUserAction("Error ! Code not found press anywhere to continue");
+
 				break;
 			}
 			
