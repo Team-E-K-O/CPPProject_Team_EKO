@@ -2,7 +2,6 @@
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
 
-//#include <iostream>  //debug_e
 ActionAddCourse::ActionAddCourse(Registrar* p):Action(p)
 {
 }
@@ -12,7 +11,7 @@ bool ActionAddCourse::Execute()
 	GUI* pGUI = pReg->getGUI();	
 	Rules rls = pReg->ReturnRules();
 	
-	pGUI->PrintMsg("Add Course to plan: Enter course Code(e.g. CIE202):");
+	pGUI->PrintMsg("Add Course to plan: Enter course Code(e.g. CIE 202):");
 	Course_Code code = pGUI->GetSrting();
 
 	//TODO: add input validation

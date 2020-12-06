@@ -3,7 +3,6 @@
 #include "../StudyPlan/AcademicYear.h"
 #include <string>
 #include <sstream>
-//#include <iostream>    //debug_e
 
 
 GUI::GUI()
@@ -52,7 +51,7 @@ void GUI::CreateMenu() const
 
 	//First prepare List of images paths for menu item
 	string MenuItemImages[ITM_CNT];
-	MenuItemImages[ITM_ADD] = "GUI\\Images\\Menu\\Menu_add_course.jpg";
+	MenuItemImages[ITM_ADD] = "GUI\\Images\\Menu\\Menu_add_course.jpeg";
 	MenuItemImages[ITM_EXIT] = "GUI\\Images\\Menu\\Menu_Exit.jpg";
 	MenuItemImages[ITM_DELETE]= "GUI\\Images\\Menu\\Menu_Delete.jpg";
 	MenuItemImages[ITM_UNDO]= "GUI\\Images\\Menu\\Menu_Undo.jpg";
@@ -88,7 +87,7 @@ void GUI::PrintMsg(string msg) const
 	int MsgY = StatusBarHeight - 10;
 
 	// Print the Message
-	pWind->SetFont(20, BOLD , BY_NAME, "Arial");
+	pWind->SetFont(20, BOLD , BY_NAME, "Times New Roman");
 	pWind->SetPen(MsgColor);
 	pWind->DrawString(MsgX, WindHeight - MsgY, msg);
 }
@@ -111,7 +110,7 @@ void GUI::UpdateInterface() const
 ////////////////////////    Drawing functions    ///////////////////
 void GUI::DrawNotes(vector<string> s) const  
 {
-	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD, BY_NAME, "Gramound");  //tested ---> 17 char max for current settings
+	pWind->SetFont(CRS_HEIGHT * 0.4, PLAIN, BY_NAME, "Lucida Handwriting");  //tested ---> 17 char max for current settings
 	pWind->SetPen(MsgColor);
 	pWind->SetBrush(NotesBarColor);
 	pWind->SetPen(OutlineColor);
@@ -131,13 +130,13 @@ void GUI::DrawCourse( Course* pCrs)
 	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT / 2);
 	
 	//Write the course code and credit hours.
-	int Code_x = gInfo.x + CRS_WIDTH * 0.15;
-	int Code_y = gInfo.y + CRS_HEIGHT * 0.05;
-	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD , BY_NAME, "Gramound");
+	int Code_x = gInfo.x + CRS_WIDTH * 0.08;
+	int Code_y = gInfo.y + CRS_HEIGHT * 0.1;
+	pWind->SetFont(CRS_HEIGHT * 0.37, BOLD , BY_NAME, "Lucida Sans");
 	pWind->SetPen(MsgColor);
 
 	ostringstream crd;
-	crd<< "crd:" << pCrs->getCredits();
+	crd<< "crd: " << pCrs->getCredits();
 	pWind->DrawString(Code_x, Code_y, pCrs->getCode());
 	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT/2, crd.str());
 }
@@ -162,27 +161,23 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 			x1 = gInfo.x;
 			x2 =gInfo.x+ DrawingAreaWidth / 5;
 		}
-		string yrname = "YEAR " + to_string(pY->GetYearNumber());
-		pWind->SetFont(15, BOLD, BY_NAME, "Arial");
+		string yrname = "                  YEAR    "  + to_string(pY->GetYearNumber());
+		pWind->SetFont(18, BOLD, BY_NAME , "Arial Black");
 		pWind->SetPen(OutlineColor);
 		pWind->SetBrush(YearFill);
 		pWind->DrawRectangle(x1 ,MenuBarHeight ,x2 , WindHeight - StatusBarHeight);
-		pWind->DrawString(x1 + 10, MenuBarHeight + 15, yrname);
+		pWind->DrawString(x1 + 10, MenuBarHeight + 9, yrname);
 		//2 - Draw a sub - rectangle for each semester
 		
 		for (int n = FALL; n < SEM_CNT; n++)
 		{
-			string SEM_S[] = { "FALL","SPRING","SUMMER" };
+			string SEM_S[] = { "  FALL","SPRING","SUMMER" };
+			pWind->SetFont(14, BOLD, BY_NAME , "Arial");
 			pWind->SetPen(OutlineColor);
-			pWind->SetBrush(YearFill);
+			pWind->SetBrush(SemFill);
 			pWind->DrawRectangle(x1+n*(x2-x1)/3, MenuBarHeight + 30  , x1 + (n + 1) * (x2 - x1) /3, WindHeight - StatusBarHeight );
 			pWind->DrawString(x1 + n * (x2 - x1) / 3 + 15, MenuBarHeight + 35, SEM_S[n]);
 		}
-	
-		
-	//		
-	//Then each course should be drawn inside rect of its year/sem
-	
 }
 
 
