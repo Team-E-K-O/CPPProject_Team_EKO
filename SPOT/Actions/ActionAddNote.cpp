@@ -9,7 +9,7 @@ ActionAddNote::ActionAddNote(Registrar* p) :Action(p)
 bool ActionAddNote::Execute()
 {
 	GUI* pGUI = pReg->getGUI();
-	StudyPlan* Ps = pReg->getStudyPlay();
+	StudyPlan* Ps = pReg->getStudyPlan();
 	pGUI->PrintMsg("Add Note:");
 	string note = pGUI->GetSrting();
 	Ps->AddPlanNote(note);

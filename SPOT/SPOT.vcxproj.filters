@@ -279,6 +279,7 @@
     <Text Include="GUI\CMUgraphicsLib\Readme.txt">
       <Filter>GraphicsLib</Filter>
     </Text>
+    <Text Include="..\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -15,7 +15,7 @@ using namespace std;
 
 Registrar::Registrar()
 {
-	//GetRules();                      //Disabled untill a catalog file is uploaded cuz it wil cause the program to crash
+	GetCourseCatalog();                      //Disabled untill a catalog file is uploaded cuz it wil cause the program to crash
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
 
@@ -28,9 +28,14 @@ GUI* Registrar::getGUI() const
 }
 
 //returns the study plan
-StudyPlan* Registrar::getStudyPlay() const
+StudyPlan* Registrar::getStudyPlan() const
 {
 	return pSPlan;
+}
+
+Rules Registrar::ReturnRules() const
+{
+	return RegRules;
 }
 
 Action* Registrar::CreateRequiredAction() 
@@ -55,7 +60,7 @@ Action* Registrar::CreateRequiredAction()
 			graphicsInfo gInfo{ x,y };
 			int year;
 			SEMESTER sem;
-			StudyPlan* pp = getStudyPlay();
+			StudyPlan* pp = getStudyPlan();
 			pp->DetYearSem(gInfo, year, sem);
 			Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
 			if (pc == nullptr)
@@ -167,20 +172,38 @@ void Registrar::GetCourseCatalog()
 		for (auto w :Words )
 		{	
 		CourseInfo c;
-		c.Title = w[0];
-		c.Code = w[1];
-		for (int i = 2; i < 5; i++)
+		c.Title = w[1];
+		c.Code = w[0];
+		/*for (int i = 2; i < 5; i++)    
 			c.PreReqList.push_back(w[i]);
 		for (int i = 5; i < 8; i++)
-			c.CoReqList.push_back(w[i]);
-		char s = w[8][5];
+			c.CoReqList.push_back(w[i]);*/
+		char s = w[2][0];
 		c.Credits = s - '0';
-		c.type = w[9];
+		//c.type = w[9];
 		RegRules.CourseCatalog.push_back(c);
 		}
 
 
 	}
+}
+Course * Registrar::AddCourse(Course_Code code)
+{
+	bool state = true;
+	for (auto i : RegRules.CourseCatalog)
+	{
+		if (code == i.Code)
+		{
+			string title = i.Title;
+			int credits = i.Credits;
+			Course* pC = new Course(code, title, credits);
+			return pC;
+			state = false;
+			break;
+		}
+	}
+	if(state)
+	return nullptr;
 }
 Registrar::~Registrar()
 {

@@ -19,8 +19,10 @@ public:
 	Action* CreateRequiredAction();
 	bool ExecuteAction(Action*);
 	void UpdateInterface();
-	StudyPlan* getStudyPlay() const;
+	StudyPlan* getStudyPlan() const;
+	Rules ReturnRules() const;
 	void GetCourseCatalog();
+	Course * AddCourse(Course_Code);
 	void Run();
 
 	~Registrar();
