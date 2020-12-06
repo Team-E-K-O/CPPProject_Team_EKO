@@ -26,7 +26,7 @@ bool ActionMove::Execute()
 		int year,year2;
 		SEMESTER sem,sem2;
 
-		StudyPlan* pp = pReg->getStudyPlay();
+		StudyPlan* pp = pReg->getStudyPlan();
 		pp->DetYearSem(gInfo, year, sem);
 		Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
 		
@@ -49,7 +49,7 @@ bool ActionMove::Execute()
 					pp->DetYearSem(gInfo2, year2, sem2);
 					pc->setSelected(false);
 					pp->AddCourse(pc, year2, sem2);
-					pp->DeleteStudyPlan(gInfo, year, sem);
+					pp->DeleteStudyPlan(gInfo);
 					break;
 				}
 			}

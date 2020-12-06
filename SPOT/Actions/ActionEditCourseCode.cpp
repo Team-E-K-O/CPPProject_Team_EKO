@@ -24,7 +24,7 @@ bool ActionEditCourseCode::Execute()
 		int year;
 		SEMESTER sem;
 
-		StudyPlan* pp = pReg->getStudyPlay();
+		StudyPlan* pp = pReg->getStudyPlan();
 		pp->DetYearSem(gInfo, year, sem);
 		Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
 		
@@ -51,12 +51,12 @@ bool ActionEditCourseCode::Execute()
 				Course* pC2 = new Course(code, Title, crd);
 
 				pC2->setGfxInfo(gInfo);
-				pp->DeleteStudyPlan(gInfo, year, sem);
+				pp->DeleteStudyPlan(gInfo);
 
 				pp->DetYearSem(gInfo, year, sem);
 
 				pp->AddCourse(pC2, year, sem);
-
+				break;
 			}
 			
 		}
