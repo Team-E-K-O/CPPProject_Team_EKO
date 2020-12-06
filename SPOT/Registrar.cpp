@@ -187,6 +187,10 @@ void Registrar::GetCourseCatalog()
 
 	}
 }
+
+
+
+
 Course * Registrar::AddCourse(Course_Code code)
 {
 	bool state = true;
