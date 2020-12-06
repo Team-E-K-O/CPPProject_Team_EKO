@@ -19,7 +19,7 @@ bool ActionImportSplan::Execute()
 		return false;
 	else
 	{
-		StudyPlan* pS = pReg->getStudyPlay();
+		StudyPlan* pS = pReg->getStudyPlan();
 		pS->DeleteALL();
 		while (getline(Myfile, Line))
 		{
@@ -45,11 +45,9 @@ bool ActionImportSplan::Execute()
 			for (int w=2;w<i.size();w++)
 			{
 				Course_Code code = i[w];
-				string Title = "Test101";
-				int crd = 0;
-				Course* pC = new Course(code, Title, crd);
-				
-				pS->AddCourse(pC, year, sem);
+				Course* pC = pReg->AddCourse(code);
+				if(pC)
+				   pS->AddCourse(pC, year, sem);
 			}
 		}
 		Myfile.close();

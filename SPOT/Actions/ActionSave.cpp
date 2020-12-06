@@ -18,7 +18,7 @@ bool ActionSave::Execute()
 	pGUI->PrintMsg("Write the name of the .txt file: ");
 
 	string filename = pGUI->GetSrting();
-	StudyPlan* pp = pReg->getStudyPlay();
+	StudyPlan* pp = pReg->getStudyPlan();
 	ofstream myfile;
 	myfile.open("Saves\\" + filename + ".txt");
 	 vector<vector<vector<Course>>> ff = pp->ReturnALlCrs();
