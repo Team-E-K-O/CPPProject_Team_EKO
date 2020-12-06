@@ -209,21 +209,37 @@ void Registrar::ImportRules()
 			Words.push_back(linewrds);
 		}
 		
-		RegRules.TotalCredit = stoi(Words[0]);
-		RegRules.ReqUnivCompulsoryCredits = stoi(w[1][0]);
-		RegRules.ReqUnivElectiveCredits = stoi(w[1][1]);
-		RegRules.ReqTrackCredits = stoi(w[2]);
-		RegRules.ReqMajorCompulsoryCredits = stoi(w[3][0]);
-		RegRules.ReqMajorElectiveCredits = stoi(w[3][1]);
-		for (auto var : Words[6])
+		RegRules.TotalCredit = stoi(Words[0][0]);
+		RegRules.ReqUnivCompulsoryCredits = stoi(Words[1][0]);
+		RegRules.ReqUnivElectiveCredits = stoi(Words[1][1]);
+		RegRules.ReqTrackCredits = stoi(Words[2][0]);
+		RegRules.ReqMajorCompulsoryCredits = stoi(Words[3][0]);
+		RegRules.ReqMajorElectiveCredits = stoi(Words[3][1]);
+		for (auto var : Words[4])
 		{
 		    Course_Code x = var;
 			RegRules.UnivCompulsory.push_back(x);
 		}
-		RegRules.CourseCatalog.push_back(RegRules);
+		for (auto var : Words[5])
+		{
+			Course_Code x = var;
+			RegRules.UnivElective.push_back(x);
 		}
-
-
+		for (auto var : Words[6])
+		{
+			Course_Code x = var;
+			RegRules.TrackCompulsory.push_back(x);
+		}
+		for (auto var : Words[7])
+		{
+			Course_Code x = var;
+			RegRules.MajorCompulsory.push_back(x);
+		}
+		for (auto var : Words[8])
+		{
+			Course_Code x = var;
+			RegRules.MajorElective.push_back(x);
+		}
 	}
 }
 
