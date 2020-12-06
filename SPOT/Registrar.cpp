@@ -158,7 +158,7 @@ void Registrar::GetCourseCatalog()
 	string file_name = "CourseCatalog.txt";
 	vector<vector<string>> Words;
 	string Line;
-	ifstream Myfile("Course Catalog\\" + file_name);
+	ifstream Myfile("Rules\\" + file_name);
 	if (Myfile.is_open())
 	{
 		while (getline(Myfile, Line))
@@ -194,7 +194,7 @@ void Registrar::ImportRules()
 	string file_name = "Rules.txt";
 	vector<vector<string>> Words;
 	string Line;
-	ifstream Myfile(file_name);
+	ifstream Myfile("Rules\\" + file_name);
 	if (Myfile.is_open())
 	{
 		while (getline(Myfile, Line))
@@ -206,7 +206,6 @@ void Registrar::ImportRules()
 				linewrds.push_back(Word);
 			Words.push_back(linewrds);
 		}
-
 		RegRules.TotalCredit = stoi(Words[0][0]);
 		RegRules.ReqUnivCompulsoryCredits = stoi(Words[1][0]);
 		RegRules.ReqUnivElectiveCredits = stoi(Words[1][1]);
