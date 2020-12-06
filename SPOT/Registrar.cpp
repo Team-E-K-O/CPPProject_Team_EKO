@@ -14,7 +14,8 @@
 using namespace std;
 
 Registrar::Registrar()
-{
+{ 
+	ImportRules();
 	GetCourseCatalog();                      //Disabled untill a catalog file is uploaded cuz it wil cause the program to crash
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
@@ -187,6 +188,60 @@ void Registrar::GetCourseCatalog()
 
 	}
 }
+
+void Registrar::ImportRules()
+{
+	string file_name = "Rules.txt";
+	vector<vector<string>> Words;
+	string Line;
+	ifstream Myfile(file_name);
+	if (Myfile.is_open())
+	{
+		while (getline(Myfile, Line))
+		{
+			stringstream ssLine(Line);
+			string Word;
+			vector<string> linewrds;
+			while (getline(ssLine, Word, ','))
+				linewrds.push_back(Word);
+			Words.push_back(linewrds);
+		}
+
+		RegRules.TotalCredit = stoi(Words[0][0]);
+		RegRules.ReqUnivCompulsoryCredits = stoi(Words[1][0]);
+		RegRules.ReqUnivElectiveCredits = stoi(Words[1][1]);
+		RegRules.ReqTrackCredits = stoi(Words[2][0]);
+		RegRules.ReqMajorCompulsoryCredits = stoi(Words[3][0]);
+		RegRules.ReqMajorElectiveCredits = stoi(Words[3][1]);
+		for (auto var : Words[4])
+		{
+			Course_Code x = var;
+			RegRules.UnivCompulsory.push_back(x);
+		}
+		for (auto var : Words[5])
+		{
+			Course_Code x = var;
+			RegRules.UnivElective.push_back(x);
+		}
+		for (auto var : Words[6])
+		{
+			Course_Code x = var;
+			RegRules.TrackCompulsory.push_back(x);
+		}
+		for (auto var : Words[7])
+		{
+			Course_Code x = var;
+			RegRules.MajorCompulsory.push_back(x);
+		}
+		for (auto var : Words[8])
+		{
+			Course_Code x = var;
+			RegRules.MajorElective.push_back(x);
+		}
+	}
+}
+
+
 Course * Registrar::AddCourse(Course_Code code)
 {
 	bool state = true;
