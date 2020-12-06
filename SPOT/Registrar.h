@@ -22,6 +22,7 @@ public:
 	StudyPlan* getStudyPlan() const;
 	Rules ReturnRules() const;
 	void GetCourseCatalog();
+	void ImportRules();
 	Course * AddCourse(Course_Code);
 	void Run();
 

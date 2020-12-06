@@ -16,6 +16,7 @@ using namespace std;
 
 Registrar::Registrar()
 {
+	ImportRules();
 	GetCourseCatalog();                      //Disabled untill a catalog file is uploaded cuz it wil cause the program to crash
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
@@ -153,6 +154,7 @@ void Registrar::UpdateInterface()
 	pGUI->UpdateInterface();	//update interface items      //test
 	pSPlan->DrawMe(pGUI);		//make study plan draw itself
 }
+
 void Registrar::GetCourseCatalog()
 {
 	string file_name = "CourseCatalog.txt";
@@ -188,6 +190,40 @@ void Registrar::GetCourseCatalog()
 
 	}
 }
+
+void Registrar::ImportRules()
+{
+	string file_name = "Rules.txt";
+	vector<vector<string>> Words;
+	string Line;
+	ifstream Myfile(file_name);
+	if (Myfile.is_open())
+	{
+		while (getline(Myfile, Line))
+		{
+			stringstream ssLine(Line);
+			string Word;
+			vector<string> linewrds;
+			while (getline(ssLine, Word, ','))
+				linewrds.push_back(Word);
+			Words.push_back(linewrds);
+		}
+		
+		/*RegRules.TotalCredit = stoi(Words[0]);
+		RegRules.ReqUnivCompulsoryCredits = stoi(w[1][0]);
+		RegRules.ReqUnivElectiveCredits = stoi(w[1][1]);
+		RegRules.ReqTrackCredits = stoi(w[2]);
+		RegRules.ReqMajorCompulsoryCredits = stoi(w[3][0]);
+		RegRules.ReqMajorElectiveCredits = stoi(w[3][1]);
+
+		RegRules.CourseCatalog.push_back(RegRules);*/
+		}
+
+
+	}
+}
+
+
 Course * Registrar::AddCourse(Course_Code code)
 {
 	bool state = true;
