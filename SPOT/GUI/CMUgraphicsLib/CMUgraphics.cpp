@@ -741,6 +741,10 @@ void window::SetFont(const int iSize, const unsigned short usStyle, const fontfa
 		lf.lfPitchAndFamily = FF_SWISS; 
 		break;
 
+	  case DECORATIVE:
+		lf.lfPitchAndFamily = FF_DECORATIVE;
+		break;
+
 	  default:	 
 	    lf.lfPitchAndFamily = FF_DONTCARE; 
 		break;
