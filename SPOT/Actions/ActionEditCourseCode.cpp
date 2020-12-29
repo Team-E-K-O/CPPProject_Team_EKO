@@ -42,6 +42,8 @@ bool ActionEditCourseCode::Execute()
 				pGUI->PrintMsg("Enter The New Course Code: Enter course Code(e.g. CIE202):");
 				pc->setSelected(false);
 				Course_Code code = pGUI->GetSrting();
+				if (code == "")
+					return false;
 
 				
 

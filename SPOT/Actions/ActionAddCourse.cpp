@@ -13,6 +13,10 @@ bool ActionAddCourse::Execute()
 	
 	pGUI->PrintMsg("Add Course to plan: Enter course Code(e.g. CIE 202):");
 	Course_Code code = pGUI->GetSrting();
+	if (code=="")
+	{
+		return false;
+	}
 
 	//TODO: add input validation
 	Course* pC = pReg->CreateCourseP(code);

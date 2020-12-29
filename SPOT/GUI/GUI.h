@@ -59,10 +59,12 @@ class GUI
 
 	string WindTitle = "Team E_K_O";
 	window* pWind;
+	
 public:
 	GUI();
 	void RedrawCourse(AcademicYear* , Course* , int ,int );
 	void CreateMenu() const;
+	void HighLightCLK(int) const ;
 	void ClearDrawingArea() const;
 	void ClearStatusBar() const;	//Clears the status bar
 	void DrawNotes(vector<string>) const;     //Clears the notes bar
