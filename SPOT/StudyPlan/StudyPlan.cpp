@@ -96,3 +96,32 @@ vector<vector<vector<Course>>> StudyPlan::ReturnALlCrs() const
 	}
 	return all;
 }
+
+void StudyPlan::StaticCopyit(StudyPlan* sp)
+{
+	plan.clear();
+	int n = 0;
+	//int test = 0; //debug_e
+	vector<vector<vector<Course>>> temp = sp->ReturnALlCrs();
+	for (auto yer : temp)
+	{
+		AcademicYear* tempyr=new  AcademicYear;
+		int smstr = 0;
+		for (auto sem : yer) {
+			for (auto crs : sem)
+			{
+				Course* tempcrs = new Course(crs);
+				tempyr->AddCourse(tempcrs,static_cast<SEMESTER>(smstr));
+				//std::cout << ++test << endl;   //debug_e
+			}
+			smstr++;
+		}
+		plan.push_back(tempyr);
+		graphicsInfo gfx;
+		gfx.x = n;
+		gfx.y = 1;
+		plan[n]->setGfxInfo(gfx);
+		plan[n]->SetYearNumber(n + 1);
+		n++;
+	}	
+}

@@ -19,6 +19,7 @@ Registrar::Registrar()
 	GetCourseCatalog();                      //Disabled untill a catalog file is uploaded cuz it wil cause the program to crash
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
+	Push2Stack();
 
 }
 
@@ -92,11 +93,11 @@ Action* Registrar::CreateRequiredAction()
 		break;
 
 	case UNDO:
-
+		UndoF();
 		break;
 
 	case REDO:
-
+		RedoF();
 		break;
 	case NOTES_AREA :
 		RequiredAction = new ActionAddNote(this);
@@ -139,13 +140,48 @@ void Registrar::Run()
 		UpdateInterface();
 
 		Action* pAct = CreateRequiredAction();
+
 		if (pAct)	//if user doesn't cancel
 		{
-			if (ExecuteAction(pAct))	//if action is not cancelled
-				UpdateInterface();
-		}
+			if (ExecuteAction(pAct))   //if action is not cancelled
+			{
+				Push2Stack();
+				//UpdateInterface();   //useless i think !
+			}
+		}	
 	}
 }
+
+void Registrar::Push2Stack()
+{
+	StudyPlan temp;
+	temp = *(pSPlan);
+	temp.StaticCopyit(pSPlan);
+	UndoS.push(temp);
+}
+
+void Registrar::UndoF()
+{
+	if (UndoS.size() >1 )
+	{
+		RedoS.push(UndoS.top());
+		UndoS.pop();
+		PlanTemp = UndoS.top();
+		pSPlan =& PlanTemp;
+	}
+}
+
+void Registrar::RedoF()
+{
+	if (RedoS.size()>0)
+	{
+		UndoS.push(RedoS.top());
+		PlanTemp = UndoS.top();
+		pSPlan = &PlanTemp;
+		RedoS.pop();
+	}
+}
+
 
 
 void Registrar::UpdateInterface()
@@ -242,7 +278,7 @@ void Registrar::ImportRules()
 }
 
 
-Course * Registrar::AddCourse(Course_Code code)
+Course * Registrar::CreateCourseP(Course_Code code)
 {
 	bool state = true;
 	for (auto i : RegRules.CourseCatalog)

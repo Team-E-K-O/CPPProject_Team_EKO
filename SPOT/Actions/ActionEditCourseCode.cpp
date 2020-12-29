@@ -45,7 +45,7 @@ bool ActionEditCourseCode::Execute()
 
 				
 
-				Course* pC2 = pReg->AddCourse(code);
+				Course* pC2 = pReg->CreateCourseP(code);
 				if (pC2) {
 
 

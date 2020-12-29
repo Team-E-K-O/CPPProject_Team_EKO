@@ -2,6 +2,7 @@
 #include <vector>
 #include "AcademicYear.h"
 #include "../GUI/Drawable.h"
+#include <iostream>   //debug_e
 using namespace std;
 //A full study plan for a student
 class StudyPlan:public Drawable
@@ -27,6 +28,7 @@ public:
 	virtual ~StudyPlan();
 	void DeleteALL();
 	vector<vector<vector<Course>>>  ReturnALlCrs() const;
+	void StaticCopyit(StudyPlan*);
 	void  DeleteStudyPlan(graphicsInfo);
 };
 

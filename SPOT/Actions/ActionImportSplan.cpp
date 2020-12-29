@@ -45,16 +45,14 @@ bool ActionImportSplan::Execute()
 			for (int w=2;w<i.size();w++)
 			{
 				Course_Code code = i[w];
-				Course* pC = pReg->AddCourse(code);
+				Course* pC = pReg->CreateCourseP(code);
 				if(pC)
 				   pS->AddCourse(pC, year, sem);
 			}
 		}
 		Myfile.close();
 		return true;
-
-	}
-   
+	} 
 }
 ActionImportSplan::~ActionImportSplan()
 {

@@ -15,13 +15,11 @@ bool ActionAddCourse::Execute()
 	Course_Code code = pGUI->GetSrting();
 
 	//TODO: add input validation
-	Course* pC = pReg->AddCourse(code);
+	Course* pC = pReg->CreateCourseP(code);
 	
-	if (pC)
+	if (pC)            // Pointer is null in case of un existing code
 	{
 		ActionData actData = pGUI->GetUserAction("Select a and semister year to add course to:");
-		
-
 		int x, y;
 		if (actData.actType == DRAW_AREA)	//user clicked inside drawing area
 		{
