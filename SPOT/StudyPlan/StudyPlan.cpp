@@ -56,8 +56,21 @@ void StudyPlan::DrawMe(GUI* pGUI)
 }
 void StudyPlan::AddPlanNote(string s)
 {
-	Notes[0] = "Notes :";
-	Notes.push_back(s);
+	Notes.push_back("");
+	string str="";
+	int n = 0;
+	for (char i :s)
+	{
+		str += i;
+		n++;
+		if (n==24)
+		{
+			Notes.push_back(str);
+			n = 0;
+			str = "";
+		}
+	}
+	Notes.push_back(str);
 }
 
 void StudyPlan::DeleteStudyPlan(graphicsInfo g)

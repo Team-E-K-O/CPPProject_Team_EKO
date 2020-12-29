@@ -2,7 +2,7 @@
 #include <vector>
 #include "AcademicYear.h"
 #include "../GUI/Drawable.h"
-#include <iostream>   //debug_e
+//#include <iostream>   //debug_e
 using namespace std;
 //A full study plan for a student
 class StudyPlan:public Drawable
