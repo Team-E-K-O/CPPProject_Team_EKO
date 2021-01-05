@@ -8,6 +8,7 @@ using namespace std;
 
 class Course;
 class AcademicYear;
+class StudyPlan;
 //user interface class
 class GUI
 {
@@ -55,7 +56,9 @@ class GUI
 	color OutlineColor = BLACK;     //Outline color for all rectangles
 	color YearFill = FLORALWHITE;    //Year Recangle Box
 	color SemFill = SNOW;
-		
+	color ErrorColor = RED;          //course error fill color
+	color CoreqColor = RED;
+	color PrereqColor = ORANGE;
 
 	string WindTitle = "Team E_K_O";
 	window* pWind;
@@ -75,6 +78,9 @@ public:
 	void DrawCourse( Course* );
 	void DrawAcademicYear( AcademicYear*);
 	void UpdateInterface() const;
+	void DrawCourseDeps(StudyPlan*, Course*);
+	void DrawThickLine(int, int, int, int, int);
+
 	
 	//input functions
 	ActionData GUI::GetUserAction(string msg = "") const;

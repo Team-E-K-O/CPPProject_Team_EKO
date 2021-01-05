@@ -15,6 +15,11 @@ AcademicYear::AcademicYear()
 
 AcademicYear::~AcademicYear()
 {
+	/*for (int sem = 0; sem < 3; sem++)
+	{
+		for (Course* crs : YearCourses[sem])
+			delete crs;
+	}*/
 }
 int AcademicYear::GetYearNumber() const
 {
@@ -74,14 +79,13 @@ int AcademicYear::GetNumCourses(int sem) const
 
 void AcademicYear::DeleteCourse(graphicsInfo g,SEMESTER sem)
 {
-	auto  sem_ = YearCourses[sem];   /////
-	for (auto  crs = sem_.begin(); crs != sem_.end() ; ++crs)
+	for (Course *  crs :YearCourses[sem])
 	{
-		if ((*crs)->isClicked(g))
+		if (crs->isClicked(g))
 		{
-			sem_.erase(crs);
-			YearCourses[sem] = sem_;
+			YearCourses[sem].remove(crs);
 			NumberOfCourses[sem]--;
+			TotalCredits -= crs->getCredits();
 			break;
 		}
 	}
@@ -91,9 +95,12 @@ void AcademicYear::DeleteAll()
 {
 	for (int sem = FALL; sem < SEM_CNT; sem++)
 	{
+		for (auto x : YearCourses[sem])
+			delete x;
 		YearCourses[sem].clear();
 		NumberOfCourses[sem]=0;
 	}
+	TotalCredits = 0;
 }
 
 Course* AcademicYear::ReturnCoursePointer(graphicsInfo g, SEMESTER sem)
@@ -110,6 +117,27 @@ Course* AcademicYear::ReturnCoursePointer(graphicsInfo g, SEMESTER sem)
 			break;
 		}
 	}
+	if (!t)
+		return nullptr;
+}
+
+Course* AcademicYear::ReturnCoursePointer(Course_Code code)
+{
+	bool t = false;
+	for (int sem = 0; sem < 3; sem++)
+	{
+		for (Course* crs :YearCourses[sem])
+		{
+			if (crs->getCode()==code)
+			{
+				t = true;
+				return crs;
+				break;
+			}	
+		}
+		if (t)
+			break;
+		}
 	if (!t)
 		return nullptr;
 }

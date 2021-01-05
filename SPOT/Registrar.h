@@ -4,17 +4,27 @@
 #include "Rules.h"
 #include "StudyPlan/StudyPlan.h"
 #include <stack>
-
-
+enum Issue
+{
+     None,Moderate,Critical
+};
+struct ProgramReqs
+{
+	bool TotalCredsAchieved, UniversityCredsAchieved, TrackCredsAchieved,
+		MajorCredsAchieved, 
+		UniversityCoursesAchieved, MajorCoursesAchieved, TrackCoursesAchieved;
+};
 //The maestro class for the application
 class Registrar
 {
 	stack<StudyPlan> UndoS, RedoS;
 	StudyPlan PlanTemp;
 	bool running ;
+	Issue CurrentIssue;
 	GUI *pGUI;	//pointer to GUI 
 	Rules RegRules;	//Registration rules
 	StudyPlan *pSPlan;
+	ProgramReqs CurrentReqs;
 public:
 	Registrar();
 	GUI* getGUI() const;
@@ -28,6 +38,8 @@ public:
 	Course * CreateCourseP(Course_Code);
 	void Run();
 	void Push2Stack();
+	void CheckRules();
+	void SetCurrentIssue();
 	void UndoF();
 	void RedoF();
 	~Registrar();

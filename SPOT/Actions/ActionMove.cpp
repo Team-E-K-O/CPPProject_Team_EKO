@@ -25,7 +25,7 @@ bool ActionMove::Execute()
 
 		StudyPlan* pp = pReg->getStudyPlan();
 		pp->DetYearSem(gInfo, year, sem);
-		Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
+		Course* pc = pp->ReturnCoursePointer(gInfo);
 		
 		while (true)
 		{
@@ -45,14 +45,12 @@ bool ActionMove::Execute()
 					graphicsInfo gInfo2{ x2, y2 };
 					pp->DetYearSem(gInfo2, year2, sem2);
 					pc->setSelected(false);
+					pp->DeleteCrs(gInfo);
 					pp->AddCourse(pc, year2, sem2);
-					pp->DeleteStudyPlan(gInfo);
 					break;
 				}
 			}
-			
 		}
-
 		return true;
 	}
 

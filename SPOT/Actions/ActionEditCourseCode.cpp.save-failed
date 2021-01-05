@@ -25,8 +25,8 @@ bool ActionEditCourseCode::Execute()
 
 		StudyPlan* pp = pReg->getStudyPlan();
 		pp->DetYearSem(gInfo, year, sem);
-		Course* pc = pp->ReturnCoursePointer(gInfo);
-		
+		Course* pc = pp->ReturnCoursePointer(gInfo, year, sem);
+
 		while (true)
 		{
 			if (pc == nullptr)
@@ -45,7 +45,7 @@ bool ActionEditCourseCode::Execute()
 				if (code == "")
 					return false;
 
-				
+
 
 				Course* pC2 = pReg->CreateCourseP(code);
 				if (pC2) {
@@ -63,9 +63,9 @@ bool ActionEditCourseCode::Execute()
 
 				break;
 			}
-			
+
 		}
-			
+
 		return true;
 	}
 
