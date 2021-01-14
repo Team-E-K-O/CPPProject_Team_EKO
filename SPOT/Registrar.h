@@ -4,6 +4,7 @@
 #include "Rules.h"
 #include "StudyPlan/StudyPlan.h"
 #include <stack>
+#include <vector>
 enum Issue
 {
      None,Moderate,Critical
@@ -42,6 +43,8 @@ public:
 	void SetCurrentIssue();
 	void UndoF();
 	void RedoF();
+	void Save2File(vector<vector<string>> ,string filename ="Report") const;
+	vector<vector<string>> CreatReport() const;
 	~Registrar();
 };
 

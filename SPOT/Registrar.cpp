@@ -11,7 +11,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-//#include <iostream> //debug
+#include <iostream> //debug
 using namespace std;
 
 void Registrar::CheckRules()
@@ -97,6 +97,14 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionAddCourse(this);
 		
 		break;
+	case REPORT:
+		pGUI->DisplayReport(CreatReport());
+		//std::cout << pSPlan->GetTotalcrds() << "   " << RegRules.TotalCredit << endl;
+		Save2File(CreatReport());
+		pGUI->GetUserAction("Report saved press anywhere to continue");
+
+		break;
+
 	case DRAW_AREA :
 	{
 		
@@ -145,7 +153,7 @@ Action* Registrar::CreateRequiredAction()
 	case REDO:
 		RedoF();
 		break;
-	case NOTES_AREA :
+	case NOTES :
 		RequiredAction = new ActionAddNote(this);
 		break;
 	case MOVE :
@@ -192,6 +200,10 @@ void Registrar::Run()
 			if (ExecuteAction(pAct))   //if action is not cancelled
 			{
 				Push2Stack();
+				while (! RedoS.empty())
+				{
+					RedoS.pop();
+				}
 				//UpdateInterface();   //useless i think !
 			}
 		}	
@@ -226,6 +238,30 @@ void Registrar::RedoF()
 		pSPlan = &PlanTemp;
 		RedoS.pop();
 	}
+}
+
+void Registrar::Save2File(vector<vector<string>> s, string filename) const
+{
+	ofstream myfile;
+	myfile.open("Saves\\" + filename + ".txt");
+	for (auto x : s)
+		myfile << x[0]+":"+x[1] << endl;
+	myfile.close();
+}
+
+vector<vector<string>> Registrar::CreatReport() const
+{
+	vector<vector<string>> Report
+	{
+	 {"Total Credits Achieved",CurrentReqs.TotalCredsAchieved ? "True" : "False"},
+	 {"University Credits Achieved", CurrentReqs.UniversityCredsAchieved ? "True" : "False"},
+	 {"Track Credits Achieved", CurrentReqs.TrackCredsAchieved ? "True" : "False"},
+	 {"Major Credit sAchieved", CurrentReqs.MajorCredsAchieved ? "True" : "False"},
+	 {"University Courses Achieved", CurrentReqs.UniversityCoursesAchieved ? "True" : "False"},
+	 {"Major Courses Achieved",CurrentReqs.MajorCoursesAchieved ? "True" : "False"},
+	 {"Track Courses Achieved",  CurrentReqs.TrackCoursesAchieved ? "True" : "False"}
+	};
+	return Report;
 }
 
 
@@ -312,10 +348,7 @@ void Registrar::GetCourseCatalog()
 			c.PreReqList.push_back(xcode);
 			//cout << "End" << endl;
 		}
-		/*for (int i = 2; i < 5; i++)    
-			c.PreReqList.push_back(w[i]);
-		for (int i = 5; i < 8; i++)
-			c.CoReqList.push_back(w[i]);*/
+	
 		char s = w[2][0];
 		c.Credits = s - '0';
 		//c.type = w[9];

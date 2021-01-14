@@ -31,14 +31,14 @@ enum ActionType
 	REDO,		//Redo the last Action canceled
 	MOVE,       //Move Course
 	EDIT,       //Edit a course in the study plan
-
+	REPORT,     //Show the report for the current state
 	EXIT,		//Exit the application
 
 	STATUS_BAR,	//A click on the status bar
 	MENU_BAR,	//A click on an empty place in the menu bar
 	DRAW_AREA,	//A click in the drawing area
-	NOTES_AREA, //A click in the notes area
-
+	NOTES, //A click in the notes area
+	
 	CANCEL,		//ESC key is pressed
 
 	//TODO: Add more action types

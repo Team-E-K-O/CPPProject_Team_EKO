@@ -17,9 +17,8 @@ GUI::GUI()
 { 
 	pWind = new window(WindWidth, WindHeight,wx,wy);
 	pWind->ChangeTitle(WindTitle);
-	//ClearDrawingArea();    //test
 	ClearStatusBar();
-	ClearNotesArea();
+
 	CreateMenu();
 }
 
@@ -34,11 +33,11 @@ void GUI::ClearDrawingArea() const
 }
 
 
-void GUI::ClearNotesArea() const
+void GUI::DrawTPage() const
 {
 	pWind->SetBrush(NotesBarColor);
 	pWind->SetPen(OutlineColor);
-	pWind->DrawRectangle(DrawingAreaWidth, MenuBarHeight, WindWidth, WindHeight - StatusBarHeight);
+	pWind->DrawRectangle(DrawingAreaWidth/4, MenuBarHeight, 3*DrawingAreaWidth/4, WindHeight - StatusBarHeight);
 
 }
 
@@ -48,6 +47,7 @@ void GUI::ClearStatusBar() const
 	pWind->SetPen(StatusBarColor);
 	pWind->DrawRectangle(0, WindHeight - StatusBarHeight, WindWidth, WindHeight);
 }
+
 
 void GUI::CreateMenu() const
 {
@@ -68,6 +68,8 @@ void GUI::CreateMenu() const
 	MenuItemImages[ITM_REDO] = "GUI\\Images\\Menu\\Menu_Redo.jpg";
 	MenuItemImages[ITM_MOVE] = "GUI\\Images\\Menu\\Menu_Move.jpg";
 	MenuItemImages[ITM_EDIT] = "GUI\\Images\\Menu\\Item_Edit.jpg";
+	MenuItemImages[ITM_REPORT] = "GUI\\Images\\Menu\\Menu_Report.jpg";
+	MenuItemImages[ITM_NOTES]= "GUI\\Images\\Menu\\Menu_Notes.jpg";
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu items one image at a time
@@ -87,17 +89,20 @@ void GUI::RedrawCourse(AcademicYear* yr,Course* crs,int sem,int n1)
 ////////////////////////    Output functions    ///////////////////
 
 //Prints a message on the status bar
-void GUI::PrintMsg(string msg) const
+void GUI::PrintMsg(string msg,int x ,int y ) const
 {
-	ClearStatusBar();	//Clear Status bar to print message on it
-						// Set the Message offset from the Status Bar
-	int MsgX = 25;
-	int MsgY = StatusBarHeight - 10;
-
+	pWind->SetFont(20, BOLD, BY_NAME, "Times New Roman");
+	if (x != 25)
+	{
+		pWind->SetFont(CRS_HEIGHT * 0.5, PLAIN, BY_NAME, "Lucida Handwriting");
+		pWind->DrawRectangle(DrawingAreaWidth / 4, y - 2, 3 * DrawingAreaWidth / 4, y + 25);
+	}
+	else
+		ClearStatusBar();
 	// Print the Message
-	pWind->SetFont(20, BOLD , BY_NAME, "Times New Roman");
+	
 	pWind->SetPen(MsgColor);
-	pWind->DrawString(MsgX, WindHeight - MsgY, msg);
+	pWind->DrawString(x, y, msg);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -108,14 +113,12 @@ void GUI::UpdateInterface() const
 	//Redraw everything
 	CreateMenu();
 	ClearStatusBar();
-	//ClearDrawingArea();      //test
-	ClearNotesArea();
 	pWind->UpdateBuffer();
 	pWind->SetBuffering(false);
 
 }
 
-void GUI::DrawCourseDeps(StudyPlan* st, Course* thisCrs)
+void GUI::DrawCourseDeps(StudyPlan* st, Course* thisCrs) const
 {
 	pWind->SetPen(CoreqColor);
 	pWind->SetBrush(CoreqColor);
@@ -143,7 +146,7 @@ void GUI::DrawCourseDeps(StudyPlan* st, Course* thisCrs)
 	}
 }
 
-void GUI::DrawThickLine(int x1, int y1, int x2 , int y2	, int width)
+void GUI::DrawThickLine(int x1, int y1, int x2 , int y2	, int width) const
 {
 	for (int i = 0; i < width; i++)
 	{
@@ -152,16 +155,39 @@ void GUI::DrawThickLine(int x1, int y1, int x2 , int y2	, int width)
 	}
 }
 
-////////////////////////    Drawing functions    ///////////////////
-void GUI::DrawNotes(vector<string> s) const  
+void GUI::DisplayReport(vector<vector<string>> s) const
 {
-	pWind->SetFont(CRS_HEIGHT * 0.4, PLAIN, BY_NAME, "Lucida Handwriting");  //tested ---> 17 char max for current settings
-	pWind->SetPen(MsgColor);
-	pWind->SetBrush(NotesBarColor);
-	pWind->SetPen(OutlineColor);
-	for (int i = 0; i < s.size(); i++)
-		pWind->DrawString(DrawingAreaWidth + 10, MenuBarHeight + (1 + i) * 15, s[i]);
+	DrawTPage();
+	pWind->SetFont(30, BOLD, BY_NAME, "Times New Roman");
+	pWind->DrawString(DrawingAreaWidth / 4 + 10, MenuBarHeight + 10, "Status Report");
+	pWind->SetFont(20, BOLD, BY_NAME, "Times New Roman");
+	for (int   i=0;i<s.size() ;i++)
+	{
+		pWind->SetPen(OutlineColor);
+		pWind->DrawString(DrawingAreaWidth / 4 + 110, MenuBarHeight + (3 + i) * 17, s[i][0]+" :");
+		if(s[i][1]=="TRUE")
+			pWind->SetPen(GREEN);
+		if (s[i][1] == "False")
+			pWind->SetPen(RED);
+		pWind->DrawString(DrawingAreaWidth / 4 + 400, MenuBarHeight + (3 + i) * 17, s[i][1] );
+	}
+}
 
+////////////////////////    Drawing functions    ///////////////////
+string GUI::StartNotesView(vector<string> s) const  
+{
+	DrawTPage();
+	pWind->SetFont(CRS_HEIGHT * 0.8, BOLD, BY_NAME, "Lucida Handwriting");
+	pWind->DrawString(DrawingAreaWidth/4 + 10, MenuBarHeight + 10, "NOTES");
+	pWind->SetFont(CRS_HEIGHT * 0.5, PLAIN, BY_NAME, "Lucida Handwriting");  
+	pWind->SetPen(OutlineColor);
+	int n = 3;
+	for (int i = 0; i < s.size(); i++)
+	{
+		pWind->DrawString(DrawingAreaWidth/4 + 10, MenuBarHeight + (3+i) * 10, s[i]);
+		n++;
+	}
+	return GetSrting(DrawingAreaWidth/4 + 10, MenuBarHeight + n * 10+7);
 }
 void GUI::DrawCourse( Course* pCrs)
 {
@@ -279,6 +305,8 @@ ActionData GUI::GetUserAction(string msg) const
 				case ITM_SAVE:return ActionData{ SAVE };
 				case ITM_MOVE:return ActionData{ MOVE };
 				case ITM_EDIT:return ActionData{ EDIT };
+				case ITM_NOTES:return ActionData{ NOTES };
+				case ITM_REPORT:return ActionData{ REPORT };
 
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar
 				}
@@ -289,13 +317,7 @@ ActionData GUI::GetUserAction(string msg) const
 			{
 				return ActionData{ DRAW_AREA,x,y };	//user want clicks inside drawing area
 			}
-			//[3] User clicks on the notes area
-			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight && x >= DrawingAreaWidth)
-			{
-				return ActionData{ NOTES_AREA,x,y };	//user want clicks inside notes area
-			}
-
-			//[4] User clicks on the status bar
+			//[3] User clicks on the status bar
 			return ActionData{ STATUS_BAR };
 		}
 	}//end while
@@ -303,40 +325,46 @@ ActionData GUI::GetUserAction(string msg) const
 }
 
 
-string GUI::GetSrting() const
+string GUI::GetSrting(int x ,int y) const
 {
 	//Reads a complete string from the user until the user presses "ENTER".
 	//If the user presses "ESCAPE". This function should return an empty string.
 	//"BACKSPACE" is also supported
-	//User should see what he is typing at the status bar
-
-	
-
+	//User should see what he is typing
 	string userInput;
 	char Key;
-	while (1)
+	pWind->FlushMouseQueue();
+	pWind->FlushKeyQueue();
+	while (true)
 	{
-		pWind->WaitKeyPress(Key);
-
-		switch (Key)
+		int xx, yy;
+		if (pWind->GetMouseClick(xx, yy) != NO_CLICK)
+			return "";
+		pWind->GetKeyPress(Key);
+		//pWind->WaitKeyPress(Key);	
+		if (Key != NO_KEYPRESS)
 		{
-		case 27: //ESCAPE key is pressed
-			PrintMsg("");
-			return ""; //returns nothing as user has cancelled the input
+			switch (Key)
+			{
+			case 27: //ESCAPE key is pressed
+				PrintMsg("", x, y);
+				return ""; //returns nothing as user has cancelled the input
 
-		case 13:		//ENTER key is pressed
-			return userInput;
+			case 13:		//ENTER key is pressed
+				return userInput;
 
-		case 8:		//BackSpace is pressed
-			if (userInput.size() > 0)
-				userInput.resize(userInput.size() - 1);
-			break;
+			case 8:		//BackSpace is pressed
+				if (userInput.size() > 0)
+					userInput.resize(userInput.size() - 1);
+				break;
 
-		default:
-			userInput += Key;
-		};
-
-		PrintMsg(userInput);
+			default:
+				userInput += Key;
+			};
+			PrintMsg(userInput, x, y);
+			if (userInput.size() == 50)
+				return userInput;
+		}
 	}
 
 }

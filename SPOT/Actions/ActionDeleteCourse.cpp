@@ -20,6 +20,8 @@ bool ActionDeleteCourse::Execute()
 		y = actData.y;
 		graphicsInfo gInfo{ x, y };
 		StudyPlan* pp = pReg->getStudyPlan();
+		if (!pp->ReturnCoursePointer(gInfo))
+			return false;
 		pp->DeleteCrs(gInfo);
 		delete pp->ReturnCoursePointer(gInfo);
 		return true;

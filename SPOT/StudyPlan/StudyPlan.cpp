@@ -6,7 +6,6 @@ StudyPlan::StudyPlan()
 {
 	//By default, the study plan starts with 5 years
 	//More year can be added
-	Notes.push_back("Click here to add a note.");
 	for (int i = 0; i < 5; i++) {
 		plan.push_back(new AcademicYear);
 		graphicsInfo gfx;
@@ -47,8 +46,7 @@ void StudyPlan::DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem)
 
 void StudyPlan::DrawMe(GUI* pGUI)
 {
-	pGUI->DrawNotes(Notes);
-	//Plan draws all year inside it.
+	//Plan draws all year inside it
 	for (int i = 0; i < plan.size(); i++)
 	{
 		plan[i]->DrawMe(pGUI);	
@@ -63,12 +61,12 @@ void StudyPlan::AddPlanNote(string s)
 	{
 		str += i;
 		n++;
-		if (n==24)
+		/*if (n==24)
 		{
 			Notes.push_back(str);
 			n = 0;
 			str = "";
-		}
+		}*/
 	}
 	Notes.push_back(str);
 }
@@ -146,8 +144,8 @@ Course* StudyPlan::ReturnCoursePointer(Course_Code code)
 
 StudyPlan::~StudyPlan()
 {
-	//for (auto x : plan)       
-	//	delete x;
+	/*for (auto x : plan)       
+		delete x;*/
 }
 
 vector<vector<vector<Course>>> StudyPlan::ReturnALlCrs() const
@@ -159,6 +157,11 @@ vector<vector<vector<Course>>> StudyPlan::ReturnALlCrs() const
 		all.push_back(x);
 	}
 	return all;
+}
+
+vector<string> StudyPlan::ReturnNotes() const
+{
+	return Notes;
 }
 
 void StudyPlan::StaticCopyit(StudyPlan* sp)

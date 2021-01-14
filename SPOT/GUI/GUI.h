@@ -25,6 +25,8 @@ class GUI
 		ITM_REDO,
 		ITM_LOAD,
 		ITM_SAVE,
+		ITM_REPORT,
+		ITM_NOTES,
 		
 						//TODO: Add more items names here
 
@@ -40,7 +42,7 @@ class GUI
 		wx = 15, wy = 15,		//Window starting coordinates
 		StatusBarHeight = 60,	//Status Bar Height
 		MenuBarHeight = 80,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
-		DrawingAreaWidth = 1080, MenuItemWidth = 80,	    //Width of each item in the menu
+		DrawingAreaWidth = 1300, MenuItemWidth = 80,	    //Width of each item in the menu
 		DrawingAreaHeigth = WindHeight - StatusBarHeight - MenuBarHeight;
 
 
@@ -70,25 +72,22 @@ public:
 	void HighLightCLK(int) const ;
 	void ClearDrawingArea() const;
 	void ClearStatusBar() const;	//Clears the status bar
-	void DrawNotes(vector<string>) const;     //Clears the notes bar
-	void ClearNotesArea() const;
+	string StartNotesView(vector<string>) const;     //Clears the notes bar
+	void DrawTPage() const;
 	//output functions
-	void PrintMsg(string) const;		//prints a message on status bar
+	void PrintMsg(string, int x = 25, int y = WindHeight - StatusBarHeight + 10) const;		//prints a message 
 	//Drawing functions
 	void DrawCourse( Course* );
 	void DrawAcademicYear( AcademicYear*);
 	void UpdateInterface() const;
-	void DrawCourseDeps(StudyPlan*, Course*);
-	void DrawThickLine(int, int, int, int, int);
+	void DrawCourseDeps(StudyPlan*, Course*) const;
+	void DrawThickLine(int, int, int, int, int) const ;
+	void DisplayReport(vector<vector<string>>) const;
 
 	
 	//input functions
 	ActionData GUI::GetUserAction(string msg = "") const;
-	string GetSrting() const;
-
-
-	
-	
+	string GetSrting(int x =25 ,int  y = WindHeight - StatusBarHeight + 10) const;
 
 	~GUI();
 };

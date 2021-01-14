@@ -29,6 +29,7 @@ public:
 	virtual ~StudyPlan();
 	void DeleteALL();            //wipes all courses
 	vector<vector<vector<Course>>>  ReturnALlCrs() const;     //returns a map of all courses in their places
+	vector<string>ReturnNotes() const;
 	void StaticCopyit(StudyPlan*);
 	void  DeleteCrs(graphicsInfo);
 	int GetTotalcrds() const;
