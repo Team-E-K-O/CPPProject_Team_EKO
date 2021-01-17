@@ -12,6 +12,10 @@ bool ActionAddNote::Execute()
 	StudyPlan* Ps = pReg->getStudyPlan();
 	pGUI->PrintMsg("Add Note:");
 	string note = pGUI->GetSrting();
+	if (note=="")
+	{
+		return false;
+	}
 	Ps->AddPlanNote(note);
 	return true;
 }

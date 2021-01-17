@@ -12,6 +12,10 @@ bool ActionImportSplan::Execute()
 	GUI* pGUI = pReg->getGUI();
 	pGUI->PrintMsg("Enter the name or the path of the study plan file :");
 	string file_name = pGUI->GetSrting();
+	if (file_name=="")
+	{
+		return false;
+	}
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile("Saves\\" + file_name + ".txt");
@@ -45,16 +49,14 @@ bool ActionImportSplan::Execute()
 			for (int w=2;w<i.size();w++)
 			{
 				Course_Code code = i[w];
-				Course* pC = pReg->AddCourse(code);
+				Course* pC = pReg->CreateCourseP(code);
 				if(pC)
 				   pS->AddCourse(pC, year, sem);
 			}
 		}
 		Myfile.close();
 		return true;
-
-	}
-   
+	} 
 }
 ActionImportSplan::~ActionImportSplan()
 {

@@ -19,17 +19,10 @@ bool ActionDeleteCourse::Execute()
 
 		x = actData.x;
 		y = actData.y;
-
-
-
 		graphicsInfo gInfo{ x, y };
-
-		int year;
-		SEMESTER sem;
-
-		StudyPlan* pp = pReg->getStudyPlay();
-		pp->DetYearSem(gInfo, year, sem);
-		pp->DeleteStudyPlan(gInfo,year, sem);
+		StudyPlan* pp = pReg->getStudyPlan();
+		pp->DeleteCrs(gInfo);
+		delete pp->ReturnCoursePointer(gInfo);
 		return true;
 	}
 

@@ -14,6 +14,7 @@ class Course : public Drawable
 	int credits;	//no. of course credits
 	string type;	//Univ, track, or major.....etc.
 	bool Done;		//Done or not yet?
+	bool Has_Error=false;
 	list<Course_Code> PreReq;	//list of prerequisites
 	list<Course_Code> CoReq;	//list of prerequisites
 public:
@@ -21,7 +22,12 @@ public:
 	string getTitle() const;
 	string getCode() const;
 	int getCredits() const;
-
+	void setPreReq(list<Course_Code>);
+	void setCoReq(list<Course_Code>);
+	list<Course_Code> retPreReq() const;
+	list<Course_Code> retCoReq() const;
+	void setError(bool);
+	bool retError() const;
 	void DrawMe(GUI*) ;
 	virtual ~Course();
 

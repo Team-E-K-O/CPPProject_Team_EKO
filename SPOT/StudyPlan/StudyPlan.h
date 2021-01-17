@@ -2,6 +2,7 @@
 #include <vector>
 #include "AcademicYear.h"
 #include "../GUI/Drawable.h"
+//#include <iostream>   //debug_e
 using namespace std;
 //A full study plan for a student
 class StudyPlan:public Drawable
@@ -20,13 +21,21 @@ class StudyPlan:public Drawable
 public:
 	StudyPlan();
 	bool AddCourse(Course*, int year, SEMESTER);
-	Course* ReturnCoursePointer(graphicsInfo g, int year, SEMESTER sem);
-	void virtual DrawMe(GUI*) ;
+	Course* ReturnCoursePointer(graphicsInfo g);      // return course by location
+	Course* ReturnCoursePointer(Course_Code);                                 //return course by code
+	void virtual DrawMe(GUI*);
 	void DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem);
 	void AddPlanNote(string);
 	virtual ~StudyPlan();
-	void DeleteALL();
-	vector<vector<vector<Course>>>  ReturnALlCrs() const;
-	void  DeleteStudyPlan(graphicsInfo);
+	void DeleteALL();            //wipes all courses
+	vector<vector<vector<Course>>>  ReturnALlCrs() const;     //returns a map of all courses in their places
+	void StaticCopyit(StudyPlan*);
+	void  DeleteCrs(graphicsInfo);
+	int GetTotalcrds() const;
+	int GetMajorcrds() const;
+	int GetUnivcrds() const;
+	int GetConccrds() const;
+	int GetMinorcrds() const;
+	int GetTrackcrds() const;
 };
 

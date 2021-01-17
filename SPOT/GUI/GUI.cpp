@@ -1,9 +1,17 @@
 #include "GUI.h"
 #include "../Courses/Course.h"
 #include "../StudyPlan/AcademicYear.h"
+#include "../StudyPlan/StudyPlan.h"
 #include <string>
 #include <sstream>
 
+
+void GUI::HighLightCLK(int i) const
+{
+	pWind->SetPen(HiColor, 2);
+	pWind->DrawRectangle(i * MenuItemWidth, 0, i * MenuItemWidth+ MenuItemWidth, MenuBarHeight, FRAME, MenuItemWidth / 7, MenuItemWidth / 7);
+
+}
 
 GUI::GUI()
 { 
@@ -107,6 +115,43 @@ void GUI::UpdateInterface() const
 
 }
 
+void GUI::DrawCourseDeps(StudyPlan* st, Course* thisCrs)
+{
+	pWind->SetPen(CoreqColor);
+	pWind->SetBrush(CoreqColor);
+	for (Course_Code code : thisCrs->retCoReq())
+	{
+		Course* thatcrs = st->ReturnCoursePointer(code);
+		if (thatcrs)
+		{
+			pWind->DrawCircle(thisCrs->getGfxInfo().x + CRS_WIDTH, thisCrs->getGfxInfo().y + CRS_HEIGHT / 2, 4);
+			pWind->DrawCircle(thatcrs->getGfxInfo().x, thatcrs->getGfxInfo().y + CRS_HEIGHT / 2, 4);
+			DrawThickLine(thisCrs->getGfxInfo().x + CRS_WIDTH, thisCrs->getGfxInfo().y + CRS_HEIGHT / 2, thatcrs->getGfxInfo().x, thatcrs->getGfxInfo().y + CRS_HEIGHT / 2, 3);
+		}
+	}
+	pWind->SetPen(PrereqColor);
+	pWind->SetBrush(PrereqColor);
+	for (Course_Code code : thisCrs->retPreReq())
+	{
+		Course* thatcrs = st->ReturnCoursePointer(code);
+		if (thatcrs)
+		{
+			pWind->DrawCircle(thisCrs->getGfxInfo().x , thisCrs->getGfxInfo().y + CRS_HEIGHT / 2, 4);
+			pWind->DrawCircle(thatcrs->getGfxInfo().x + CRS_WIDTH, thatcrs->getGfxInfo().y + CRS_HEIGHT / 2, 4);
+			DrawThickLine(thisCrs->getGfxInfo().x, thisCrs->getGfxInfo().y + CRS_HEIGHT / 2, thatcrs->getGfxInfo().x + CRS_WIDTH, thatcrs->getGfxInfo().y + CRS_HEIGHT / 2, 3);
+		}
+	}
+}
+
+void GUI::DrawThickLine(int x1, int y1, int x2 , int y2	, int width)
+{
+	for (int i = 0; i < width; i++)
+	{
+		pWind->DrawLine(x1, y1+i, x2, y2+i);
+		pWind->DrawLine(x1, y1 - i, x2, y2 - i);
+	}
+}
+
 ////////////////////////    Drawing functions    ///////////////////
 void GUI::DrawNotes(vector<string> s) const  
 {
@@ -123,10 +168,13 @@ void GUI::DrawCourse( Course* pCrs)
 	if (pCrs->isSelected())
 		pWind->SetPen(HiColor, 2);
 	else
-	pWind->SetPen(DrawColor, 2);
-	pWind->SetBrush(FillColor);
+		pWind->SetPen(DrawColor, 2);
+	if (pCrs->retError())
+		pWind->SetBrush(ErrorColor);
+	else 
+		pWind->SetBrush(FillColor);
 	graphicsInfo gInfo = pCrs->getGfxInfo();
-	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT);
+	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT,FILLED , CRS_HEIGHT/7, CRS_HEIGHT/7);
 	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT / 2);
 	
 	//Write the course code and credit hours.
@@ -219,7 +267,7 @@ ActionData GUI::GetUserAction(string msg) const
 				int ClickedItemOrder = (x / MenuItemWidth);
 				//Divide x coord of the point clicked by the menu item width (int division)
 				//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
-
+				HighLightCLK(ClickedItemOrder);
 				switch (ClickedItemOrder)
 				{
 				case ITM_ADD: return ActionData{ ADD_CRS };	//Add course
@@ -292,14 +340,6 @@ string GUI::GetSrting() const
 	}
 
 }
-
-
-
-
-
-
-
-
 GUI::~GUI()
 {
 	delete pWind;

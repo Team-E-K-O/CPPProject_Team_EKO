@@ -18,6 +18,10 @@ bool ActionSave::Execute()
 	pGUI->PrintMsg("Write the name of the .txt file: ");
 
 	string filename = pGUI->GetSrting();
+	if (filename=="")
+	{
+		return false;
+	}
 	StudyPlan* pp = pReg->getStudyPlan();
 	ofstream myfile;
 	myfile.open("Saves\\" + filename + ".txt");

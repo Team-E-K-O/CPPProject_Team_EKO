@@ -8,6 +8,7 @@ using namespace std;
 
 class Course;
 class AcademicYear;
+class StudyPlan;
 //user interface class
 class GUI
 {
@@ -52,15 +53,20 @@ class GUI
 	color StatusBarColor = DARKGRAY;//StatusBar color
 	color NotesBarColor =LEMONCHIFFON;     //NotesBar color
 	color OutlineColor = BLACK;     //Outline color for all rectangles
-	color YearFill = WHITESMOKE;    //Year Recangle Box
+	color YearFill = FLORALWHITE;    //Year Recangle Box
+	color SemFill = SNOW;
+	color ErrorColor = RED;          //course error fill color
+	color CoreqColor = RED;
+	color PrereqColor = ORANGE;
 
-	string WindTitle = "Study-Plan Organizational Tool (SPOT)";
-
+	string WindTitle = "Team E_K_O";
 	window* pWind;
+	
 public:
 	GUI();
 	void RedrawCourse(AcademicYear* , Course* , int ,int );
 	void CreateMenu() const;
+	void HighLightCLK(int) const ;
 	void ClearDrawingArea() const;
 	void ClearStatusBar() const;	//Clears the status bar
 	void DrawNotes(vector<string>) const;     //Clears the notes bar
@@ -71,6 +77,9 @@ public:
 	void DrawCourse( Course* );
 	void DrawAcademicYear( AcademicYear*);
 	void UpdateInterface() const;
+	void DrawCourseDeps(StudyPlan*, Course*);
+	void DrawThickLine(int, int, int, int, int);
+
 	
 	//input functions
 	ActionData GUI::GetUserAction(string msg = "") const;
