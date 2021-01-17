@@ -19,10 +19,9 @@ class GUI
 		ITM_ADD,		//Add a new course
 		ITM_DELETE,
 		ITM_MOVE,
-		ITM_EDIT,
 		ITM_UNDO,
 		ITM_REDO,
-		ITM_LOAD,
+		ITM_OPEN,
 		ITM_SAVE,
 		
 						//TODO: Add more items names here
@@ -45,19 +44,18 @@ class GUI
 
 
 	color DrawColor = BLACK;		//Drawing color
-	color FillColor = LIGHTCYAN;		//Filling color (for courses)
+	color FillColor = YELLOW;		//Filling color (for courses)
 	color HiColor = RED;			//Highlighting color
 	color ConnColor = GREEN;		//Connector color
-	color MsgColor = BLACK;			//Messages color
-	color BkGrndColor = SKYBLUE;	//Background color
-	color StatusBarColor = ANTIQUEWHITE;//StatusBar color
+	color MsgColor = BLUE;			//Messages color
+	color BkGrndColor = LIGHTGRAY;	//Background color
+	color StatusBarColor = DARKGRAY;//StatusBar color
 	color NotesBarColor =LEMONCHIFFON;     //NotesBar color
 	color OutlineColor = BLACK;     //Outline color for all rectangles
-	color YearFill = FLORALWHITE;    //Year Recangle Box
-	color SemFill = SNOW;
-		
+	color YearFill = WHITESMOKE;    //Year Recangle Box
 
-	string WindTitle = "Team E_K_O";
+	string WindTitle = "Study-Plan Organizational Tool (SPOT)";
+
 	window* pWind;
 public:
 	GUI();

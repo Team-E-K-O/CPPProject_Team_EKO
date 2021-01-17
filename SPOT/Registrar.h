@@ -19,11 +19,8 @@ public:
 	Action* CreateRequiredAction();
 	bool ExecuteAction(Action*);
 	void UpdateInterface();
-	StudyPlan* getStudyPlan() const;
-	Rules ReturnRules() const;
-	void GetCourseCatalog();
-	void ImportRules();
-	Course * AddCourse(Course_Code);
+	StudyPlan* getStudyPlay() const;
+
 	void Run();
 
 	~Registrar();

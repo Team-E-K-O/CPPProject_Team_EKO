@@ -1,6 +1,7 @@
 ﻿#include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
 #include "ActionDeleteCourse.h"
+#include <iostream>
 
 ActionDeleteCourse::ActionDeleteCourse(Registrar* p) :Action(p)
 {
@@ -23,11 +24,12 @@ bool ActionDeleteCourse::Execute()
 
 		graphicsInfo gInfo{ x, y };
 
-		
+		int year;
+		SEMESTER sem;
 
-		StudyPlan* pp = pReg->getStudyPlan();
-		
-		pp->DeleteStudyPlan(gInfo);
+		StudyPlan* pp = pReg->getStudyPlay();
+		pp->DetYearSem(gInfo, year, sem);
+		pp->DeleteStudyPlan(gInfo,year, sem);
 		return true;
 	}
 
