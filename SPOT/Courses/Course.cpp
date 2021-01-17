@@ -25,6 +25,36 @@ int Course::getCredits() const
 	return credits;
 }
 
+void Course::setPreReq(list<Course_Code> p)
+{
+	PreReq = p;
+}
+
+void Course::setCoReq(list<Course_Code> c)
+{
+	CoReq = c ;
+}
+
+list<Course_Code> Course::retPreReq() const
+{
+	return PreReq;
+}
+
+list<Course_Code> Course::retCoReq() const
+{
+	return CoReq;
+}
+
+void Course::setError(bool e)
+{
+	Has_Error = e;
+}
+
+bool Course::retError() const
+{
+	return Has_Error;
+}
+
 void Course::DrawMe(GUI* pG) 
 {
 	pG->DrawCourse(this);

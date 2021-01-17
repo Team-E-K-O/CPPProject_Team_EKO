@@ -6,8 +6,6 @@
 #include <vector>
 using namespace std;
 
-
-
 //Represent one year in the student's study plan
 class AcademicYear:public Drawable
 {
@@ -32,8 +30,9 @@ public:
 	int GetNumCourses(int) const;
 	void virtual DrawMe(GUI*) ;
 	virtual Course* ReturnCoursePointer(graphicsInfo, SEMESTER sem);
+	virtual Course* ReturnCoursePointer(Course_Code);
+
 	vector<vector<Course>>  ReturnAllCrs()   const;
 	void DeleteCourse(graphicsInfo,SEMESTER sem);
 	virtual void DeleteAll();
 };
-
