@@ -22,7 +22,8 @@
     <ProjectGuid>{B84C2A90-6BB5-4AB5-8523-87F1D3B8EDAD}</ProjectGuid>
     <RootNamespace>SPOT</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>SPOT</ProjectName>
+    <ProjectName>
+    </ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -90,6 +91,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\as\Desktop\Team EKO\Team-E-K-O\Cpp_Project_Team_EKO\SPOT\Actions;C:\Users\as\Desktop\Team EKO\Team-E-K-O\Cpp_Project_Team_EKO\SPOT\Courses;C:\Users\as\Desktop\Team EKO\Team-E-K-O\Cpp_Project_Team_EKO\SPOT\StudyPlan;C:\Users\as\Desktop\Team EKO\Team-E-K-O\Cpp_Project_Team_EKO\SPOT\GUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -120,6 +122,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actions\ActionAddCourse.cpp" />
+    <ClCompile Include="Actions\ActionAddNote.cpp" />
+    <ClCompile Include="Actions\ActionCoursetype.cpp" />
+    <ClCompile Include="Actions\ActionDeleteCourse.cpp" />
+    <ClCompile Include="Actions\ActionImportSplan.cpp" />
+    <ClCompile Include="Actions\ActionEditCourseCode.cpp" />
+    <ClCompile Include="Actions\ActionModifyGrade.cpp" />
+    <ClCompile Include="Actions\ActionMove.cpp" />
+    <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Courses\Course.cpp" />
     <ClCompile Include="GUI\CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="GUI\CMUgraphicsLib\colors.cpp" />
@@ -166,6 +176,14 @@
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\ActionAddCourse.h" />
+    <ClInclude Include="Actions\ActionAddNote.h" />
+    <ClInclude Include="Actions\ActionCoursetype.h" />
+    <ClInclude Include="Actions\ActionDeleteCourse.h" />
+    <ClInclude Include="Actions\ActionImportSplan.h" />
+    <ClInclude Include="Actions\ActionEditCourseCode.h" />
+    <ClInclude Include="Actions\ActionModifyGrade.h" />
+    <ClInclude Include="Actions\ActionMove.h" />
+    <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Courses\Course.h" />
     <ClInclude Include="GUI\CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="GUI\CMUgraphicsLib\colors.h" />
@@ -195,6 +213,7 @@
     <ClInclude Include="StudyPlan\StudyPlan.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\ReadMe.txt" />
     <Text Include="GUI\CMUgraphicsLib\Manual.txt" />
     <Text Include="GUI\CMUgraphicsLib\Readme.txt" />
   </ItemGroup>

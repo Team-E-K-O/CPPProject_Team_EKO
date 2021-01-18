@@ -55,11 +55,12 @@ const unsigned char STRIKEOUT  = 0x08;
 
 // Generic Font family's
 enum fontfamily {
-	BY_NAME,	// use font name instead of abstract type
-	MODERN,		// monospace with or without serifs
-	ROMAN,		// variable width with serifs
-	SCRIPT,		// like handwriting
-	SWISS		  // variable width without serifs
+    BY_NAME,	// use font name instead of abstract type
+    MODERN,		// monospace with or without serifs
+    ROMAN,	// variable width with serifs
+	SCRIPT,	    // like handwriting
+    DECORATIVE,  // old english 
+	SWISS,		  // variable width without serifs
 };
 
 // Units of angluar measure

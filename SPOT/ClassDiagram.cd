@@ -9,15 +9,8 @@
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
-    <NestedTypes>
-      <Enum Name="GUI::MENU_ITEM" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>GUI\GUI.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>CgABAIBAAAQQQAAAJAAAEAAAhBAIAAgGAABAFAgAgHA=</HashCode>
+      <HashCode>CgABAIBIAAQQQAAAJAAAEAAAhBAIAAgGAABAFAgAgHA=</HashCode>
       <FileName>GUI\GUI.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -139,23 +132,19 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>IUoEEIEqCLBMUEBAAKMIAgASAgUESAIAxQMwgwAEQgI=</HashCode>
-      <FileName>c:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vector</FileName>
+      <HashCode>AWAEk4EqCrBsCEBAAOMIIAAyAAUEQBIghQkwgkAFUko=</HashCode>
+      <FileName>C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\vector</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="std::list&lt;_Ty, _Alloc&gt;" Collapsed="true">
     <Position X="0.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEgEEqECAHBEgEhEAKEIAgISFAwAKJIAoQEkAgAFQgo=</HashCode>
-      <FileName>c:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\list</FileName>
+      <HashCode>AEQAkqEKAHBEgABEAKEIAgASFAQAJJIigQEgAhAFQwo=</HashCode>
+      <FileName>C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\list</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Course" Collapsed="true">
     <Position X="0.75" Y="3" Width="1.5" />
-    <Members>
-      <Method Name="~Course" Hidden="true" />
-      <Method Name="Course" Hidden="true" />
-    </Members>
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>

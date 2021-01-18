@@ -25,9 +25,37 @@ bool Drawable::isSelected() const
 {
 	return Selected;
 }
+bool Drawable::isClicked(graphicsInfo g) const
+{
+	if (g.x >= GfxInfo.x && (g.x) < (GfxInfo.x + width) && g.y >= GfxInfo.y && (g.y) < (GfxInfo.y + height))
+		return true;
+	else
+		return false;
+}
+void Drawable::setDim(int w, int h)
+{
+	width = w;
+	height = h;
+}
+int Drawable::getDimw() const
+{
+	return width;
+}
+int Drawable::getDimh() const
+{
+	return height;
+}
 
 void Drawable::setSelected(bool sel)
 {
 	Selected = sel;
+}
+void Drawable::SetDrawed()
+{
+	Drawed = true;
+}
+bool Drawable::IsDrawed() const
+{
+	return Drawed;
 }
 
