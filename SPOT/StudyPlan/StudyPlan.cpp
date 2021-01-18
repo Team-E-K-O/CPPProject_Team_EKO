@@ -77,7 +77,7 @@ void StudyPlan::AddPlanNote(string s)
 	Notes.push_back(str);
 }
 
-void StudyPlan::DeleteCrs(graphicsInfo g)
+void StudyPlan::DeleteCourse(graphicsInfo g)
 {
 	int year;
 	SEMESTER sem ;

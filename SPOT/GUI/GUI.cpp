@@ -8,9 +8,11 @@
 
 void GUI::HighLightCLK(int i) const
 {
-	pWind->SetPen(HiColor, 2);
-	pWind->DrawRectangle(i * MenuItemWidth, 0, i * MenuItemWidth+ MenuItemWidth, MenuBarHeight, FRAME, MenuItemWidth / 7, MenuItemWidth / 7);
-
+	if (i < ITM_CNT)
+	{
+		pWind->SetPen(HiColor, 2);
+		pWind->DrawRectangle(i * MenuItemWidth, 0, i * MenuItemWidth + MenuItemWidth, MenuBarHeight, FRAME, MenuItemWidth / 7, MenuItemWidth / 7);
+	}
 }
 
 GUI::GUI()

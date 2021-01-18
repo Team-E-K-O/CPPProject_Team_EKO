@@ -66,6 +66,7 @@ Registrar::Registrar()
 	GetCourseCatalog();                     
 	pGUI = new GUI;       	                     //create interface object
 	pSPlan = new StudyPlan;	                    //create a study plan.
+	
 	Push2Stack();
 
 }
@@ -278,7 +279,7 @@ void Registrar::UpdateInterface()
 }
 void Registrar::GetCourseCatalog()
 {
-	string file_name = "Catalog - 2020 12 19 .txt";
+	string file_name = "Externals\\Catalog - 2020 12 19 .txt";
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile(file_name);
@@ -366,7 +367,7 @@ void Registrar::GetCourseCatalog()
 
 void Registrar::ImportRules()
 {
-	string file_name = "ENV-Requirements.txt";
+	string file_name = "Externals\\ENV-Requirements.txt";
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile(file_name);

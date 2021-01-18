@@ -5,6 +5,7 @@
 #include "StudyPlan/StudyPlan.h"
 #include <stack>
 #include <vector>
+using namespace std;
 enum Issue
 {
      None,Moderate,Critical
@@ -26,6 +27,7 @@ class Registrar
 	Rules RegRules;	//Registration rules
 	StudyPlan *pSPlan;
 	ProgramReqs CurrentReqs;
+	
 public:
 	Registrar();
 	GUI* getGUI() const;
