@@ -6,6 +6,7 @@
 #include <sstream>
 
 
+
 void GUI::HighLightCLK(int i) const
 {
 	if (i < ITM_CNT)
@@ -255,6 +256,28 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 			pWind->DrawRectangle(x1+n*(x2-x1)/3, MenuBarHeight + 30  , x1 + (n + 1) * (x2 - x1) /3, WindHeight - StatusBarHeight );
 			pWind->DrawString(x1 + n * (x2 - x1) / 3 + 15, MenuBarHeight + 35, SEM_S[n]);
 		}
+}
+
+void GUI::DrawTotalGPA(double TotalGPA)
+{
+	pWind->SetPen(MsgColor);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawString(1120, 15, "TotalGPA: " + to_string(TotalGPA));
+}
+
+void GUI::DrawIssue(Issue CurrentIssue)
+{
+	pWind->SetPen(MsgColor);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	if (CurrentIssue == Moderate)
+	{
+		pWind->DrawString(1120, 30, "Moderate Issue");
+	}
+	else if (CurrentIssue == Critical)
+	{
+		pWind->DrawString(1120, 30, "Critical Issue");
+	}
+	
 }
 
 

@@ -51,12 +51,141 @@ void Registrar::CheckRules()
 	}
 }
 
+void Registrar::Checkcrdts()
+{
+	vector<vector<vector<Course>>> allcrs = pSPlan->ReturnALlCrs();
+	bool flag = false;
+	for (int y = 0; y < 5; y++)
+	{
+		if (flag)
+		{
+			break;
+		}
+		for (int s = 0; s < 3; s++)
+		{
+			int crdts = pSPlan->CheckMinMaxCr(y, s);
+			if (s == 2)
+			{
+				if (crdts > 6)
+				{
+					CurrentReqs.semcrdtError = true;
+				}
+				else
+				{
+					CurrentReqs.semcrdtError = false;
+					flag = true;
+					break;
+				}
+			}
+			else
+			{
+				if (crdts > 18 || crdts < 12)
+				{
+					CurrentReqs.semcrdtError = true;
+				}
+				else
+				{
+					CurrentReqs.semcrdtError = false;
+					flag = true;
+					break;
+				}
+			}
+		}
+	}
+}
+
+void Registrar::Checkcoreq()
+{
+	vector<vector<vector<Course>>> allcrs = pSPlan->ReturnALlCrs();
+	bool flag = false;
+	for (int y = 0; y < 5; y++)
+	{
+		for (int s = 0; s < 3; s++)
+		{
+			for (auto ccrs : allcrs[y][s])
+			{
+				for (auto code : ccrs.retCoReq())
+				{
+					if (flag)
+					{
+						break;
+					}
+					for (auto ccrs : allcrs[y][s])
+					{
+						if (code != ccrs.getCode())
+						{
+							CurrentReqs.CoReqError = true;
+						}
+						else
+						{
+							CurrentReqs.CoReqError = false;
+							break;
+							flag = true;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void Registrar::Checkperq()
+{
+	vector<vector<vector<Course>>> allcrs = pSPlan->ReturnALlCrs();
+	bool flag = false;
+	for (int y = 0; y < 5; y++)
+	{
+		for (int s = 0; s < 3; s++)
+		{
+			for (auto ccrs : allcrs[y][s])
+			{
+				for (auto code : ccrs.retPreReq())
+				{
+					if (flag)
+					{
+						break;
+					}
+					for (int yi = 1; yi < y; yi++)
+					{
+						if (flag)
+						{
+							break;
+						}
+						for (int si = 1; si < y; si++)
+						{
+							if (flag)
+							{
+								break;
+							}
+							for (auto ccrs : allcrs[y-yi][s-si])
+							{
+								if (code != ccrs.getCode())
+								{
+									CurrentReqs.CoReqError = true;
+								}
+								else
+								{
+									CurrentReqs.CoReqError = false;
+									break;
+									flag = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 void Registrar::SetCurrentIssue()
 {
 	if (!(CurrentReqs.TotalCredsAchieved && CurrentReqs.UniversityCredsAchieved && CurrentReqs.TrackCredsAchieved,
 		CurrentReqs.MajorCredsAchieved &&
-		CurrentReqs.UniversityCoursesAchieved && CurrentReqs.MajorCoursesAchieved && CurrentReqs.TrackCoursesAchieved))
+		CurrentReqs.UniversityCoursesAchieved && CurrentReqs.MajorCoursesAchieved && CurrentReqs.TrackCoursesAchieved && CurrentReqs.CoReqError && CurrentReqs.PreqError))
 		CurrentIssue = Critical;
+	else if (CurrentReqs.semcrdtError)
+		CurrentIssue = Moderate;
 
 }
 
@@ -218,7 +347,9 @@ void Registrar::Run()
 	{
 		//update interface here as CMU Lib doesn't refresh itself
 		//when window is minimized then restored
+		
 		UpdateInterface();
+		pGUI->DrawTotalGPA(pSPlan->GetTotalGPA());
 
 		Action* pAct = CreateRequiredAction();
 
@@ -226,9 +357,14 @@ void Registrar::Run()
 		{
 			if (ExecuteAction(pAct))   //if action is not cancelled
 			{
+				pSPlan->CGPA();
+				Checkcrdts();
+				Checkperq();
+				Checkcoreq();
 				Push2Stack();
 				CheckRules();
 				SetCurrentIssue();
+				
 				while (! RedoS.empty())
 				{
 					RedoS.pop();

@@ -14,7 +14,7 @@ struct ProgramReqs
 {
 	bool TotalCredsAchieved, UniversityCredsAchieved, TrackCredsAchieved,
 		MajorCredsAchieved, 
-		UniversityCoursesAchieved, MajorCoursesAchieved, TrackCoursesAchieved;
+		UniversityCoursesAchieved, MajorCoursesAchieved, TrackCoursesAchieved, semcrdtError, CoReqError, PreqError;
 };
 //The maestro class for the application
 class Registrar
@@ -44,6 +44,9 @@ public:
 	void Run();
 	void Push2Stack();
 	void CheckRules();
+	void Checkcrdts();
+	void Checkcoreq();
+	void Checkperq();
 	void SetCurrentIssue();
 	void UndoF();
 	void RedoF();
