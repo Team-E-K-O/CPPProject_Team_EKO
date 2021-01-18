@@ -83,6 +83,7 @@ public:
 	void DrawCourseDeps(StudyPlan*, Course*) const;
 	void DrawThickLine(int, int, int, int, int) const ;
 	void DisplayReport(vector<vector<string>>) const;
+
 	
 
 	
