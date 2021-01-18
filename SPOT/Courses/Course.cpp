@@ -25,6 +25,11 @@ int Course::getCredits() const
 	return credits;
 }
 
+crsgrades Course::getGrade() const
+{
+	      return Grade;
+}
+
 void Course::setPreReq(list<Course_Code> p)
 {
 	PreReq = p;

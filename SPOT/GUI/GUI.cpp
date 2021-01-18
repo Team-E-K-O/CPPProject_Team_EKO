@@ -254,6 +254,13 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 		}
 }
 
+void GUI::DrawTotalGPA(double TotalGPA)
+{
+	pWind->SetPen(MsgColor);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawString(1120, 30, "TotalGPA: " + to_string(TotalGPA));
+}
+
 
 ////////////////////////    Input functions    ///////////////////
 //This function reads the position where the user clicks to determine the desired action

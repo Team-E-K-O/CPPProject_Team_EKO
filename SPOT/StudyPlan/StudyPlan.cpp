@@ -110,6 +110,11 @@ int StudyPlan::GetTrackcrds() const
 	return TotalTrackCredits;
 }
 
+double StudyPlan::GetTotalGPA() const
+{
+	return TotalGPA;
+}
+
 void StudyPlan::DeleteALL()
 {
 	TotalCredits = 0,
@@ -157,6 +162,48 @@ vector<vector<vector<Course>>> StudyPlan::ReturnALlCrs() const
 		all.push_back(x);
 	}
 	return all;
+}
+
+void StudyPlan::CGPA()
+{
+	vector<vector<vector<Course>>> allcrs = ReturnALlCrs();
+	double gpa = 0;
+	for (auto year : allcrs)
+	{
+		for (auto sem : year)
+		{
+			for (auto crs : sem)
+			{
+				gpa += crs.getCredits() * lettertograde(crs.getGrade());
+			}
+		}
+	}
+	TotalGPA = gpa/TotalCredits;
+}
+
+void StudyPlan::CheckPreq(int y, int s)
+{
+	
+}
+
+void StudyPlan::CheckCoreq(int y, int s)
+{
+	vector<vector<vector<Course>>> allcrs = ReturnALlCrs();
+	for (auto crs : allcrs[y][s])
+	{
+
+	}
+}
+
+int StudyPlan::CheckMinMaxCr(int y, int s)
+{
+	vector<vector<vector<Course>>> allcrs = ReturnALlCrs();
+	int crdts;
+	for (auto crs : allcrs[y][s])
+	{
+		crdts += crs.getCredits();
+	}
+	return crdts;
 }
 
 vector<string> StudyPlan::ReturnNotes() const

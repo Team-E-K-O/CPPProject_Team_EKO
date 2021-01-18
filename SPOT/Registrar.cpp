@@ -50,12 +50,51 @@ void Registrar::CheckRules()
 	}
 }
 
+void Registrar::Checkcrdts()
+{
+	vector<vector<vector<Course>>> allcrs = pSPlan->ReturnALlCrs();
+	
+	for (int y = 0; y < 4; y++)
+	{
+		for (int s = 0; s < 2; s++)
+		{
+			int crdts = pSPlan->CheckMinMaxCr(y, s);
+			if (s == 2)
+			{
+				if (crdts > 6)
+				{
+					CurrentReqs.semcrdtError = true;
+				}
+				else
+				{
+					CurrentReqs.semcrdtError = false;
+					break;
+				}
+			}
+			else
+			{
+				if (crdts > 18 || crdts < 12)
+				{
+					CurrentReqs.semcrdtError = true;
+				}
+				else
+				{
+					CurrentReqs.semcrdtError = false;
+					break;
+				}
+			}
+		}
+	}
+}
+
 void Registrar::SetCurrentIssue()
 {
 	if (!(CurrentReqs.TotalCredsAchieved && CurrentReqs.UniversityCredsAchieved && CurrentReqs.TrackCredsAchieved,
 		CurrentReqs.MajorCredsAchieved &&
 		CurrentReqs.UniversityCoursesAchieved && CurrentReqs.MajorCoursesAchieved && CurrentReqs.TrackCoursesAchieved))
 		CurrentIssue = Critical;
+	else if (CurrentReqs.semcrdtError)
+		CurrentIssue = Moderate;
 
 }
 
@@ -191,7 +230,9 @@ void Registrar::Run()
 	{
 		//update interface here as CMU Lib doesn't refresh itself
 		//when window is minimized then restored
+		
 		UpdateInterface();
+		pGUI->DrawTotalGPA(pSPlan->GetTotalGPA());
 
 		Action* pAct = CreateRequiredAction();
 
@@ -199,7 +240,11 @@ void Registrar::Run()
 		{
 			if (ExecuteAction(pAct))   //if action is not cancelled
 			{
+				pSPlan->CGPA();
+				pSPlan->CheckMinMaxCr();
+
 				Push2Stack();
+				
 				while (! RedoS.empty())
 				{
 					RedoS.pop();
