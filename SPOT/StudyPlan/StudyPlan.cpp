@@ -58,6 +58,7 @@ void StudyPlan::DrawMe(GUI* pGUI)
 		plan[i]->DrawMe(pGUI);	
 	}
 }
+
 void StudyPlan::AddPlanNote(string s)
 {
 	Notes.push_back("");
@@ -67,12 +68,6 @@ void StudyPlan::AddPlanNote(string s)
 	{
 		str += i;
 		n++;
-		/*if (n==24)
-		{
-			Notes.push_back(str);
-			n = 0;
-			str = "";
-		}*/
 	}
 	Notes.push_back(str);
 }
@@ -150,8 +145,6 @@ Course* StudyPlan::ReturnCoursePointer(Course_Code code)
 
 StudyPlan::~StudyPlan()
 {
-	/*for (auto x : plan)       
-		delete x;*/
 }
 
 vector<vector<vector<Course>>> StudyPlan::ReturnALlCrs() const
@@ -174,7 +167,6 @@ void StudyPlan::StaticCopyit(StudyPlan* sp)
 {
 	plan.clear();
 	int n = 0;
-	//int test = 0; //debug_e
 	vector<vector<vector<Course>>> temp = sp->ReturnALlCrs();
 	for (auto yer : temp)
 	{
@@ -185,7 +177,6 @@ void StudyPlan::StaticCopyit(StudyPlan* sp)
 			{
 				Course* tempcrs = new Course(crs);
 				tempyr->AddCourse(tempcrs,static_cast<SEMESTER>(smstr));
-				//std::cout << ++test << endl;   //debug_e
 			}
 			smstr++;
 		}
