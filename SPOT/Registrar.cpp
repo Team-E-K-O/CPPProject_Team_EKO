@@ -13,7 +13,9 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <iostream> //debug
+
+
+
 using namespace std;
 
 void Registrar::CheckRules()
@@ -208,7 +210,7 @@ bool Registrar::setCurrentMajor(string s)
 	if (s == "CIE" || s == "SPC" || s == "ENV" || s == "NANENG" || s == "REE")
 	{
 		currentMajor = s;
-		cout << currentMajor << endl;
+		
 		return true;
 	}
 	return false;
@@ -244,7 +246,6 @@ Action* Registrar::CreateRequiredAction()
 		break;
 	case REPORT:
 		pGUI->DisplayReport(CreateReport());
-		//std::cout << pSPlan->GetTotalcrds() << "   " << RegRules.TotalCredit << endl;
 		Save2File(CreateReport());
 		pGUI->GetUserAction("Report saved press anywhere to continue");
 
@@ -501,14 +502,14 @@ void Registrar::GetCourseCatalog()
 			 string halfcode;
 			 string xcode="";
 
-			 //cout << "crc : ";
+			
 			 while (getline(req, halfcode, ' '))
 			 {
 
 				 if (halfcode == "And")
 				 {
 					 xcode = xcode.substr(0, xcode.size() - 1);
-					 //cout << xcode << "//";
+					
 					 c.CoReqList.push_back(xcode);
 					 xcode = "";
 				 }
@@ -518,13 +519,13 @@ void Registrar::GetCourseCatalog()
 				 }
 			 }
 			 xcode = xcode.substr(0, xcode.size() - 1);
-			 //cout << xcode << "//";
+		
 			 c.CoReqList.push_back(xcode); 
-			 //cout << "End"<<endl;
+			
 		}
 		if (w.size()==5)
 		{
-			//cout << "prc : ";
+			
 			string sup = w[4].substr(8, w[4].size());
 			stringstream req(sup);
 			string halfcode;
@@ -535,7 +536,7 @@ void Registrar::GetCourseCatalog()
 				if (halfcode == "And")
 				{
 					xcode = xcode.substr(0, xcode.size() - 1);
-					//cout << xcode <<"//";
+					
 					c.PreReqList.push_back(xcode);
 					xcode = "";
 				}
@@ -545,9 +546,9 @@ void Registrar::GetCourseCatalog()
 				}
 			}
 			xcode = xcode.substr(0, xcode.size() - 1);
-			//cout << xcode << "//";
+			
 			c.PreReqList.push_back(xcode);
-			//cout << "End" << endl;
+	
 		}
 	
 		char s = w[2][0];
@@ -727,5 +728,5 @@ void Registrar::petition()
 Registrar::~Registrar()
 {
 	delete pGUI;
-	//delete pSPlan;
+
 }

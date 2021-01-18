@@ -15,11 +15,6 @@ AcademicYear::AcademicYear()
 
 AcademicYear::~AcademicYear()
 {
-	/*for (int sem = 0; sem < 3; sem++)
-	{
-		for (Course* crs : YearCourses[sem])
-			delete crs;
-	}*/
 }
 int AcademicYear::GetYearNumber() const
 {
