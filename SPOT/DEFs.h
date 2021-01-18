@@ -15,8 +15,11 @@ enum SEMESTER
 	SUMMER,
 	SEM_CNT	//number of semesters 
 };
-
-
+//Issues for the registrar
+enum Issue
+{
+	None, Moderate, Critical
+};
 //All possible actions
 enum ActionType
 {
