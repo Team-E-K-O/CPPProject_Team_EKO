@@ -6,6 +6,10 @@
 using namespace std;
 typedef string Course_Code;
 
+enum Issue
+{
+	None, Moderate, Critical
+};
 
 //Semesters
 enum SEMESTER

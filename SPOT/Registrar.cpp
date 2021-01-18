@@ -151,13 +151,13 @@ void Registrar::Checkperq()
 						{
 							break;
 						}
-						for (int si = 1; si < y; si++)
+						for (int si = 1; si < s; si++)
 						{
 							if (flag)
 							{
 								break;
 							}
-							for (auto ccrs : allcrs[y-yi][s-si])
+							for (auto ccrs : allcrs[(y - yi)][(s - si)])
 							{
 								if (code != ccrs.getCode())
 								{
