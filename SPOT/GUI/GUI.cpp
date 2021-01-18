@@ -211,31 +211,9 @@ string GUI::StartNotesView(vector<string> s) const
 	}
 	return GetSrting(DrawingAreaWidth/4 + 10, MenuBarHeight + n * 10+7);
 }
+
 void GUI::DrawCourse( Course* pCrs)
 {
-	if (pCrs->isSelected())
-		pWind->SetPen(HiColor, 2);
-	else
-		pWind->SetPen(DrawColor, 2);
-	if (pCrs->retError())
-		pWind->SetBrush(ErrorColor);
-	else 
-		pWind->SetBrush(FillColor);
-	graphicsInfo gInfo = pCrs->getGfxInfo();
-	pWind->DrawRectangle(gInfo.x+2, gInfo.y, gInfo.x + CRS_WIDTH-2, gInfo.y + CRS_HEIGHT,FILLED , CRS_HEIGHT/7, CRS_HEIGHT/7);
-	pWind->DrawLine(gInfo.x+3, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH-3, gInfo.y + CRS_HEIGHT / 2);
-	
-	//Write the course code and credit hours.
-	int Code_x = gInfo.x + CRS_WIDTH * 0.08;
-	int Code_y = gInfo.y + CRS_HEIGHT * 0.1;
-	pWind->SetFont(CRS_HEIGHT * 0.37, BOLD , BY_NAME, "Lucida Sans");
-	pWind->SetPen(MsgColor);
-
-	ostringstream crd;
-	crd<< "crd: " << pCrs->getCredits();
-	pWind->DrawString(Code_x, Code_y, pCrs->getCode());
-	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT/2, crd.str());
-
 	if (pCrs->getCourseType() == univ)
 	{
 		pWind->SetPen(RED);
@@ -250,12 +228,44 @@ void GUI::DrawCourse( Course* pCrs)
 	}
 	if (pCrs->getCourseType() == track)
 	{
-		pWind->SetPen(YELLOW);
+		pWind->SetPen(PURPLE);
 	}
 	if (pCrs->getCourseType() == conc)
 	{
-		pWind->SetPen(PINK);
+		pWind->SetPen(DARKBLUE);
 	}
+	
+
+	if (pCrs->isSelected())
+		pWind->SetPen(HiColor, 2);
+
+	if (pCrs->retError())
+		pWind->SetBrush(ErrorColor);
+	else 
+		pWind->SetBrush(FillColor);
+	graphicsInfo gInfo = pCrs->getGfxInfo();
+
+	if (pCrs->getCourseType() == elec)
+	{
+		pWind->DrawRectangle(gInfo.x + 2, gInfo.y, gInfo.x + CRS_WIDTH - 2, gInfo.y + CRS_HEIGHT, FILLED, CRS_HEIGHT / 7, CRS_HEIGHT / 7);
+	}
+	else
+	{
+		pWind->DrawRectangle(gInfo.x + 2, gInfo.y, gInfo.x + CRS_WIDTH - 2, gInfo.y + CRS_HEIGHT, FILLED);
+	}
+	pWind->DrawLine(gInfo.x+3, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH-3, gInfo.y + CRS_HEIGHT / 2);
+	
+	//Write the course code and credit hours.
+	int Code_x = gInfo.x + CRS_WIDTH * 0.08;
+	int Code_y = gInfo.y + CRS_HEIGHT * 0.1;
+	pWind->SetFont(CRS_HEIGHT * 0.37, BOLD , BY_NAME, "Lucida Sans");
+	pWind->SetPen(MsgColor);
+
+	ostringstream crd;
+	crd<< "crd: " << pCrs->getCredits();
+	pWind->DrawString(Code_x, Code_y, pCrs->getCode());
+	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT/2, crd.str());
+
 }
 
 void GUI::DrawAcademicYear( AcademicYear* pY) 

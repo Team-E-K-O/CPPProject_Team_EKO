@@ -423,7 +423,7 @@ void Registrar::ImportRules()
 	cout << file_name << endl;
 	vector<vector<string>> Words;
 	string Line;
-	ifstream Myfile("Rules\\" + file_name);
+	ifstream Myfile(file_name);
 	if (Myfile.is_open())
 	{
 		while (getline(Myfile, Line))
