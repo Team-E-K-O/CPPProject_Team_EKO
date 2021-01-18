@@ -1,10 +1,11 @@
 #pragma once
 #include <string>
+#include <vector>
 using namespace std;
 
 #include "..\DEFs.h"
 #include "CMUgraphicsLib\CMUgraphics.h"
-#include <vector>
+
 
 class Course;
 class AcademicYear;
@@ -80,10 +81,13 @@ public:
 	//Drawing functions
 	void DrawCourse( Course* );
 	void DrawAcademicYear( AcademicYear*);
+	void DrawTotalGPA(double);
+	void DrawIssue(Issue);
 	void UpdateInterface() const;
 	void DrawCourseDeps(StudyPlan*, Course*) const;
 	void DrawThickLine(int, int, int, int, int) const ;
 	void DisplayReport(vector<vector<string>>) const;
+
 	
 
 	void pet(vector<string> s)const;

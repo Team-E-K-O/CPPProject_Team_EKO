@@ -45,6 +45,11 @@ void Course::setCourseType(Course_type s)
 	c_type = s;
 }
 
+crsgrades Course::getGrade() const
+{
+	      return Grade;
+}
+
 void Course::setPreReq(list<Course_Code> p)
 {
 	PreReq = p;
