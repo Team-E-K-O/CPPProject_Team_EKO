@@ -8,6 +8,7 @@
 #include"Actions/ActionSave.h"
 #include"Actions/ActionSave.h"
 #include "Actions/ActionImportSplan.h"
+#include "ActionCoursetype.h"
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -191,12 +192,14 @@ void Registrar::SetCurrentIssue()
 
 Registrar::Registrar()
 { 
-	                     
+	vector<string>mype(15, "Normal");
+	mypets = mype;
+	ImportRules();
+	GetCourseCatalog();                     
 	pGUI = new GUI;       	                     //create interface object
 	pSPlan = new StudyPlan;	                    //create a study plan.
 	
 	Push2Stack();
-
 }
 
 bool Registrar::setCurrentMajor(string s)
@@ -266,13 +269,27 @@ Action* Registrar::CreateRequiredAction()
 			}
 			else
 			{
+				string cotype;
 				pc->setSelected(true);
 				pc->DrawMe(pGUI);
 				pGUI->DrawCourseDeps(pSPlan, pc);
 				string pc2 = to_string(pc->getCredits());
 				string title = pc->getTitle();
 				string code = pc->getCode();
-				string courseinfo ="Title: " +  title + ", " + "Code: " + code + ", " + "Credits: " + pc2;
+				coursestate courtype = pc->getstate();
+				if (courtype == 0)
+				{
+					cotype = "Done";
+				}
+				if (courtype == 1)
+				{
+					cotype = "In Progress";
+				}
+				if (courtype == 2)
+				{
+					cotype = "Pending";
+				}
+				string courseinfo ="Title: " +  title + ", " + "Code: " + code + ", " + "Credits: " + pc2 + ", " + "Type: " + cotype ;
 				ActionData actData = pGUI->GetUserAction(courseinfo);
 				pc->setSelected(0);
 				break;
@@ -291,12 +308,18 @@ Action* Registrar::CreateRequiredAction()
 		UndoF();
 		break;
 
+	case EDITTYPE:
+		RequiredAction = new ActionCoursetype(this);
+		break;
+
 	case REDO:
 		RedoF();
 		break;
+
 	case NOTES :
 		RequiredAction = new ActionAddNote(this);
 		break;
+
 	case MOVE :
 		RequiredAction = new ActionMove(this);
 		break;
@@ -347,10 +370,13 @@ void Registrar::Run()
 	{
 		//update interface here as CMU Lib doesn't refresh itself
 		//when window is minimized then restored
+		studentlvl();
+		petition();
 		
 		UpdateInterface();
 		pGUI->DrawTotalGPA(pSPlan->GetTotalGPA());
 
+		pGUI->pet(mypets);
 		Action* pAct = CreateRequiredAction();
 
 		if (pAct)	//if user doesn't cancel
@@ -423,8 +449,9 @@ vector<vector<string>> Registrar::CreateReport() const
 	 {"Track Credits Achieved", CurrentReqs.TrackCredsAchieved ? "True" : "False"},
 	 {"Major Credit sAchieved", CurrentReqs.MajorCredsAchieved ? "True" : "False"},
 	 {"University Courses Achieved", CurrentReqs.UniversityCoursesAchieved ? "True" : "False"},
-	 {"Major Courses Achieved",CurrentReqs.MajorCoursesAchieved ? "True" : "False"},
-	 {"Track Courses Achieved",  CurrentReqs.TrackCoursesAchieved ? "True" : "False"}
+	 {"Major Courses Achieved", CurrentReqs.MajorCoursesAchieved ? "True" : "False"},
+	 {"Track Courses Achieved",  CurrentReqs.TrackCoursesAchieved ? "True" : "False"},
+	 {"Student Level", studlvl},
 	};
 	return Report;
 }
@@ -436,12 +463,14 @@ void Registrar::UpdateInterface()
 	pGUI->UpdateInterface();	//update interface items      //test
 	pSPlan->DrawMe(pGUI);		//make study plan draw itself
 }
+
+
 void Registrar::GetCourseCatalog()
 {
-	string file_name = "Externals\\Catalog - 2020 12 19 .txt";
+	string file_name = "Catalog - 2020 12 19 .txt";
 	vector<vector<string>> Words;
 	string Line;
-	ifstream Myfile(file_name);
+	ifstream Myfile("Rules\\" + file_name);
 	if (Myfile.is_open())
 	{
 		while (getline(Myfile, Line))
@@ -527,8 +556,6 @@ void Registrar::GetCourseCatalog()
 void Registrar::ImportRules()
 {
 	string file_name = "Externals\\"+currentMajor+"-Requirements.txt";
-	cout << currentMajor << endl;
-	cout << file_name << endl;
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile(file_name);
@@ -543,7 +570,6 @@ void Registrar::ImportRules()
 				linewrds.push_back(Word);
 			Words.push_back(linewrds);
 		}
-
 		RegRules.TotalCredit = stoi(Words[0][0]);
 		RegRules.ReqUnivCompulsoryCredits = stoi(Words[1][0]);
 		RegRules.ReqUnivElectiveCredits = stoi(Words[1][1]);
@@ -609,6 +635,86 @@ Course * Registrar::CreateCourseP(Course_Code code)
 	if(state)
 	return nullptr;
 }
+
+string Registrar::studentlvl()
+{
+	auto pp = pSPlan->ReturnALlCrs();
+	int crdt = 0;
+	for (auto i : pp)
+	{
+		for (auto sem : i)
+		{
+			for (auto crs : sem)
+			{
+				coursestate pc = crs.getstate();
+				if (pc == 0)
+				{
+					crdt += crs.getCredits();
+				}
+			}
+		}
+	}
+
+	if (crdt < 30)
+	{
+		studlvl = "Fresh";
+	}
+	if (crdt >= 30 && crdt < 60)
+	{
+		studlvl = "Sophomore";
+	}
+	if (crdt >= 60 && crdt < 90)
+	{
+		studlvl = "Junior";
+	}
+	if (crdt >= 90)
+	{
+		studlvl = "Senior";
+	}
+
+	return studlvl;
+}
+
+void Registrar::petition()
+{
+	auto pp = pSPlan->ReturnALlCrs();
+	int n = 0;
+	for (auto i : pp)
+	{
+		for (auto sem : i)
+		{
+			int crdt = 0;
+			for (auto crs : sem)
+			{
+				crdt += crs.getCredits();
+			}
+			if (crdt > 18)
+			{
+				mypets[n] = "Overload";
+			}
+			if (crdt < 12)
+			{
+				mypets[n] = "Underload";
+			}
+			if (crdt <= 18 && crdt >= 12)
+			{
+				mypets[n] = "Normal";
+			}
+
+			if (n == 2 || n == 5 || n == 8 || n == 11 || n == 14)
+			{
+				if (crdt > 6)
+				{
+					mypets[n] = "Overload";
+				}
+				else
+					mypets[n] = "Normal";
+			}
+			n++;
+		}
+	}
+}
+
 Registrar::~Registrar()
 {
 	delete pGUI;

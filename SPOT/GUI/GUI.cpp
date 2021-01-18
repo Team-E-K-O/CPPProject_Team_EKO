@@ -73,6 +73,7 @@ void GUI::CreateMenu() const
 	MenuItemImages[ITM_EDIT] = "GUI\\Images\\Menu\\Item_Edit.jpg";
 	MenuItemImages[ITM_REPORT] = "GUI\\Images\\Menu\\Menu_Report.jpg";
 	MenuItemImages[ITM_NOTES]= "GUI\\Images\\Menu\\Menu_Notes.jpg";
+	MenuItemImages[ITM_EDITTYPE] = "GUI\\Images\\Menu\\Menu_Edittype.jpg";
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu items one image at a time
@@ -158,6 +159,7 @@ void GUI::DrawThickLine(int x1, int y1, int x2 , int y2	, int width) const
 	}
 }
 
+
 void GUI::DisplayReport(vector<vector<string>> s) const
 {
 	DrawTPage();
@@ -173,6 +175,23 @@ void GUI::DisplayReport(vector<vector<string>> s) const
 		if (s[i][1] == "False")
 			pWind->SetPen(RED);
 		pWind->DrawString(DrawingAreaWidth / 4 + 400, MenuBarHeight + (3 + i) * 17, s[i][1] );
+	}
+}
+
+void GUI::pet(vector<string> s) const
+{
+	for (int i = 0; i < 15; i++)
+	{
+		if (s[i] == "Overload")
+		{
+			pWind->SetBrush(RED);
+			pWind->DrawCircle(i * WindWidth / 15 + 12, MenuBarHeight + 42,7, FILLED);
+		}
+		if (s[i] == "Underload")
+		{
+			pWind->SetBrush(DEEPSKYBLUE);
+			pWind->DrawCircle(i* WindWidth / 15 + 12, MenuBarHeight + 42,7, FILLED);
+		}
 	}
 }
 
@@ -193,18 +212,49 @@ string GUI::StartNotesView(vector<string> s) const
 	}
 	return GetSrting(DrawingAreaWidth/4 + 10, MenuBarHeight + n * 10+7);
 }
+
 void GUI::DrawCourse( Course* pCrs)
 {
+	if (pCrs->getCourseType() == univ)
+	{
+		pWind->SetPen(DARKORANGE,2);
+	}
+	if (pCrs->getCourseType() == major)
+	{
+		pWind->SetPen(BLACK,2);
+	}
+	if (pCrs->getCourseType() == minor)
+	{
+		pWind->SetPen(GREEN,2);
+	}
+	if (pCrs->getCourseType() == track)
+	{
+		pWind->SetPen(DARKVIOLET,2);
+	}
+	if (pCrs->getCourseType() == conc)
+	{
+		pWind->SetPen(DARKBLUE,2);
+	}
+	
 	if (pCrs->isSelected())
 		pWind->SetPen(HiColor, 2);
-	else
-		pWind->SetPen(DrawColor, 2);
+
 	if (pCrs->retError())
 		pWind->SetBrush(ErrorColor);
 	else 
 		pWind->SetBrush(FillColor);
+
 	graphicsInfo gInfo = pCrs->getGfxInfo();
-	pWind->DrawRectangle(gInfo.x+2, gInfo.y, gInfo.x + CRS_WIDTH-2, gInfo.y + CRS_HEIGHT,FILLED , CRS_HEIGHT/7, CRS_HEIGHT/7);
+
+	if (pCrs->is_ELective() == true)
+	{
+		pWind->DrawRectangle(gInfo.x + 2, gInfo.y, gInfo.x + CRS_WIDTH - 2, gInfo.y + CRS_HEIGHT, FILLED, CRS_HEIGHT / 3, CRS_HEIGHT / 3);
+	}
+	else
+	{
+		pWind->DrawRectangle(gInfo.x + 2, gInfo.y, gInfo.x + CRS_WIDTH - 2, gInfo.y + CRS_HEIGHT, FILLED);
+	}
+
 	pWind->DrawLine(gInfo.x+3, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH-3, gInfo.y + CRS_HEIGHT / 2);
 	
 	//Write the course code and credit hours.
@@ -217,6 +267,7 @@ void GUI::DrawCourse( Course* pCrs)
 	crd<< "crd: " << pCrs->getCredits();
 	pWind->DrawString(Code_x, Code_y, pCrs->getCode());
 	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT/2, crd.str());
+
 }
 
 void GUI::DrawAcademicYear( AcademicYear* pY) 
@@ -239,7 +290,7 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 			x1 = gInfo.x;
 			x2 =gInfo.x+ DrawingAreaWidth / 5;
 		}
-		string yrname = "                  YEAR    "  + to_string(pY->GetYearNumber());
+		string yrname = "                       YEAR    "  + to_string(pY->GetYearNumber());
 		pWind->SetFont(18, BOLD, BY_NAME , "Arial Black");
 		pWind->SetPen(OutlineColor);
 		pWind->SetBrush(YearFill);
@@ -249,7 +300,7 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 		
 		for (int n = FALL; n < SEM_CNT; n++)
 		{
-			string SEM_S[] = { "  FALL","SPRING","SUMMER" };
+			string SEM_S[] = { "     FALL","   SPRING","  SUMMER" };
 			pWind->SetFont(14, BOLD, BY_NAME , "Arial");
 			pWind->SetPen(OutlineColor);
 			pWind->SetBrush(SemFill);
@@ -333,6 +384,7 @@ ActionData GUI::GetUserAction(string msg) const
 				case ITM_EDIT:return ActionData{ EDIT };
 				case ITM_NOTES:return ActionData{ NOTES };
 				case ITM_REPORT:return ActionData{ REPORT };
+				case ITM_EDITTYPE:return ActionData{ EDITTYPE };
 
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar
 				}

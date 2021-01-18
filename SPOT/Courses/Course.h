@@ -5,10 +5,21 @@ using namespace std;
 #include "..\DEFs.h"
 
 #include "../GUI/Drawable.h"
+
+
+enum coursestate
+{
+	done,
+	inprogress,
+	pending
+};
+
 enum Course_type
 {
 	univ ,major ,minor ,track ,conc
 };
+
+
 //Base class for all types of courses
 
 enum crsgrades
@@ -77,10 +88,13 @@ class Course : public Drawable
 	Course_type c_type;
 	list<Course_Code> PreReq;	//list of prerequisites
 	list<Course_Code> CoReq;	//list of prerequisites
+	coursestate courtype = done;
 public:
 	Course(Course_Code r_code,string r_title, int crd);
 	string getTitle() const;
 	string getCode() const;
+	coursestate getstate();
+	void settype(string n);
 	int getCredits() const;
 	void set_Elective(bool);
 	bool is_ELective() const;
@@ -95,5 +109,4 @@ public:
 	bool retError() const;
 	void DrawMe(GUI*) ;
 	virtual ~Course();
-
 };

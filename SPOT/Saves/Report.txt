@@ -5,3 +5,4 @@ Major Credit sAchieved:True
 University Courses Achieved:True
 Major Courses Achieved:True
 Track Courses Achieved:True
+Student Level:Senior

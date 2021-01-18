@@ -13,6 +13,7 @@ struct ProgramReqs
 		MajorCredsAchieved, 
 		UniversityCoursesAchieved, MajorCoursesAchieved, TrackCoursesAchieved, semcrdtError, CoReqError, PreqError;
 };
+
 //The maestro class for the application
 class Registrar
 {
@@ -25,7 +26,9 @@ class Registrar
 	Rules RegRules;	//Registration rules
 	StudyPlan *pSPlan;
 	ProgramReqs CurrentReqs;
-	
+	string studlvl;
+	vector<string> mypets;
+
 public:
 	Registrar();
 	bool setCurrentMajor(string);
@@ -47,6 +50,8 @@ public:
 	void SetCurrentIssue();
 	void UndoF();
 	void RedoF();
+	string studentlvl();
+	void petition();
 	void Save2File(vector<vector<string>> ,string filename ="Report") const;
 	vector<vector<string>> CreateReport() const;
 	~Registrar();

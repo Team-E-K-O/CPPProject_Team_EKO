@@ -28,6 +28,7 @@ class GUI
 		ITM_SAVE,
 		ITM_REPORT,
 		ITM_NOTES,
+		ITM_EDITTYPE,
 		
 						//TODO: Add more items names here
 
@@ -89,7 +90,7 @@ public:
 
 	
 
-	
+	void pet(vector<string> s)const;
 	//input functions
 	ActionData GUI::GetUserAction(string msg = "") const;
 	string GetSrting(int x =25 ,int  y = WindHeight - StatusBarHeight + 10) const;

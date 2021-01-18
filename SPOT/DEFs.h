@@ -33,7 +33,8 @@ enum ActionType
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
 	MOVE,       //Move Course
-	EDIT,       //Edit a course in the study plan
+	EDIT,   //Edit a course in the study plan
+	EDITTYPE,
 	REPORT,     //Show the report for the current state
 	EXIT,		//Exit the application
 
