@@ -234,6 +234,27 @@ void GUI::DrawCourse( Course* pCrs)
 	crd<< "crd: " << pCrs->getCredits();
 	pWind->DrawString(Code_x, Code_y, pCrs->getCode());
 	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT/2, crd.str());
+
+	if (pCrs->getCourseType() == univ)
+	{
+		pWind->SetPen(RED);
+	}
+	if (pCrs->getCourseType() == major)
+	{
+		pWind->SetPen(BLACK);
+	}
+	if (pCrs->getCourseType() == minor)
+	{
+		pWind->SetPen(GREEN);
+	}
+	if (pCrs->getCourseType() == track)
+	{
+		pWind->SetPen(YELLOW);
+	}
+	if (pCrs->getCourseType() == conc)
+	{
+		pWind->SetPen(PINK);
+	}
 }
 
 void GUI::DrawAcademicYear( AcademicYear* pY) 

@@ -306,7 +306,7 @@ void Registrar::UpdateInterface()
 
 void Registrar::GetCourseCatalog()
 {
-	string file_name = "Externals\\Catalog - 2020 12 19 .txt";
+	string file_name = "Catalog - 2020 12 19 .txt";
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile("Rules\\" + file_name);
@@ -394,7 +394,7 @@ void Registrar::GetCourseCatalog()
 
 void Registrar::ImportRules()
 {
-	string file_name = "Externals\\ENV-Requirements.txt";
+	string file_name = "CIE-Requirements.txt";
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile("Rules\\" + file_name);

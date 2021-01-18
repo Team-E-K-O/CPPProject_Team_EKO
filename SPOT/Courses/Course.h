@@ -18,6 +18,8 @@ enum Course_type
 {
 	univ ,major ,minor ,track ,conc
 };
+
+
 //Base class for all types of courses
 class Course : public Drawable
 {
