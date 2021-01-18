@@ -77,7 +77,7 @@ void Course::settype(string n)
 	}
 }
 
-coursestate Course::gettype()
+coursestate Course::getstate()
 {
 	return courtype;
 }

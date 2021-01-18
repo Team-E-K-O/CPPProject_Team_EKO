@@ -30,7 +30,7 @@ public:
 	Course(Course_Code r_code,string r_title, int crd);
 	string getTitle() const;
 	string getCode() const;
-	coursestate gettype();
+	coursestate getstate();
 	void settype(string n);
 	int getCredits() const;
 	void setPreReq(list<Course_Code>);

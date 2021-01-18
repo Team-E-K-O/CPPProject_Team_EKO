@@ -5,6 +5,7 @@
 #include "StudyPlan/StudyPlan.h"
 #include <stack>
 #include <vector>
+
 enum Issue
 {
      None,Moderate,Critical
@@ -15,6 +16,7 @@ struct ProgramReqs
 		MajorCredsAchieved, 
 		UniversityCoursesAchieved, MajorCoursesAchieved, TrackCoursesAchieved;
 };
+
 //The maestro class for the application
 class Registrar
 {
@@ -26,6 +28,9 @@ class Registrar
 	Rules RegRules;	//Registration rules
 	StudyPlan *pSPlan;
 	ProgramReqs CurrentReqs;
+	string studlvl;
+	vector<string> mypets;
+
 public:
 	Registrar();
 	GUI* getGUI() const;
@@ -43,6 +48,8 @@ public:
 	void SetCurrentIssue();
 	void UndoF();
 	void RedoF();
+	string studentlvl();
+	void petition();
 	void Save2File(vector<vector<string>> ,string filename ="Report") const;
 	vector<vector<string>> CreatReport() const;
 	~Registrar();

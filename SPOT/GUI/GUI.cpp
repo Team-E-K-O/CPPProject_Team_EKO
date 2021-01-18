@@ -156,6 +156,7 @@ void GUI::DrawThickLine(int x1, int y1, int x2 , int y2	, int width) const
 	}
 }
 
+
 void GUI::DisplayReport(vector<vector<string>> s) const
 {
 	DrawTPage();
@@ -171,6 +172,23 @@ void GUI::DisplayReport(vector<vector<string>> s) const
 		if (s[i][1] == "False")
 			pWind->SetPen(RED);
 		pWind->DrawString(DrawingAreaWidth / 4 + 400, MenuBarHeight + (3 + i) * 17, s[i][1] );
+	}
+}
+
+void GUI::pet(vector<string> s) const
+{
+	for (int i = 0; i < 15; i++)
+	{
+		if (s[i] == "Overload")
+		{
+			pWind->SetBrush(RED);
+			pWind->DrawCircle(i * WindWidth / 15 + 12, MenuBarHeight + 42,7, FILLED);
+		}
+		if (s[i] == "Underload")
+		{
+			pWind->SetBrush(DEEPSKYBLUE);
+			pWind->DrawCircle(i* WindWidth / 15 + 12, MenuBarHeight + 42,7, FILLED);
+		}
 	}
 }
 
@@ -236,7 +254,7 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 			x1 = gInfo.x;
 			x2 =gInfo.x+ DrawingAreaWidth / 5;
 		}
-		string yrname = "                  YEAR    "  + to_string(pY->GetYearNumber());
+		string yrname = "                       YEAR    "  + to_string(pY->GetYearNumber());
 		pWind->SetFont(18, BOLD, BY_NAME , "Arial Black");
 		pWind->SetPen(OutlineColor);
 		pWind->SetBrush(YearFill);
@@ -246,7 +264,7 @@ void GUI::DrawAcademicYear( AcademicYear* pY)
 		
 		for (int n = FALL; n < SEM_CNT; n++)
 		{
-			string SEM_S[] = { "  FALL","SPRING","SUMMER" };
+			string SEM_S[] = { "     FALL","   SPRING","  SUMMER" };
 			pWind->SetFont(14, BOLD, BY_NAME , "Arial");
 			pWind->SetPen(OutlineColor);
 			pWind->SetBrush(SemFill);

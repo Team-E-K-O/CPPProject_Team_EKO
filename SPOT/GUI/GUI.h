@@ -85,7 +85,7 @@ public:
 	void DrawThickLine(int, int, int, int, int) const ;
 	void DisplayReport(vector<vector<string>>) const;
 
-	
+	void pet(vector<string> s)const;
 	//input functions
 	ActionData GUI::GetUserAction(string msg = "") const;
 	string GetSrting(int x =25 ,int  y = WindHeight - StatusBarHeight + 10) const;

@@ -5,3 +5,4 @@ Major Credit sAchieved:False
 University Courses Achieved:False
 Major Courses Achieved:False
 Track Courses Achieved:False
+Student Level:Senior
