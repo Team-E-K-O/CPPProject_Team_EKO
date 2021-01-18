@@ -5,6 +5,8 @@ using namespace std;
 #include "..\DEFs.h"
 #include "CMUgraphicsLib\CMUgraphics.h"
 #include <vector>
+#include "../Registrar.h"
+
 
 class Course;
 class AcademicYear;
@@ -80,6 +82,7 @@ public:
 	void DrawCourse( Course* );
 	void DrawAcademicYear( AcademicYear*);
 	void DrawTotalGPA(double TotalGPA);
+	void DrawIssue(Issue);
 	void UpdateInterface() const;
 	void DrawCourseDeps(StudyPlan*, Course*) const;
 	void DrawThickLine(int, int, int, int, int) const ;

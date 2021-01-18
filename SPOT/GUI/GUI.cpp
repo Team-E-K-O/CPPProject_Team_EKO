@@ -6,6 +6,7 @@
 #include <sstream>
 
 
+
 void GUI::HighLightCLK(int i) const
 {
 	pWind->SetPen(HiColor, 2);
@@ -258,7 +259,22 @@ void GUI::DrawTotalGPA(double TotalGPA)
 {
 	pWind->SetPen(MsgColor);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->DrawString(1120, 30, "TotalGPA: " + to_string(TotalGPA));
+	pWind->DrawString(1120, 15, "TotalGPA: " + to_string(TotalGPA));
+}
+
+void GUI::DrawIssue(Issue CurrentIssue)
+{
+	pWind->SetPen(MsgColor);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	if (CurrentIssue == Moderate)
+	{
+		pWind->DrawString(1120, 30, "Moderate Issue");
+	}
+	else if (CurrentIssue == Critical)
+	{
+		pWind->DrawString(1120, 30, "Critical Issue");
+	}
+	
 }
 
 

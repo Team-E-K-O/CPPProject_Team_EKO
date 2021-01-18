@@ -25,8 +25,6 @@ public:
 	Course* ReturnCoursePointer(Course_Code);                                 //return course by code
 	void virtual DrawMe(GUI*);
 	void CGPA();
-	void CheckPreq(int y, int s);
-	void CheckCoreq(int y, int s);
 	int CheckMinMaxCr(int y, int s);
 	void DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem);
 	void AddPlanNote(string);

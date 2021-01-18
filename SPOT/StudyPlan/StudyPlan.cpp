@@ -181,24 +181,10 @@ void StudyPlan::CGPA()
 	TotalGPA = gpa/TotalCredits;
 }
 
-void StudyPlan::CheckPreq(int y, int s)
-{
-	
-}
-
-void StudyPlan::CheckCoreq(int y, int s)
-{
-	vector<vector<vector<Course>>> allcrs = ReturnALlCrs();
-	for (auto crs : allcrs[y][s])
-	{
-
-	}
-}
-
 int StudyPlan::CheckMinMaxCr(int y, int s)
 {
 	vector<vector<vector<Course>>> allcrs = ReturnALlCrs();
-	int crdts;
+	int crdts = 0;
 	for (auto crs : allcrs[y][s])
 	{
 		crdts += crs.getCredits();

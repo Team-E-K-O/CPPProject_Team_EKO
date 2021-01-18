@@ -53,10 +53,14 @@ void Registrar::CheckRules()
 void Registrar::Checkcrdts()
 {
 	vector<vector<vector<Course>>> allcrs = pSPlan->ReturnALlCrs();
-	
-	for (int y = 0; y < 4; y++)
+	bool flag = false;
+	for (int y = 0; y < 5; y++)
 	{
-		for (int s = 0; s < 2; s++)
+		if (flag)
+		{
+			break;
+		}
+		for (int s = 0; s < 3; s++)
 		{
 			int crdts = pSPlan->CheckMinMaxCr(y, s);
 			if (s == 2)
@@ -68,6 +72,7 @@ void Registrar::Checkcrdts()
 				else
 				{
 					CurrentReqs.semcrdtError = false;
+					flag = true;
 					break;
 				}
 			}
@@ -80,7 +85,92 @@ void Registrar::Checkcrdts()
 				else
 				{
 					CurrentReqs.semcrdtError = false;
+					flag = true;
 					break;
+				}
+			}
+		}
+	}
+}
+
+void Registrar::Checkcoreq()
+{
+	vector<vector<vector<Course>>> allcrs = pSPlan->ReturnALlCrs();
+	bool flag = false;
+	for (int y = 0; y < 5; y++)
+	{
+		for (int s = 0; s < 3; s++)
+		{
+			for (auto ccrs : allcrs[y][s])
+			{
+				for (auto code : ccrs.retCoReq())
+				{
+					if (flag)
+					{
+						break;
+					}
+					for (auto ccrs : allcrs[y][s])
+					{
+						if (code != ccrs.getCode())
+						{
+							CurrentReqs.CoReqError = true;
+						}
+						else
+						{
+							CurrentReqs.CoReqError = false;
+							break;
+							flag = true;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void Registrar::Checkperq()
+{
+	vector<vector<vector<Course>>> allcrs = pSPlan->ReturnALlCrs();
+	bool flag = false;
+	for (int y = 0; y < 5; y++)
+	{
+		for (int s = 0; s < 3; s++)
+		{
+			for (auto ccrs : allcrs[y][s])
+			{
+				for (auto code : ccrs.retPreReq())
+				{
+					if (flag)
+					{
+						break;
+					}
+					for (int yi = 1; yi < y; yi++)
+					{
+						if (flag)
+						{
+							break;
+						}
+						for (int si = 1; si < y; si++)
+						{
+							if (flag)
+							{
+								break;
+							}
+							for (auto ccrs : allcrs[y-yi][s-si])
+							{
+								if (code != ccrs.getCode())
+								{
+									CurrentReqs.CoReqError = true;
+								}
+								else
+								{
+									CurrentReqs.CoReqError = false;
+									break;
+									flag = true;
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -91,7 +181,7 @@ void Registrar::SetCurrentIssue()
 {
 	if (!(CurrentReqs.TotalCredsAchieved && CurrentReqs.UniversityCredsAchieved && CurrentReqs.TrackCredsAchieved,
 		CurrentReqs.MajorCredsAchieved &&
-		CurrentReqs.UniversityCoursesAchieved && CurrentReqs.MajorCoursesAchieved && CurrentReqs.TrackCoursesAchieved))
+		CurrentReqs.UniversityCoursesAchieved && CurrentReqs.MajorCoursesAchieved && CurrentReqs.TrackCoursesAchieved && CurrentReqs.CoReqError && CurrentReqs.PreqError))
 		CurrentIssue = Critical;
 	else if (CurrentReqs.semcrdtError)
 		CurrentIssue = Moderate;
@@ -241,8 +331,9 @@ void Registrar::Run()
 			if (ExecuteAction(pAct))   //if action is not cancelled
 			{
 				pSPlan->CGPA();
-				pSPlan->CheckMinMaxCr();
-
+				Checkcrdts();
+				Checkperq();
+				Checkcoreq();
 				Push2Stack();
 				
 				while (! RedoS.empty())
