@@ -455,6 +455,9 @@ vector<vector<string>> Registrar::CreateReport() const
 	 {"University Courses Achieved", CurrentReqs.UniversityCoursesAchieved ? "True" : "False"},
 	 {"Major Courses Achieved", CurrentReqs.MajorCoursesAchieved ? "True" : "False"},
 	 {"Track Courses Achieved",  CurrentReqs.TrackCoursesAchieved ? "True" : "False"},
+		{"All semesiter credits are valid",CurrentReqs.semcrdtError ? "True" : "False"},
+		{"All corequesets achieved",CurrentReqs.CoReqError ?"True":"False"},
+		{"All corequesets achieved",CurrentReqs.PreqError ?"True":"False"},
 	 {"Student Level", studlvl},
 	};
 	return Report;
