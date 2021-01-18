@@ -19,7 +19,8 @@ void Registrar::CheckRules()
 {
 	CurrentReqs.TotalCredsAchieved = (pSPlan->GetTotalcrds() >= RegRules.TotalCredit);
 	CurrentReqs.MajorCredsAchieved = (pSPlan->GetMajorcrds() >= RegRules.ReqMajorCompulsoryCredits);
-	CurrentReqs.UniversityCoursesAchieved = (pSPlan->GetUnivcrds() >= RegRules.ReqUnivCompulsoryCredits);
+	CurrentReqs.UniversityCredsAchieved = (pSPlan->GetUnivcrds() >= RegRules.ReqUnivCompulsoryCredits);
+	
 	CurrentReqs.TrackCredsAchieved = (pSPlan->GetTrackcrds() >= RegRules.ReqTrackCredits);
 	CurrentReqs.MajorCoursesAchieved = true, CurrentReqs.UniversityCoursesAchieved = true, CurrentReqs.TrackCoursesAchieved = true;
 	/// Check if one of the university courses is missing
@@ -68,6 +69,7 @@ Registrar::Registrar()
 	GetCourseCatalog();                     
 	pGUI = new GUI;       	                     //create interface object
 	pSPlan = new StudyPlan;	                    //create a study plan.
+	
 	Push2Stack();
 }
 
@@ -100,8 +102,9 @@ Action* Registrar::CreateRequiredAction()
 		
 		break;
 	case REPORT:
-		pGUI->DisplayReport(CreatReport());
-		Save2File(CreatReport());
+		pGUI->DisplayReport(CreateReport());
+		//std::cout << pSPlan->GetTotalcrds() << "   " << RegRules.TotalCredit << endl;
+		Save2File(CreateReport());
 		pGUI->GetUserAction("Report saved press anywhere to continue");
 
 		break;
@@ -223,9 +226,13 @@ void Registrar::Run()
 			if (ExecuteAction(pAct))   //if action is not cancelled
 			{
 				Push2Stack();
+				CheckRules();
+				SetCurrentIssue();
 				while (! RedoS.empty())
 				{
 					RedoS.pop();
+					
+
 				}
 				//UpdateInterface();   //useless i think !
 			}
@@ -272,7 +279,7 @@ void Registrar::Save2File(vector<vector<string>> s, string filename) const
 	myfile.close();
 }
 
-vector<vector<string>> Registrar::CreatReport() const
+vector<vector<string>> Registrar::CreateReport() const
 {
 	vector<vector<string>> Report
 	{
@@ -299,7 +306,7 @@ void Registrar::UpdateInterface()
 
 void Registrar::GetCourseCatalog()
 {
-	string file_name = "Catalog - 2020 12 19 .txt";
+	string file_name = "Externals\\Catalog - 2020 12 19 .txt";
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile("Rules\\" + file_name);
@@ -387,7 +394,7 @@ void Registrar::GetCourseCatalog()
 
 void Registrar::ImportRules()
 {
-	string file_name = "ENV-Requirements.txt";
+	string file_name = "Externals\\ENV-Requirements.txt";
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile("Rules\\" + file_name);
@@ -451,6 +458,15 @@ Course * Registrar::CreateCourseP(Course_Code code)
 			list<Course_Code> preq(i.PreReqList.begin(), i.PreReqList.end());
 			pC->setCoReq(coreq);
 			pC->setPreReq(preq);
+			if (count(RegRules.UnivCompulsory.begin(), RegRules.UnivCompulsory.end(), code) || count(RegRules.UnivElective.begin(), RegRules.UnivElective.end(), code))
+			
+				
+				pC->setCourseType(univ);
+			
+			if (count(RegRules.TrackCompulsory.begin(), RegRules.TrackCompulsory.end(), code) || count(RegRules.TrackElective.begin(), RegRules.TrackElective.end(), code))
+				pC->setCourseType(track);
+			if (count(RegRules.MajorCompulsory.begin(), RegRules.MajorCompulsory.end(), code) || count(RegRules.MajorElective.begin(), RegRules.MajorElective.end(), code))
+				pC->setCourseType(major);
 			return pC;
 			state = false;
 			break;

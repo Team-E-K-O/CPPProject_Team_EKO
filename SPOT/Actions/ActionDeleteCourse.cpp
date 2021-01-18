@@ -22,7 +22,7 @@ bool ActionDeleteCourse::Execute()
 		StudyPlan* pp = pReg->getStudyPlan();
 		if (!pp->ReturnCoursePointer(gInfo))
 			return false;
-		pp->DeleteCrs(gInfo);
+		pp->DeleteCourse(gInfo);
 		delete pp->ReturnCoursePointer(gInfo);
 		return true;
 	}

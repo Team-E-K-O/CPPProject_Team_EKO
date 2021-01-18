@@ -52,7 +52,7 @@ bool ActionEditCourseCode::Execute()
 
 
 					pC2->setGfxInfo(gInfo);
-					pp->DeleteCrs(gInfo);
+					pp->DeleteCourse(gInfo);
 
 					pp->DetYearSem(gInfo, year, sem);
 
