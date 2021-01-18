@@ -8,7 +8,8 @@
 #include"Actions/ActionSave.h"
 #include"Actions/ActionSave.h"
 #include "Actions/ActionImportSplan.h"
-#include "ActionCoursetype.h"
+#include "Actions/ActionCoursetype.h"
+#include "Actions/ActionModifyGrade.h"
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -152,7 +153,7 @@ void Registrar::Checkperq()
 						{
 							break;
 						}
-						for (int si = 1; si < y; si++)
+						for (int si = 1; si < s; si++)
 						{
 							if (flag)
 							{
@@ -247,6 +248,9 @@ Action* Registrar::CreateRequiredAction()
 		Save2File(CreateReport());
 		pGUI->GetUserAction("Report saved press anywhere to continue");
 
+		break;
+	case MOD_GRADE:
+		RequiredAction = new ActionModifyGrade(this);
 		break;
 
 	case DRAW_AREA :

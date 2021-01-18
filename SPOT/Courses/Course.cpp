@@ -50,6 +50,11 @@ crsgrades Course::getGrade() const
 	      return Grade;
 }
 
+void Course::setGrade(crsgrades g)
+{
+	Grade = g;
+}
+
 void Course::setPreReq(list<Course_Code> p)
 {
 	PreReq = p;

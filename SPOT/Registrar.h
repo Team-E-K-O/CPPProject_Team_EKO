@@ -5,11 +5,8 @@
 #include "StudyPlan/StudyPlan.h"
 #include <stack>
 #include <vector>
+using namespace std;
 
-enum Issue
-{
-     None,Moderate,Critical
-};
 struct ProgramReqs
 {
 	bool TotalCredsAchieved, UniversityCredsAchieved, TrackCredsAchieved,

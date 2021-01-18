@@ -1,6 +1,6 @@
 #include "ActionAddCourse.h"
 #include "..\Registrar.h"
-#include "../Courses/UnivCourse.h"
+
 
 ActionAddCourse::ActionAddCourse(Registrar* p):Action(p)
 {

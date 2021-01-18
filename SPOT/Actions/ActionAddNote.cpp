@@ -1,6 +1,6 @@
 #include "ActionAddNote.h"
 #include "..\Registrar.h"
-#include "../Courses/UnivCourse.h"
+
 
 ActionAddNote::ActionAddNote(Registrar* p) :Action(p)
 {

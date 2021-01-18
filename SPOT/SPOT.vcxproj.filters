@@ -168,6 +168,10 @@
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ActionCoursetype.cpp">
+    <ClCompile Include="Actions\ActionCoursetype.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionModifyGrade.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,6 +279,10 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionCoursetype.h">
+    <ClInclude Include="Actions\ActionCoursetype.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionModifyGrade.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

@@ -74,6 +74,7 @@ void GUI::CreateMenu() const
 	MenuItemImages[ITM_REPORT] = "GUI\\Images\\Menu\\Menu_Report.jpg";
 	MenuItemImages[ITM_NOTES]= "GUI\\Images\\Menu\\Menu_Notes.jpg";
 	MenuItemImages[ITM_EDITTYPE] = "GUI\\Images\\Menu\\Menu_Edittype.jpg";
+	MenuItemImages[ITM_MODGRADE]= "GUI\\Images\\Menu\\Menu_ModGrade.jpg";
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu items one image at a time
@@ -385,6 +386,8 @@ ActionData GUI::GetUserAction(string msg) const
 				case ITM_NOTES:return ActionData{ NOTES };
 				case ITM_REPORT:return ActionData{ REPORT };
 				case ITM_EDITTYPE:return ActionData{ EDITTYPE };
+				case ITM_MODGRADE:return ActionData{ MOD_GRADE };
+				
 
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar
 				}
