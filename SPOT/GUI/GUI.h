@@ -82,7 +82,7 @@ public:
 	void DrawCourse( Course* );
 	void DrawAcademicYear( AcademicYear*);
 	void DrawTotalGPA(double TotalGPA);
-	void DrawIssue(Issue);
+	void DrawIssue(Issue CurrentIssue);
 	void UpdateInterface() const;
 	void DrawCourseDeps(StudyPlan*, Course*) const;
 	void DrawThickLine(int, int, int, int, int) const ;
