@@ -45,17 +45,17 @@ bool ActionCoursetype::Execute()
 					return false;
 
 
-				if (type == "done")
+				if (type == "done" || type == "DONE" || type == "Done")
 				{
 					pc->settype(type);
 					ActionData actData = pGUI->GetUserAction("Status Edited Successfully ! press anywhere to continue");
 				}
-				else if (type == "in progress")
+				else if (type == "in progress" || type == "IN PROGRESS" || type == "In Progress")
 				{
 					pc->settype(type);
 					ActionData actData = pGUI->GetUserAction("Status Edited Successfully ! press anywhere to continue");
 				}
-				else if (type == "pending")
+				else if (type == "pending" || type == "PENDING" || type == "Pending")
 				{
 					pc->settype(type);
 					ActionData actData = pGUI->GetUserAction("Status Edited Successfully ! press anywhere to continue");
