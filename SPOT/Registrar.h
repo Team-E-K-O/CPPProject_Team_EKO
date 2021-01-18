@@ -23,6 +23,7 @@ class Registrar
 	StudyPlan PlanTemp;
 	bool running ;
 	Issue CurrentIssue;
+	string currentMajor;
 	GUI *pGUI;	//pointer to GUI 
 	Rules RegRules;	//Registration rules
 	StudyPlan *pSPlan;
@@ -30,6 +31,7 @@ class Registrar
 	
 public:
 	Registrar();
+	bool setCurrentMajor(string);
 	GUI* getGUI() const;
 	Action* CreateRequiredAction();
 	bool ExecuteAction(Action*);

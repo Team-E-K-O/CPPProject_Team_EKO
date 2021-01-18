@@ -176,6 +176,7 @@ void GUI::DisplayReport(vector<vector<string>> s) const
 }
 
 
+
 string GUI::StartNotesView(vector<string> s) const  
 {
 	DrawTPage();
