@@ -1,8 +1,8 @@
 Total Credits Achieved:False
 University Credits Achieved:True
-Track Credits Achieved:True
+Track Credits Achieved:False
 Major Credit sAchieved:True
 University Courses Achieved:True
 Major Courses Achieved:True
-Track Courses Achieved:True
+Track Courses Achieved:False
 Student Level:Senior

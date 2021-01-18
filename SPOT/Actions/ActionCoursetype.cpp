@@ -1,5 +1,5 @@
 #include "ActionCoursetype.h"
-#include "Registrar.h"
+#include "..\Registrar.h"
 #include "UnivCourse.h"
 
 
