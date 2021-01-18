@@ -1,4 +1,4 @@
-Total Credits Achieved:True
+Total Credits Achieved:False
 University Credits Achieved:True
 Track Credits Achieved:True
 Major Credit sAchieved:True

@@ -29,6 +29,7 @@ class Course : public Drawable
 	string type;	//Univ, track, or major.....etc.
 	bool Done;		//Done or not yet?
 	bool Has_Error=false;
+	bool Elective = false;
 	Course_type c_type;
 	list<Course_Code> PreReq;	//list of prerequisites
 	list<Course_Code> CoReq;	//list of prerequisites
@@ -40,6 +41,8 @@ public:
 	coursestate getstate();
 	void settype(string n);
 	int getCredits() const;
+	void set_Elective(bool);
+	bool is_ELective() const;
 	Course_type getCourseType() const;
 	void setCourseType(Course_type);
 	void setPreReq(list<Course_Code>);
