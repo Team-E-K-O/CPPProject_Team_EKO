@@ -216,26 +216,25 @@ void GUI::DrawCourse( Course* pCrs)
 {
 	if (pCrs->getCourseType() == univ)
 	{
-		pWind->SetPen(RED);
+		pWind->SetPen(DARKORANGE,2);
 	}
 	if (pCrs->getCourseType() == major)
 	{
-		pWind->SetPen(BLACK);
+		pWind->SetPen(BLACK,2);
 	}
 	if (pCrs->getCourseType() == minor)
 	{
-		pWind->SetPen(GREEN);
+		pWind->SetPen(GREEN,2);
 	}
 	if (pCrs->getCourseType() == track)
 	{
-		pWind->SetPen(PURPLE);
+		pWind->SetPen(DARKVIOLET,2);
 	}
 	if (pCrs->getCourseType() == conc)
 	{
-		pWind->SetPen(DARKBLUE);
+		pWind->SetPen(DARKBLUE,2);
 	}
 	
-
 	if (pCrs->isSelected())
 		pWind->SetPen(HiColor, 2);
 
@@ -243,16 +242,18 @@ void GUI::DrawCourse( Course* pCrs)
 		pWind->SetBrush(ErrorColor);
 	else 
 		pWind->SetBrush(FillColor);
+
 	graphicsInfo gInfo = pCrs->getGfxInfo();
 
-	if (pCrs->getCourseType() == elec)
+	if (pCrs->is_ELective() == true)
 	{
-		pWind->DrawRectangle(gInfo.x + 2, gInfo.y, gInfo.x + CRS_WIDTH - 2, gInfo.y + CRS_HEIGHT, FILLED, CRS_HEIGHT / 7, CRS_HEIGHT / 7);
+		pWind->DrawRectangle(gInfo.x + 2, gInfo.y, gInfo.x + CRS_WIDTH - 2, gInfo.y + CRS_HEIGHT, FILLED, CRS_HEIGHT / 3, CRS_HEIGHT / 3);
 	}
 	else
 	{
 		pWind->DrawRectangle(gInfo.x + 2, gInfo.y, gInfo.x + CRS_WIDTH - 2, gInfo.y + CRS_HEIGHT, FILLED);
 	}
+
 	pWind->DrawLine(gInfo.x+3, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH-3, gInfo.y + CRS_HEIGHT / 2);
 	
 	//Write the course code and credit hours.

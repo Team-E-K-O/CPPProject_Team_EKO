@@ -419,8 +419,6 @@ void Registrar::GetCourseCatalog()
 void Registrar::ImportRules()
 {
 	string file_name = "Externals\\"+currentMajor+"-Requirements.txt";
-	cout << currentMajor << endl;
-	cout << file_name << endl;
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile(file_name);
