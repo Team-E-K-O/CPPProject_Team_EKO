@@ -458,14 +458,13 @@ Course * Registrar::CreateCourseP(Course_Code code)
 			pC->setCoReq(coreq);
 			pC->setPreReq(preq);
 			if (count(RegRules.UnivCompulsory.begin(), RegRules.UnivCompulsory.end(), code) || count(RegRules.UnivElective.begin(), RegRules.UnivElective.end(), code))
-			
-				
 				pC->setCourseType(univ);
-			
-			if (count(RegRules.TrackCompulsory.begin(), RegRules.TrackCompulsory.end(), code) || count(RegRules.TrackElective.begin(), RegRules.TrackElective.end(), code))
+			if (count(RegRules.TrackCompulsory.begin(), RegRules.TrackCompulsory.end(), code) || count(RegRules.TrackElective.begin(), RegRules.TrackElective.end(), code)) 
 				pC->setCourseType(track);
 			if (count(RegRules.MajorCompulsory.begin(), RegRules.MajorCompulsory.end(), code) || count(RegRules.MajorElective.begin(), RegRules.MajorElective.end(), code))
 				pC->setCourseType(major);
+			pC->set_Elective(count(RegRules.TrackElective.begin(), RegRules.TrackElective.end(), code) || count(RegRules.UnivElective.begin(), RegRules.UnivElective.end(),
+				code) || count(RegRules.MajorElective.begin(), RegRules.MajorElective.end(), code));
 			return pC;
 			state = false;
 			break;
