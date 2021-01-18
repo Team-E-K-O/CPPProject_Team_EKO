@@ -67,7 +67,7 @@ class GUI
 	
 public:
 	GUI();
-	void RedrawCourse(AcademicYear* , Course* , int ,int );
+	void SetCourseLocation(AcademicYear* , Course* , int ,int );
 	void CreateMenu() const;
 	void HighLightCLK(int) const ;
 	void ClearDrawingArea() const;

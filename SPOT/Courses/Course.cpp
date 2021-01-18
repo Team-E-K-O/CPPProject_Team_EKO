@@ -25,6 +25,16 @@ int Course::getCredits() const
 	return credits;
 }
 
+Course_type Course::getCourseType() const
+{
+	return c_type;
+}
+
+void Course::setCourseType(Course_type s)
+{
+	c_type = s;
+}
+
 void Course::setPreReq(list<Course_Code> p)
 {
 	PreReq = p;

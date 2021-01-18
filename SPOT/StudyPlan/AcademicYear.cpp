@@ -1,7 +1,7 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
 #include <vector>
-
+#include <iostream>    //debug
 using namespace std;
 
 AcademicYear::AcademicYear()
@@ -40,12 +40,15 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 		YearCourses[sem].push_back(pC);
 		TotalCredits += pC->getCredits();
 		NumberOfCourses[sem]++;
-
-
-
 		//TODO: acording to course type incremenet corrsponding toatl hours for that year
+		if (pC->getCourseType() == univ)
+			TotalUnivCredits+=pC->getCredits();
+		else if(pC->getCourseType() == major)
+			TotalMajorCredits += pC->getCredits();
+		else if (pC->getCourseType() == track)
+			TotalTrackCredits += pC->getCredits();
 
-
+		
 		return true;
 	}
 	else
@@ -65,7 +68,7 @@ void AcademicYear::DrawMe(GUI* pGUI)
 		for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)
 		{
 			
-			pGUI->RedrawCourse(this,* it, sem, n);
+			pGUI->SetCourseLocation(this,* it, sem, n);
 			(*it)->DrawMe(pGUI);	//call DrawMe for each course in this semester
 			n++;
 		}

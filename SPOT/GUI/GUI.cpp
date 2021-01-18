@@ -76,7 +76,7 @@ void GUI::CreateMenu() const
 	for (int i = 0; i<ITM_CNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i*MenuItemWidth, 0, MenuItemWidth, MenuBarHeight);
 }
-void GUI::RedrawCourse(AcademicYear* yr,Course* crs,int sem,int n1)
+void GUI::SetCourseLocation(AcademicYear* yr,Course* crs,int sem,int n1)
 {
 	graphicsInfo g = yr->getGfxInfo();
 	crs->setDim(CRS_WIDTH, CRS_HEIGHT);
@@ -117,7 +117,7 @@ void GUI::UpdateInterface() const
 	pWind->SetBuffering(false);
 
 }
-
+////////////////////////    Drawing functions    ///////////////////
 void GUI::DrawCourseDeps(StudyPlan* st, Course* thisCrs) const
 {
 	pWind->SetPen(CoreqColor);
@@ -165,7 +165,7 @@ void GUI::DisplayReport(vector<vector<string>> s) const
 	{
 		pWind->SetPen(OutlineColor);
 		pWind->DrawString(DrawingAreaWidth / 4 + 110, MenuBarHeight + (3 + i) * 17, s[i][0]+" :");
-		if(s[i][1]=="TRUE")
+		if(s[i][1]=="True")
 			pWind->SetPen(GREEN);
 		if (s[i][1] == "False")
 			pWind->SetPen(RED);
@@ -173,7 +173,7 @@ void GUI::DisplayReport(vector<vector<string>> s) const
 	}
 }
 
-////////////////////////    Drawing functions    ///////////////////
+
 string GUI::StartNotesView(vector<string> s) const  
 {
 	DrawTPage();
@@ -200,8 +200,8 @@ void GUI::DrawCourse( Course* pCrs)
 	else 
 		pWind->SetBrush(FillColor);
 	graphicsInfo gInfo = pCrs->getGfxInfo();
-	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT,FILLED , CRS_HEIGHT/7, CRS_HEIGHT/7);
-	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT / 2);
+	pWind->DrawRectangle(gInfo.x+2, gInfo.y, gInfo.x + CRS_WIDTH-2, gInfo.y + CRS_HEIGHT,FILLED , CRS_HEIGHT/7, CRS_HEIGHT/7);
+	pWind->DrawLine(gInfo.x+3, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH-3, gInfo.y + CRS_HEIGHT / 2);
 	
 	//Write the course code and credit hours.
 	int Code_x = gInfo.x + CRS_WIDTH * 0.08;
