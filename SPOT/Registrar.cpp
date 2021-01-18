@@ -73,6 +73,17 @@ Registrar::Registrar()
 	Push2Stack();
 }
 
+bool Registrar::setCurrentMajor(string s)
+{
+	if (s == "CIE" || s == "SPC" || s == "ENV" || s == "NANENG" || s == "REE")
+	{
+		currentMajor = s;
+		cout << currentMajor << endl;
+		return true;
+	}
+	return false;
+}
+
 //returns a pointer to GUI
 GUI* Registrar::getGUI() const
 {
@@ -208,9 +219,24 @@ bool Registrar::ExecuteAction(Action* pAct)
 }
 
 void Registrar::Run()
-{
 
+{
 	running = true;
+	while (true)
+	{
+		pGUI->PrintMsg("Please select the desired Major :( CIE , ENV, NANENG, REE , SPC )");
+		string choice = pGUI->GetSrting();    
+		if (choice == "")               //will terminate the problem if the user cancels
+		{
+			running = false;
+			break;
+		}
+		if (setCurrentMajor(choice))
+			break;
+	}
+	ImportRules();
+	GetCourseCatalog();
+	UpdateInterface();
 	while (running)
 	{
 		//update interface here as CMU Lib doesn't refresh itself
@@ -231,8 +257,6 @@ void Registrar::Run()
 				while (! RedoS.empty())
 				{
 					RedoS.pop();
-					
-
 				}
 				//UpdateInterface();   //useless i think !
 			}
@@ -394,7 +418,9 @@ void Registrar::GetCourseCatalog()
 
 void Registrar::ImportRules()
 {
-	string file_name = "CIE-Requirements.txt";
+	string file_name = "Externals\\"+currentMajor+"-Requirements.txt";
+	cout << currentMajor << endl;
+	cout << file_name << endl;
 	vector<vector<string>> Words;
 	string Line;
 	ifstream Myfile("Rules\\" + file_name);

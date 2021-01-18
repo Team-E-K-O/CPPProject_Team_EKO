@@ -195,6 +195,7 @@ void GUI::pet(vector<string> s) const
 }
 
 
+
 string GUI::StartNotesView(vector<string> s) const  
 {
 	DrawTPage();
