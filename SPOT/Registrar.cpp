@@ -8,6 +8,7 @@
 #include"Actions/ActionSave.h"
 #include"Actions/ActionSave.h"
 #include "Actions/ActionImportSplan.h"
+#include "ActionCoursetype.h"
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -99,7 +100,6 @@ Action* Registrar::CreateRequiredAction()
 		break;
 	case REPORT:
 		pGUI->DisplayReport(CreatReport());
-		//std::cout << pSPlan->GetTotalcrds() << "   " << RegRules.TotalCredit << endl;
 		Save2File(CreatReport());
 		pGUI->GetUserAction("Report saved press anywhere to continue");
 
@@ -125,13 +125,27 @@ Action* Registrar::CreateRequiredAction()
 			}
 			else
 			{
+				string cotype;
 				pc->setSelected(true);
 				pc->DrawMe(pGUI);
 				pGUI->DrawCourseDeps(pSPlan, pc);
 				string pc2 = to_string(pc->getCredits());
 				string title = pc->getTitle();
 				string code = pc->getCode();
-				string courseinfo ="Title: " +  title + ", " + "Code: " + code + ", " + "Credits: " + pc2;
+				coursestate courtype = pc->gettype();
+				if (courtype == 0)
+				{
+					cotype = "Done";
+				}
+				if (courtype == 1)
+				{
+					cotype = "In Progress";
+				}
+				if (courtype == 2)
+				{
+					cotype = "Pending";
+				}
+				string courseinfo ="Title: " +  title + ", " + "Code: " + code + ", " + "Credits: " + pc2 + ", " + "Type: " + cotype ;
 				ActionData actData = pGUI->GetUserAction(courseinfo);
 				pc->setSelected(0);
 				break;
@@ -150,12 +164,18 @@ Action* Registrar::CreateRequiredAction()
 		UndoF();
 		break;
 
+	case EDITTYPE:
+		RequiredAction = new ActionCoursetype(this);
+		break;
+
 	case REDO:
 		RedoF();
 		break;
+
 	case NOTES :
 		RequiredAction = new ActionAddNote(this);
 		break;
+
 	case MOVE :
 		RequiredAction = new ActionMove(this);
 		break;
@@ -258,7 +278,7 @@ vector<vector<string>> Registrar::CreatReport() const
 	 {"Track Credits Achieved", CurrentReqs.TrackCredsAchieved ? "True" : "False"},
 	 {"Major Credit sAchieved", CurrentReqs.MajorCredsAchieved ? "True" : "False"},
 	 {"University Courses Achieved", CurrentReqs.UniversityCoursesAchieved ? "True" : "False"},
-	 {"Major Courses Achieved",CurrentReqs.MajorCoursesAchieved ? "True" : "False"},
+	 {"Major Courses Achieved", CurrentReqs.MajorCoursesAchieved ? "True" : "False"},
 	 {"Track Courses Achieved",  CurrentReqs.TrackCoursesAchieved ? "True" : "False"}
 	};
 	return Report;

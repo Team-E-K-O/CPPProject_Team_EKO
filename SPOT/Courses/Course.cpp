@@ -59,3 +59,25 @@ void Course::DrawMe(GUI* pG)
 {
 	pG->DrawCourse(this);
 }
+
+
+void Course::settype(string n)
+{
+	if (n == "done")
+	{
+		courtype = done;
+	}
+	else if (n == "in progress")
+	{
+		courtype = inprogress;
+	}
+	else if (n == "pending")
+	{
+		courtype = pending;
+	}
+}
+
+coursestate Course::gettype()
+{
+	return courtype;
+}

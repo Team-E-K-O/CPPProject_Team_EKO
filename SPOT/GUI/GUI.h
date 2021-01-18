@@ -27,6 +27,7 @@ class GUI
 		ITM_SAVE,
 		ITM_REPORT,
 		ITM_NOTES,
+		ITM_EDITTYPE,
 		
 						//TODO: Add more items names here
 
