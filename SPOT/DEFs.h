@@ -42,8 +42,9 @@ enum ActionType
 	MENU_BAR,	//A click on an empty place in the menu bar
 	DRAW_AREA,	//A click in the drawing area
 	NOTES, //A click in the notes area
-	
+	MOD_GRADE,
 	CANCEL,		//ESC key is pressed
+
 
 	//TODO: Add more action types
 

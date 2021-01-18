@@ -101,8 +101,10 @@ public:
 	Course_type getCourseType() const;
 	void setCourseType(Course_type);
 	crsgrades getGrade() const;
+	void setGrade(crsgrades);
 	void setPreReq(list<Course_Code>);
 	void setCoReq(list<Course_Code>);
+
 	list<Course_Code> retPreReq() const;
 	list<Course_Code> retCoReq() const;
 	void setError(bool);

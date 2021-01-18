@@ -121,12 +121,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ActionCoursetype.cpp" />
     <ClCompile Include="Actions\ActionAddCourse.cpp" />
     <ClCompile Include="Actions\ActionAddNote.cpp" />
+    <ClCompile Include="Actions\ActionCoursetype.cpp" />
     <ClCompile Include="Actions\ActionDeleteCourse.cpp" />
     <ClCompile Include="Actions\ActionImportSplan.cpp" />
     <ClCompile Include="Actions\ActionEditCourseCode.cpp" />
+    <ClCompile Include="Actions\ActionModifyGrade.cpp" />
     <ClCompile Include="Actions\ActionMove.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Courses\Course.cpp" />
@@ -173,13 +174,14 @@
     <ClCompile Include="StudyPlan\StudyPlan.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionCoursetype.h" />
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\ActionAddCourse.h" />
     <ClInclude Include="Actions\ActionAddNote.h" />
+    <ClInclude Include="Actions\ActionCoursetype.h" />
     <ClInclude Include="Actions\ActionDeleteCourse.h" />
     <ClInclude Include="Actions\ActionImportSplan.h" />
     <ClInclude Include="Actions\ActionEditCourseCode.h" />
+    <ClInclude Include="Actions\ActionModifyGrade.h" />
     <ClInclude Include="Actions\ActionMove.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Courses\Course.h" />

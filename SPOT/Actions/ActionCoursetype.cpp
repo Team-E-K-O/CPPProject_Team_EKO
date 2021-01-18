@@ -1,6 +1,6 @@
 #include "ActionCoursetype.h"
-#include "Registrar.h"
-#include "UnivCourse.h"
+#include "..\Registrar.h"
+
 
 
 ActionCoursetype::ActionCoursetype(Registrar* p):Action(p)
@@ -12,7 +12,7 @@ bool ActionCoursetype::Execute()
 {
 	GUI* pGUI = pReg->getGUI();
 
-	ActionData actData = pGUI->GetUserAction("Click on the course you want change it's type ...");
+	ActionData actData = pGUI->GetUserAction("Click on the course you want change its State ...");
 
 	int x, y;
 
@@ -30,18 +30,15 @@ bool ActionCoursetype::Execute()
 		pp->DetYearSem(gInfo, year, sem);
 		Course* pc = pp->ReturnCoursePointer(gInfo);
 		
-		while (true)
-		{
+		
 			if (pc == nullptr)
-			{
-				break;
-			}
+				return false;
 			else
 			{
 				pc->setSelected(true);
 				pc->DrawMe(pGUI);
 
-				pGUI->PrintMsg("Write the type of the course :");
+				pGUI->PrintMsg("Write the type of the course : (done , pending , in progress)");
 				pc->setSelected(false);
 				string type = pGUI->GetSrting();
 				if (type == "")
@@ -51,29 +48,32 @@ bool ActionCoursetype::Execute()
 				if (type == "done")
 				{
 					pc->settype(type);
-					ActionData actData = pGUI->GetUserAction("Type Edited Successfully ! press anywhere to continue");
+					ActionData actData = pGUI->GetUserAction("Status Edited Successfully ! press anywhere to continue");
 				}
 				else if (type == "in progress")
 				{
 					pc->settype(type);
-					ActionData actData = pGUI->GetUserAction("Type Edited Successfully ! press anywhere to continue");
+					ActionData actData = pGUI->GetUserAction("Status Edited Successfully ! press anywhere to continue");
 				}
 				else if (type == "pending")
 				{
 					pc->settype(type);
-					ActionData actData = pGUI->GetUserAction("Type Edited Successfully ! press anywhere to continue");
+					ActionData actData = pGUI->GetUserAction("Status Edited Successfully ! press anywhere to continue");
 				}
+				else
+					return false;
 
-				break;
+
+				
 			}
-		}
-
-		return true;
 	}
-
-
-	return true;
+	    return true;
+		
 }
+
+
+	
+
 
 ActionCoursetype :: ~ActionCoursetype()
 {

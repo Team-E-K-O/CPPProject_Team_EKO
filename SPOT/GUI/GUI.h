@@ -22,13 +22,15 @@ class GUI
 		ITM_DELETE,
 		ITM_MOVE,
 		ITM_EDIT,
+		ITM_EDITTYPE,
+		ITM_MODGRADE,
 		ITM_UNDO,
 		ITM_REDO,
 		ITM_LOAD,
 		ITM_SAVE,
 		ITM_REPORT,
 		ITM_NOTES,
-		ITM_EDITTYPE,
+		
 		
 						//TODO: Add more items names here
 

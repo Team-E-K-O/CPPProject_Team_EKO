@@ -1,5 +1,5 @@
 ﻿#include "..\Registrar.h"
-#include "../Courses/UnivCourse.h"
+
 #include "ActionDeleteCourse.h"
 
 ActionDeleteCourse::ActionDeleteCourse(Registrar* p) :Action(p)
