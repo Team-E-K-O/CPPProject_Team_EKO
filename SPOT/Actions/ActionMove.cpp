@@ -45,7 +45,7 @@ bool ActionMove::Execute()
 					graphicsInfo gInfo2{ x2, y2 };
 					pp->DetYearSem(gInfo2, year2, sem2);
 					pc->setSelected(false);
-					pp->DeleteCrs(gInfo);
+					pp->DeleteCourse(gInfo);
 					pp->AddCourse(pc, year2, sem2);
 					break;
 				}

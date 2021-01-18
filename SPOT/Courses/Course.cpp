@@ -25,6 +25,26 @@ int Course::getCredits() const
 	return credits;
 }
 
+void Course::set_Elective(bool b)
+{
+	Elective = b;
+}
+
+bool Course::is_ELective() const
+{
+	return Elective;
+}
+
+Course_type Course::getCourseType() const
+{
+	return c_type;
+}
+
+void Course::setCourseType(Course_type s)
+{
+	c_type = s;
+}
+
 crsgrades Course::getGrade() const
 {
 	      return Grade;

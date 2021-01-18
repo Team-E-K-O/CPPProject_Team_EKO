@@ -5,7 +5,10 @@ using namespace std;
 #include "..\DEFs.h"
 
 #include "../GUI/Drawable.h"
-
+enum Course_type
+{
+	univ ,major ,minor ,track ,conc
+};
 //Base class for all types of courses
 
 enum crsgrades
@@ -70,6 +73,8 @@ class Course : public Drawable
 	string type;	//Univ, track, or major.....etc.
 	bool Done;		//Done or not yet?
 	bool Has_Error=false;
+	bool Elective = false;
+	Course_type c_type;
 	list<Course_Code> PreReq;	//list of prerequisites
 	list<Course_Code> CoReq;	//list of prerequisites
 public:
@@ -77,6 +82,10 @@ public:
 	string getTitle() const;
 	string getCode() const;
 	int getCredits() const;
+	void set_Elective(bool);
+	bool is_ELective() const;
+	Course_type getCourseType() const;
+	void setCourseType(Course_type);
 	crsgrades getGrade() const;
 	void setPreReq(list<Course_Code>);
 	void setCoReq(list<Course_Code>);

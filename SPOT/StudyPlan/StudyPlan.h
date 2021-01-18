@@ -33,7 +33,7 @@ public:
 	vector<vector<vector<Course>>>  ReturnALlCrs() const;     //returns a map of all courses in their places
 	vector<string>ReturnNotes() const;
 	void StaticCopyit(StudyPlan*);
-	void  DeleteCrs(graphicsInfo);
+	void  DeleteCourse(graphicsInfo);
 	int GetTotalcrds() const;
 	int GetMajorcrds() const;
 	int GetUnivcrds() const;

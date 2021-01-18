@@ -69,7 +69,7 @@ class GUI
 	
 public:
 	GUI();
-	void RedrawCourse(AcademicYear* , Course* , int ,int );
+	void SetCourseLocation(AcademicYear* , Course* , int ,int );
 	void CreateMenu() const;
 	void HighLightCLK(int) const ;
 	void ClearDrawingArea() const;
@@ -87,6 +87,8 @@ public:
 	void DrawCourseDeps(StudyPlan*, Course*) const;
 	void DrawThickLine(int, int, int, int, int) const ;
 	void DisplayReport(vector<vector<string>>) const;
+
+	
 
 	
 	//input functions

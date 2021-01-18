@@ -24,6 +24,12 @@ bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
 	//std::cout << year<<endl;    //debug_e
 	plan[year - 1]->AddCourse(pC, sem);
 	TotalCredits += pC->getCredits();
+	if (pC->getCourseType() == univ)
+		TotalUnivCredits += pC->getCredits();
+	else if (pC->getCourseType() == major)
+		TotalMajorCredits += pC->getCredits();
+	else if (pC->getCourseType() == track)
+		TotalTrackCredits += pC->getCredits();
 	return true;
 }
 void StudyPlan::DetYearSem(graphicsInfo g, int& year, SEMESTER& Sem) 
@@ -71,7 +77,7 @@ void StudyPlan::AddPlanNote(string s)
 	Notes.push_back(str);
 }
 
-void StudyPlan::DeleteCrs(graphicsInfo g)
+void StudyPlan::DeleteCourse(graphicsInfo g)
 {
 	int year;
 	SEMESTER sem ;

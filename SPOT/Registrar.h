@@ -5,6 +5,7 @@
 #include "StudyPlan/StudyPlan.h"
 #include <stack>
 #include <vector>
+using namespace std;
 enum Issue
 {
      None,Moderate,Critical
@@ -22,12 +23,15 @@ class Registrar
 	StudyPlan PlanTemp;
 	bool running ;
 	Issue CurrentIssue;
+	string currentMajor;
 	GUI *pGUI;	//pointer to GUI 
 	Rules RegRules;	//Registration rules
 	StudyPlan *pSPlan;
 	ProgramReqs CurrentReqs;
+	
 public:
 	Registrar();
+	bool setCurrentMajor(string);
 	GUI* getGUI() const;
 	Action* CreateRequiredAction();
 	bool ExecuteAction(Action*);
@@ -47,7 +51,7 @@ public:
 	void UndoF();
 	void RedoF();
 	void Save2File(vector<vector<string>> ,string filename ="Report") const;
-	vector<vector<string>> CreatReport() const;
+	vector<vector<string>> CreateReport() const;
 	~Registrar();
 };
 
