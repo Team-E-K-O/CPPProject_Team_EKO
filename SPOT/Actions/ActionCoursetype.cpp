@@ -30,46 +30,45 @@ bool ActionCoursetype::Execute()
 		StudyPlan* pp = pReg->getStudyPlan();
 		pp->DetYearSem(gInfo, year, sem);
 		Course* pc = pp->ReturnCoursePointer(gInfo);
-		
-		
-			if (pc == nullptr)
+
+
+		if (pc == nullptr)
+			return false;
+		else
+		{
+			pc->setSelected(true);
+			pc->DrawMe(pGUI);
+
+			pGUI->PrintMsg("Write the type of the course : (done , pending , in progress)");
+			pc->setSelected(false);
+			string type = pGUI->GetSrting();
+			if (type == "")
 				return false;
-			else
+
+
+			if (type == "done" || type == "DONE" || type == "Done")
 			{
-				pc->setSelected(true);
-				pc->DrawMe(pGUI);
-
-				pGUI->PrintMsg("Write the type of the course : (done , pending , in progress)");
-				pc->setSelected(false);
-				string type = pGUI->GetSrting();
-				if (type == "")
-					return false;
-
-
-				if (type == "done" || type == "DONE" || type == "Done")
-				{
-					pc->settype("done");
-					ActionData actData = pGUI->GetUserAction("Type Edited Successfully ! press anywhere to continue");
-				}
-				else if (type == "in progress" || type == "IN PROGRESS" || type == "In Progress")
-				{
-					pc->settype("in progress");
-					ActionData actData = pGUI->GetUserAction("Type Edited Successfully ! press anywhere to continue");
-				}
-				else if (type == "pending" || type == "PENDING" || type == "Pending")
-				{
-					pc->settype("pending");
-					ActionData actData = pGUI->GetUserAction("Type Edited Successfully ! press anywhere to continue");
-				}
-				else
-					return false;
-
-
-				
+				pc->settype("done");
+				ActionData actData = pGUI->GetUserAction("Type Edited Successfully ! press anywhere to continue");
 			}
+			else if (type == "in progress" || type == "IN PROGRESS" || type == "In Progress")
+			{
+				pc->settype("in progress");
+				ActionData actData = pGUI->GetUserAction("Type Edited Successfully ! press anywhere to continue");
+			}
+			else if (type == "pending" || type == "PENDING" || type == "Pending")
+			{
+				pc->settype("pending");
+				ActionData actData = pGUI->GetUserAction("Type Edited Successfully ! press anywhere to continue");
+			}
+			else
+				return false;
+
+
+
 		}
-		return true;
 	}
+	return true;
 }
 
 ActionCoursetype :: ~ActionCoursetype()
